@@ -21,9 +21,9 @@ import com.sea.domain.item.db.Item;
 public class Sale {
 	
 	@Id
-	@Column(name = "sale_no")
+	@Column(name = "sale_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int saleNo;
+	int saleId;
 	
 	@Column(name = "sale_contract_address", length = 200)
 	String saleContractAddress;
@@ -50,8 +50,8 @@ public class Sale {
 	LocalDateTime saleCompletedAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_item_no")
-	Item fkItemNo;
+	@JoinColumn(name = "fk_item_id")
+	Item fkItemId;
 	
 	@Column(name = "sale_start_time")
 	int saleStartTime;

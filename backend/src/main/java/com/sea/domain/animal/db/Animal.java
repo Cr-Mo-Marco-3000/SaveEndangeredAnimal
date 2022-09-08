@@ -12,9 +12,9 @@ import javax.persistence.Table;
 public class Animal {
 	
 	@Id
-	@Column(name = "animal_no")
+	@Column(name = "animal_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int animalNo;
+	int animalId;
 	
 	@Column(name = "animal_name", length = 50)
 	String animalName;

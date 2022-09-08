@@ -12,19 +12,21 @@ import javax.persistence.Table;
 
 import com.sea.domain.animal.db.Animal;
 import com.sea.domain.donation.db.Donation;
+import lombok.Getter;
 
 @Entity
+@Getter
 @Table(name = "ITEM")
 public class Item {
 	
 	@Id
-	@Column(name = "item_no")
+	@Column(name = "item_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int itemNo;
+	int itemId;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_animal_no")
-	Animal fkAnimalNo;
+	@JoinColumn(name = "fk_animal_id")
+	Animal fkAnimalId;
 	
 	@Column(name = "item_img_url", length = 1000)
 	String itemImgUrl;
@@ -36,8 +38,8 @@ public class Item {
 	String itemOwnerAddress;
 	
 	@OneToOne
-	@JoinColumn(name = "fk_donation_no")
-	Donation fkDonationNo;
+	@JoinColumn(name = "fk_donation_id")
+	Donation fkDonationId;
 	
 	@Column(name = "item_title", length = 100)
 	String itemTitle;

@@ -14,16 +14,16 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sea.domain.user.db.User;
+import com.sea.domain.user.db.entity.User;
 
 @Entity
 @Table(name = "DONATION")
 public class Donation {
 	
 	@Id
-	@Column(name = "dontion_no")
+	@Column(name = "dontion_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int donationNo;
+	int donationId;
 	
 	@Column(name = "donation_amount")
 	int donationAmount;
@@ -40,6 +40,6 @@ public class Donation {
 	String donationTransactionHash;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_user_no")
-	User fkUserNo;
+	@JoinColumn(name = "fk_user_id")
+	User fkUserId;
 }

@@ -14,13 +14,13 @@ import javax.persistence.Table;
 public class AnimalImg {
 	
 	@Id
-	@Column(name = "animal_img_no")
+	@Column(name = "animal_img_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int animalImgNo;
+	int animalImgId;
 	
 	@ManyToOne
-	@JoinColumn(name = "animal_no")
-	Animal animalNo;
+	@JoinColumn(name = "animal_id")
+	Animal animalId;
 	
 	@Column(name = "animal_img_address", length = 100)
 	String animalImgAddress;
