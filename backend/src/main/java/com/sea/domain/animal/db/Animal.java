@@ -16,8 +16,11 @@ public class Animal {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int animalId;
 	
-	@Column(name = "animal_name", length = 50)
-	String animalName;
+	@Column(name = "animal_korean_name", length = 50)
+	String animalKoreanName;
+	
+	@Column(name = "animal_english_name", length = 100)
+	String animalEnglishName;
 	
 	@Column(name = "animal_scientific_name", length = 100)
 	String animalScientificName;
@@ -35,9 +38,9 @@ public class Animal {
 	String animalImg;
 	
 	//tinyInt 추가 
-	@Column(name = "animal_yn", columnDefinition = "TINYINT(1)")
-	int animalYn;
-	
+//	@Column(name = "animal_yn", columnDefinition = "TINYINT(1)")
+//	int animalYn;
+
 	@Column(name = "animal_endangered_level")
 	int animalEndangeredLevel;
 	

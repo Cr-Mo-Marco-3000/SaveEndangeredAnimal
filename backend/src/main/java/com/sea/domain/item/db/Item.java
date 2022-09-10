@@ -10,8 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.sea.domain.animal.db.Animal;
-import com.sea.domain.donation.db.Donation;
+import com.sea.domain.donation.db.entity.Donation;
 import lombok.Getter;
 
 @Entity
@@ -23,10 +22,6 @@ public class Item {
 	@Column(name = "item_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int itemId;
-	
-	@ManyToOne
-	@JoinColumn(name = "fk_animal_id")
-	Animal fkAnimalId;
 	
 	@Column(name = "item_img_url", length = 1000)
 	String itemImgUrl;
