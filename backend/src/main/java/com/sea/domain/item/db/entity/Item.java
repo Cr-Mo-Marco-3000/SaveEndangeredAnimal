@@ -12,11 +12,18 @@ import javax.persistence.Table;
 
 import com.sea.domain.animal.db.entity.Animal;
 import com.sea.domain.donation.db.entity.Donation;
+import com.sea.domain.item.request.ItemUpdatePutReq;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ITEM")
 public class Item {
 	
@@ -43,4 +50,9 @@ public class Item {
 	
 	@Column(name = "item_price")
 	double itemPrice;
+
+	public void update(ItemUpdatePutReq updateInfo) {
+		this.itemPrice = updateInfo.getItePrice();
+		this.itemOwnerAddress = updateInfo.getItemOwnerAddress();
+	}
 }
