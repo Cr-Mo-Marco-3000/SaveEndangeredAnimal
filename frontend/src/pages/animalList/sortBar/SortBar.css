@@ -1,0 +1,21 @@
+.sort-bar {
+  width: auto;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.sort-bar_setting {
+  width: 90%;
+  height: 4rem;
+  background-color: #d3e0ea;
+  color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+  font-weight: 600;
+}
