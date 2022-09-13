@@ -28,82 +28,83 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private CookieUtil cookieUtil;
+	@Autowired
+	private CookieUtil cookieUtil;
 
-    @Autowired
-    private RedisUtil redisUtil;
+	@Autowired
+	private RedisUtil redisUtil;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
 
-        final Cookie accessCookie = cookieUtil.getCookie(request, jwtTokenUtil.ACCESS_TOKEN_NAME);
+		final Cookie accessCookie = cookieUtil.getCookie(request, jwtTokenUtil.ACCESS_TOKEN_NAME);
 
-        String userAddress = null;
-        String accessToken = null;
-        String refreshToken = null;
+		String userAddress = null;
+		String accessToken = null;
+		String refreshToken = null;
 
-        try {
-            if (accessCookie != null) {
-                accessToken = accessCookie.getValue();
+		try {
+			if (accessCookie != null) {
+				accessToken = accessCookie.getValue();
 
-                userAddress = jwtTokenUtil.getUserAddress(accessToken);
-            }
-            if (userAddress != null) {    // Access token이 유효하면 AccessToken내 payload를 읽어 사용자와 관련있는 userDetail 생성
-                log.info("jwt - access token 유효");
-                // jwt 토큰에 포함된 계정 정보(userAddress) 통해 실제 디비에 해당 정보의 계정이 있는지 조회.
-                User user = userService.getUserByAddress(userAddress);
+				userAddress = jwtTokenUtil.getUserAddress(accessToken);
+			}
+			if (userAddress != null) { // Access token이 유효하면 AccessToken내 payload를 읽어 사용자와 관련있는 userDetail 생성
+				log.info("jwt - access token 유효");
+				// jwt 토큰에 포함된 계정 정보(userAddress) 통해 실제 디비에 해당 정보의 계정이 있는지 조회.
+				User user = userService.getUserByAddress(userAddress);
 
-                UserDetails userDetails = new UserDetails(user);
-                if (jwtTokenUtil.verify(accessToken).isResult()) {
-                    // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
-                    UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(user.getUserId(),
-                            null, AuthorityUtils.createAuthorityList(user.getUserRole()));
-                    jwtAuthentication.setDetails(userDetails);
-                    // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
-                    SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
-                }
-            }
-        } catch (ExpiredJwtException e) { // Access token이 유효하지 않으면 Refresh Token 값을 읽어드림
-            log.info("jwt - access token 유효하지 않아서 refresh token 값 가져오기");
-            Cookie refreshCookie = cookieUtil.getCookie(request, jwtTokenUtil.REFRESH_TOKEN_NAME);
-            if (refreshToken != null) {
-                refreshToken = refreshCookie.getValue();
-            }
-        } catch (Exception e) {
-        }
+				UserDetails userDetails = new UserDetails(user);
+				if (jwtTokenUtil.verify(accessToken).isResult()) {
+					// 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
+					UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(
+							user.getUserId(), null, AuthorityUtils.createAuthorityList(user.getUserRole()));
+					jwtAuthentication.setDetails(userDetails);
+					// jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
+					SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
+				}
+			}
+		} catch (ExpiredJwtException e) { // Access token이 유효하지 않으면 Refresh Token 값을 읽어드림
+			log.info("jwt - access token 유효하지 않아서 refresh token 값 가져오기");
+			Cookie refreshCookie = cookieUtil.getCookie(request, jwtTokenUtil.REFRESH_TOKEN_NAME);
+			if (refreshToken != null) {
+				refreshToken = refreshCookie.getValue();
+			}
+		} catch (Exception e) {
+			
+		}
 
-        try {    // Refresh Token을 읽어 Access Token을 사용자에게 재생성하고, 요청을 허가시킴
-            if (refreshToken != null) {
-                userAddress = redisUtil.getData(refreshToken);
-                if (userAddress != null) {
-                    log.info("jwt - access token 읽어오기 성공");
-                    User user = userService.getUserByAddress(userAddress);
-                    UserDetails userDetails = new UserDetails(user);
+		try { // Refresh Token을 읽어 Access Token을 사용자에게 재생성하고, 요청을 허가시킴
+			if (refreshToken != null) {
+				userAddress = redisUtil.getData(refreshToken);
+				if (userAddress != null) {
+					log.info("jwt - access token 읽어오기 성공");
+					User user = userService.getUserByAddress(userAddress);
+					UserDetails userDetails = new UserDetails(user);
 
-                    UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(user.getUserId(),
-                            null, AuthorityUtils.createAuthorityList(user.getUserRole()));
-                    jwtAuthentication.setDetails(userDetails);
+					UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(
+							user.getUserId(), null, AuthorityUtils.createAuthorityList(user.getUserRole()));
+					jwtAuthentication.setDetails(userDetails);
 
-                    SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
+					SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
 
-                    // Access Token 재생성
-                    String newToken = jwtTokenUtil.createAccessToken(user.getUserId(), userAddress);
+					// Access Token 재생성
+					String newToken = jwtTokenUtil.createAccessToken(user.getUserId(), userAddress);
 
-                    Cookie newAccessToken = cookieUtil.createCookie(jwtTokenUtil.ACCESS_TOKEN_NAME, newToken);
-                    response.addCookie(newAccessToken);
-                }
-            }
-        } catch (ExpiredJwtException e) {
+					Cookie newAccessToken = cookieUtil.createCookie(jwtTokenUtil.ACCESS_TOKEN_NAME, newToken);
+					response.addCookie(newAccessToken);
+				}
+			}
+		} catch (ExpiredJwtException e) {
 
-        }
-        filterChain.doFilter(request, response);
-    }
-
+		}
+		filterChain.doFilter(request, response);
+	}
 }
