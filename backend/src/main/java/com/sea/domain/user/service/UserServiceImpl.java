@@ -5,9 +5,11 @@ import com.sea.domain.user.db.repository.UserRepository;
 import com.sea.domain.user.request.UserUpdateTestResultPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;

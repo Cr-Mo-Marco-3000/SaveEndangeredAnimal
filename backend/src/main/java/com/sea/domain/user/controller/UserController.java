@@ -1,4 +1,4 @@
-package com.sea.domain.user.Controller;
+package com.sea.domain.user.controller;
 
 import com.sea.common.auth.UserDetails;
 import com.sea.common.model.response.BaseResponseBody;
@@ -14,7 +14,9 @@ import com.sea.domain.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.jboss.logging.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -24,13 +26,10 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
-
-    @Autowired
-    private Logger log;
 
     @Autowired
     private UserService userService;
