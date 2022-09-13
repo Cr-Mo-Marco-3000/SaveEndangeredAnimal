@@ -1,16 +1,13 @@
 package com.sea.domain.donation.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +24,6 @@ import com.sea.domain.user.db.entity.User;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -54,10 +50,11 @@ public class DonationController {
 	@ApiOperation(value = "내 기부 내역 확인")
 	@GetMapping()
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = DonationDto.class), })
-	public ResponseEntity<? extends BaseResponseBody> getDonationList(@ApiIgnore Authentication authentication,
-			Principal principal) {
+	public ResponseEntity<? extends BaseResponseBody> getDonationList(@ApiIgnore Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getDetails();
 		User user = userDetails.getUser();
+		
+		System.out.println(user.getUserNickname());
 		
 		List<MyDonationDto> list = donationService.getDonationList(user);
 		return ResponseEntity.status(200).body(MyDonationListGetRes.of(200, "Success", list));

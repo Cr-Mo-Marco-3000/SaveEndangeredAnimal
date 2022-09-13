@@ -1,7 +1,5 @@
 package com.sea.domain.donation.request;
 
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 
 @Getter

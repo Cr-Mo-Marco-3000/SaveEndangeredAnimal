@@ -45,7 +45,8 @@ public class DonationServiceImpl implements DonationService {
 
 	@Override
 	public Donation createDonation(DonationRegisterPostReq registerInfo, User user) {
-		Animal animal = animalRepository.findById(registerInfo.getAnimalId()).get();
+		System.out.println(registerInfo.getDonationStatusCode());
+		Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
 
 		Donation donation = Donation.builder().donationAmount(registerInfo.getDonationAmount())
 				.donationStatusCode(registerInfo.getDonationStatusCode())

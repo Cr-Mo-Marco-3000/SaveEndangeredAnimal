@@ -40,7 +40,7 @@ public class Animal {
 	@Column(name = "animal_scientific_name", length = 100)
 	String animalScientificName;
 
-	@Column(name = "animal_desc")
+	@Column(name = "animal_desc", columnDefinition = "TEXT")
 	String animalDesc;
 
 	@Column(name = "animal_max_item")
