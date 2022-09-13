@@ -1,4 +1,4 @@
-package com.sea.domain.sales.db.entity;
+package com.sea.domain.sale.db.entity;
 
 import java.time.LocalDateTime;
 
@@ -12,12 +12,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.sea.domain.item.db.entity.Item;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "SALE")
 public class Sale {
 	
@@ -38,7 +48,7 @@ public class Sale {
 	@Column(name = "sale_seller_address", length = 200)
 	String saleSellerAddress;
 	
-	@Column(name = "sale_buyer_address", length = 200)
+	@Column(name = "sale_buyer_address", length = 200, nullable = true)
 	String saleBuyerAddress;
 	
 	@CreationTimestamp
@@ -46,6 +56,7 @@ public class Sale {
 	@Column(name = "sale_created_at")
 	LocalDateTime saleCreatedAt;
 	
+	@UpdateTimestamp
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
 	@Column(name = "sale_completed_at", nullable = true)
 	LocalDateTime saleCompletedAt;
@@ -59,5 +70,10 @@ public class Sale {
 	
 	@Column(name = "sale_end_time")
 	int saleEndTime;
+
+	public void updateBuyerAddress(String saleBuyerAddress) {
+		this.saleBuyerAddress = saleBuyerAddress;
+		saleYn = 0;
+	}
 	
 }
