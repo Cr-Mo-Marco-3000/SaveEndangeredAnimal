@@ -1,5 +1,5 @@
 import "./AnimalList.css"
-import AnimalItems from "./AnimalItems/AnimalItems"
+import AnimalItems from "./animalItems/AnimalItems"
 import SortBar from "./sortBar/SortBar"
 
 function AnimalList() {
