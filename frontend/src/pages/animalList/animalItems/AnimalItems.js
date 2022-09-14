@@ -1,5 +1,5 @@
 import AnimalItem from "./animalItem/AnimalItem"
-import style from "./AnimalItems.css"
+import style from "./AnimalItems.module.css"
 
 function AnimalItems(props) {
   const animalList = props.animalList

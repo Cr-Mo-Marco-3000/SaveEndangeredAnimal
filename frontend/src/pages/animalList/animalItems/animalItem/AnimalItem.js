@@ -1,4 +1,4 @@
-import style from "./AnimalItem.css"
+import style from "./AnimalItem.module.css"
 
 function AnimalItem(props) {
   const koreanName = props.animalItem.animal_korean_name
