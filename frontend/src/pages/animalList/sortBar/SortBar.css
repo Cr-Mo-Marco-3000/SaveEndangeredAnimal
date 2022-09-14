@@ -1,4 +1,4 @@
-.sort-bar {
+.sortBar {
   width: auto;
   height: 7rem;
   display: flex;
@@ -8,7 +8,7 @@
   margin-top: 1rem;
 }
 
-.sort-bar_setting {
+.sortBar_setting {
   width: 90%;
   height: 4rem;
   background-color: #d3e0ea;

@@ -1,8 +1,5 @@
-* {
+.animalItem {
   color: #286778;
-}
-
-.animal-item {
   width: 80rem;
   height: 30rem;
   background-color: white;
@@ -12,7 +9,7 @@
   align-items: center;
 }
 
-.animal-item_block {
+.animalItem_block {
   background-color: #f9f6f6;
   display: flex;
   justify-content: center;
@@ -22,14 +19,14 @@
   box-shadow: 10px 10px 20px #eeeeee;
 }
 
-.image-area {
+.imageArea {
   width: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.image-area_image {
+.imageArea_image {
   width: 85%;
   height: auto;
   border-radius: 15px;
@@ -37,14 +34,14 @@
 }
 
 /* 높이 30rem */
-.script-area {
+.scriptArea {
   width: 55%;
   height: 100%;
   position: relative;
   left: 2rem;
 }
 
-.script-area > .script-area-horizon:nth-child(1) {
+.scriptArea > .scriptAreaHorizon:nth-child(1) {
   height: 8rem;
   width: 90%;
   position: absolute;
@@ -56,43 +53,43 @@
   align-items: flex-start;
 }
 
-.script-area > .script-area-horizon:nth-child(1) > .script-area-horizon_info {
+.scriptArea > .scriptAreaHorizon:nth-child(1) > .scriptAreaHorizon_info {
   position: relative;
   left: 1.7rem;
 }
 
-.script-area
-  > .script-area-horizon:nth-child(1)
-  > .script-area-horizon_info:nth-child(1) {
+.scriptArea
+  > .scriptAreaHorizon:nth-child(1)
+  > .scriptAreaHorizon_info:nth-child(1) {
   top: 0.7rem;
   font-size: 35px;
   font-weight: 1000;
 }
-.script-area
-  > .script-area-horizon:nth-child(1)
-  > .script-area-horizon_info:nth-child(2) {
+.scriptArea
+  > .scriptAreaHorizon:nth-child(1)
+  > .scriptAreaHorizon_info:nth-child(2) {
   font-size: 20px;
   left: 2rem;
   color: #1787a7;
   font-weight: 700;
 }
-.script-area
-  > .script-area-horizon:nth-child(1)
-  > .script-area-horizon_info:nth-child(3) {
+.scriptArea
+  > .scriptAreaHorizon:nth-child(1)
+  > .scriptAreaHorizon_info:nth-child(3) {
   font-size: 17px;
   left: 2rem;
   font-weight: 500;
   color: #d3e0ea;
   bottom: 0.5rem;
 }
-.script-area > .script-area-horizon:nth-child(2) {
+.scriptArea > .scriptAreaHorizon:nth-child(2) {
   position: absolute;
   font-size: 20px;
   font-weight: 700;
   color: #1787a7;
   top: 14rem;
 }
-.script-area > .script-area-horizon:nth-child(3) {
+.scriptArea > .scriptAreaHorizon:nth-child(3) {
   font-weight: 700;
   width: 90%;
   height: 30%;

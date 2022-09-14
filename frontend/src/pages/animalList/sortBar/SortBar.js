@@ -1,8 +1,8 @@
-import "./SortBar.css"
+import style from "./SortBar.module.css"
 function SortBar() {
   return (
-    <div className="sort-bar">
-      <div className="sort-bar_setting">
+    <div className={style.sortBar}>
+      <div className={style.sortBar_setting}>
         <div>전체</div>
         <div>위급</div>
         <div>위기</div>

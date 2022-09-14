@@ -1,9 +1,10 @@
 import AnimalItem from "./animalItem/AnimalItem"
-import "./AnimalItems.css"
+import style from "./AnimalItems.css"
+
 function AnimalItems(props) {
   const animalList = props.animalList
   return (
-    <div className="animal-items">
+    <div className={style.animalItems}>
       <AnimalItem animalItem={animalList[0]} />
       <AnimalItem animalItem={animalList[0]} />
       <AnimalItem animalItem={animalList[0]} />

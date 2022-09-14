@@ -1,4 +1,4 @@
-import "./AnimalList.css"
+import style from "./AnimalList.module.css"
 import AnimalItems from "./animalItems/AnimalItems"
 import SortBar from "./sortBar/SortBar"
 
@@ -17,7 +17,7 @@ function AnimalList() {
     },
   ]
   return (
-    <div className="animal-list">
+    <div className={style.animallist}>
       <SortBar />
       <AnimalItems animalList={animalList} />
     </div>
