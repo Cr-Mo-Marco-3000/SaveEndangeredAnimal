@@ -26,7 +26,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function Album() {
+export default function Mainpage() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -38,10 +38,6 @@ export default function Album() {
           </Typography>
         </Toolbar>
       </AppBar> */}
-      <Navbar />
-      <Toolbar></Toolbar>
-      <Toolbar></Toolbar>
-      <Toolbar></Toolbar>
       <main>
         {/* Hero unit */}
         <Box
@@ -108,12 +104,11 @@ export default function Album() {
           </Grid>
         </Container>
       </main>
-      <Footer />
-      <Routes>
-        <Route path="express" element={<ExpressionPage />}></Route>
-        <Route path="mypage" element={<MyPage />}></Route>
-        {/* <Route path="animalList" element={<AnimalList />}></Route> */}
-      </Routes>
-    </ThemeProvider>
+       {/* <Routes>
+         <Route path="express/*" element={<ExpressionPage />}></Route>
+         <Route path="mypage/*" element={<MyPage />}></Route>
+         <Route path="animalList" element={<AnimalList />}></Route>
+       </Routes> */}
+     </ThemeProvider>
   );
 }

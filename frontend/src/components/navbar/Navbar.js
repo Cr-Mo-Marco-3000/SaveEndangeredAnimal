@@ -1,6 +1,6 @@
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, Button, AppBar, Toolbar } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const APPBAR_MOBILE = 64;
@@ -21,20 +21,16 @@ const Navbar = () => {
         }
       }));
 
+    const navigate = useNavigate();
+
     return (
         <RootStyle>
             <ToolbarStyle>
-                <Box>logo</Box>
+                <Box>SEA</Box>
                 <Box sx={{flexGrow: 1}} />
-                <Link to="/express">
-                  <Button>나 표현하기</Button>
-                </Link>
-                <Link to="/animalList">
-                  <Button>기금 목록</Button>
-                </Link>
-                <Link to="/mypage">
-                  <Button>마이페이지</Button>
-                </Link>
+                <Button onClick={()=>navigate("/main/express")}>나 표현하기</Button>
+                <Button onClick={()=>navigate("/main/animalList")}>기금 목록</Button>
+                <Button onClick={()=>navigate("/main/mypage")}>마이페이지</Button>
             </ToolbarStyle>
         </RootStyle>
     )
