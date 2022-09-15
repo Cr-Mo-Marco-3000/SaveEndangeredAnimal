@@ -2,3 +2,8 @@
   width: auto;
   height: auto;
 }
+
+.announcement {
+  margin-top: 10rem;
+  font-size: 5rem;
+}

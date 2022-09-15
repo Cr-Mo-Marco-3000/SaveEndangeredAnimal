@@ -30,7 +30,7 @@
   width: 85%;
   height: auto;
   border-radius: 15px;
-  box-shadow: 0px 4px 10px #286778;
+  box-shadow: 0px 4px 10px #13323a;
 }
 
 /* 높이 30rem */
@@ -72,12 +72,14 @@
   left: 2rem;
   color: #1787a7;
   font-weight: 700;
+  margin: 0.1rem 0;
 }
 .scriptArea
   > .scriptAreaHorizon:nth-child(1)
   > .scriptAreaHorizon_info:nth-child(3) {
   font-size: 17px;
   left: 2rem;
+  padding-top: 3px;
   font-weight: 500;
   color: #d3e0ea;
   bottom: 0.5rem;

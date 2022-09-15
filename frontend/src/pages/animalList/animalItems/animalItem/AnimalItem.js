@@ -15,17 +15,15 @@ function AnimalItem(props) {
         <div className={style.imageArea}>
           <img
             className={style.imageArea_image}
-            src={imageAddress}
+            src={require(`resources/img/animals/${imageAddress}`)}
             alt="logoimage"
           />
         </div>
         <div className={style.scriptArea}>
           <div className={style.scriptAreaHorizon}>
             <div className={style.scriptAreaHorizon_info}>{koreanName}</div>
+            <div className={style.scriptAreaHorizon_info}>{scientificName}</div>
             <div className={style.scriptAreaHorizon_info}>
-              <div className={style.scriptAreaHorizon_info}>
-                {scientificName}
-              </div>
               NFT {nowItem}/{maxItem}
             </div>
           </div>
