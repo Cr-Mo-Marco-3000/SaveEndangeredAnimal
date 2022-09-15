@@ -8,7 +8,7 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src src
 RUN chmod +x ./gradlew
-RUN ./gradlew bootJar
+RUN ./gradlew build
 
 FROM openjdk:8-jdk-alpine
 
