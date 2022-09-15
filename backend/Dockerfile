@@ -1,18 +1,22 @@
-FROM openjdk:8-jdk-alpine
-
-# 도커 컨테이너 외부에 노출할 포트 지정
-EXPOSE 8080
+FROM openjdk:8-jdk-alpine AS builder
 
 WORKDIR /var/jenkins_home/workspace/save-endangered-animal/backend
 
-RUN gradle build --no-daemon 
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src src
+RUN chmod +x ./gradlew
+RUN ./gradlew bootJar
 
-# 도커 내에서 사용할 변수의 값 설정 , 아무튼 그 뒤에 jar 파일 명
-ARG JAR_FILE=build/libs/backend-0.0.1-SNAPSHOT.jar
+FROM openjdk:8-jdk-alpine
 
 # JAR_FILE에 해당하는 파일 app.jar
-COPY ${JAR_FILE} app.jar
+COPY --from=builder build/libs/*.jar app.jar
 
+# 도커 컨테이너 외부에 노출할 포트 지정
+EXPOSE 8080
 # CMD와 유사하나, 디폴트로 수행될 명령은 ENTRYPOINT를 사용해 지정
 ENTRYPOINT ["java","-jar","/app.jar"]
 
