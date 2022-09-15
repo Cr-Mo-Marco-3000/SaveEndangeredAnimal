@@ -10,10 +10,10 @@ COPY src src
 RUN chmod +x ./gradlew
 RUN ./gradlew build
 
-FROM openjdk:8-jdk-alpine
+ARG JAR_FILE=build/libs/backend-0.0.1-SNAPSHOT.jar
 
 # JAR_FILE에 해당하는 파일 app.jar
-COPY --from=builder build/libs/*.jar app.jar
+COPY ${JAR_FILE} app.jar
 
 # 도커 컨테이너 외부에 노출할 포트 지정
 EXPOSE 8080
