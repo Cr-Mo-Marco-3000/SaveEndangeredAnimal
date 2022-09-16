@@ -1,8 +1,8 @@
-import React from "react";
-import CarouselImages from "./carousel/CarouselImages";
-import DetailHeader from "./detailHeader/DetailHeader";
-import DetailInfo from "./detailInfo/DetailInfo";
-import styles from "./AnimalDetailPage.module.css";
+import * as React from "react"
+import CarouselImages from "./carousel/CarouselImages"
+import DetailHeader from "./detailHeader/DetailHeader"
+import DetailInfo from "./detailInfo/DetailInfo"
+import styles from "./AnimalDetailPage.module.css"
 
 const AnimalDetail = (props) => {
   //동물 정보는 props에서 받은 선택한 정보던지 axios로 받던지 추후 상호작용
@@ -15,14 +15,14 @@ const AnimalDetail = (props) => {
     nowNFT: 40,
     iucn: "취약 등급 1급",
     species: "포유류",
-  };
+  }
   return (
     <div className={styles.AnimalDetail}>
       <DetailHeader></DetailHeader>
       <CarouselImages></CarouselImages>
       <DetailInfo animalInfo={animalInfo}></DetailInfo>
     </div>
-  );
-};
+  )
+}
 
-export default AnimalDetail;
+export default AnimalDetail

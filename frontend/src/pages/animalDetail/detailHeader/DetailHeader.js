@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./DetailHeader.module.css";
+import * as React from "react"
+import styles from "./DetailHeader.module.css"
 function DetailHeader(props) {
   return (
     <div className={styles.DetailHeader}>
@@ -9,7 +9,7 @@ function DetailHeader(props) {
         alt="logo"
       ></img>
     </div>
-  );
+  )
 }
 
-export default DetailHeader;
+export default DetailHeader
