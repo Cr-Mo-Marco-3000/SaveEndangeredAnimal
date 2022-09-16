@@ -2,12 +2,13 @@ package com.sea.domain.animal.dto;
 
 
 
+import java.util.List;
+
 import com.sea.domain.animal.db.entity.Animal;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @ApiModel("AnimalDto")
@@ -34,7 +35,7 @@ public class AnimalDto {
 	int animalNowItem;
 	
 	@ApiModelProperty(value = "동물이미지")
-	String animalImg;
+	List<String> animalImg;
 	
 	//tinyInt 추가 
 	@ApiModelProperty(value = "기부중 여부")
@@ -54,6 +55,7 @@ public class AnimalDto {
 		this.animalDesc = animal.getAnimalDesc();
 		this.animalMaxItem = animal.getAnimalMaxItem();
 		this.animalNowItem = animal.getAnimalNowItem();
+		this.animalImg = animal.getAnimalImg();
 		this.animalYn = animal.getAnimalYn();
 		this.animalEndangeredLevel = animal.getAnimalEndangeredLevel();
 		this.animalType = animal.getAnimalType();
