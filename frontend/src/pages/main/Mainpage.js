@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { useEffect, useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import CameraIcon from '@mui/icons-material/PhotoCamera';
@@ -21,12 +22,20 @@ import Navbar from '../../components/navbar/Navbar';
 import MyPage from '../mypage/MyPage';
 import AnimalListPage from '../animalList/AnimalList';
 import AnimalList from '../animalList/AnimalList';
+import Modal from '../../components/modal/Modal'
+import NFTsale from '../modal/NFTsale/NFTsale'
+
+import SweetTest from '../modal/SweetTest'
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
 export default function Mainpage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => { setModalOpen(true); };
+  const closeModal = () => { setModalOpen(false); };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -65,7 +74,11 @@ export default function Mainpage() {
               spacing={2}
               justifyContent="center">
               <Button variant="contained">기부하러 가기</Button>
+
+              <button onClick={openModal} >테스트 모달</button>
+              <Modal open={modalOpen} close={closeModal} header="테스트모달"><NFTsale /></Modal>
             </Stack>
+            <SweetTest />
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">

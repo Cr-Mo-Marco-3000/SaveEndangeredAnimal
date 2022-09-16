@@ -26,7 +26,7 @@ const Navbar = () => {
     return (
         <RootStyle>
             <ToolbarStyle>
-                <Box>SEA</Box>
+                <Button onClick={()=>navigate("/main")}>SEA</Button>
                 <Box sx={{flexGrow: 1}} />
                 <Button onClick={()=>navigate("/main/express")}>나 표현하기</Button>
                 <Button onClick={()=>navigate("/main/animalList")}>기금 목록</Button>

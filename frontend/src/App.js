@@ -10,6 +10,8 @@ import MyPage from './pages/mypage/MyPage';
 import AnimalListPage from './pages/animalList/AnimalList';
 import AnimalList from './pages/animalList/AnimalList';
 
+
+
 function App() {
   let header = (
     <div>
