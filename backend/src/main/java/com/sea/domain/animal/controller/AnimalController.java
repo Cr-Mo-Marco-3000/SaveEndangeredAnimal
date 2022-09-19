@@ -59,7 +59,7 @@ public class AnimalController {
 	}
 
 	@ApiOperation(value = "동물 이미지 등록")
-	@PutMapping(path = "/image", value = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {"multipart/form-data"})
+	@PutMapping(path = "/image", value = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
 			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
 	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPostReq registerInfo, @RequestPart MultipartFile file) {
@@ -90,7 +90,7 @@ public class AnimalController {
 	}
 
 	@ApiOperation(value = "동물 상세보기")
-	@GetMapping("/{animalNo}")
+	@GetMapping("/detail/{animalNo}")
 	public ResponseEntity<? extends BaseResponseBody> animalDetail(
 			@ApiParam(value = "동물키") @PathVariable("animalNo") int animalNo) {
 		log.info("animalDetail - 호출");

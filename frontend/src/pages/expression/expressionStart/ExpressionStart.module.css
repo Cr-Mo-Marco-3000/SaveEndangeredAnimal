@@ -1,0 +1,66 @@
+.expressionStart {
+  background-color: white;
+  width: 60rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 3rem;
+  align-items: center;
+  box-shadow: 1px 1px 3px 1px rgb(197, 197, 197);
+  margin: 0 0 3rem 0;
+}
+
+.imageDiv {
+  width: 55rem;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 3px 1px rgb(197, 197, 197) inset;
+  border-radius: 3rem;
+  background-color: rgb(251, 251, 251);
+}
+
+.image {
+  height: 97%;
+  width: auto;
+  border-radius: 3rem;
+  box-shadow: 2px 2px 3px 1px rgb(197, 197, 197);
+}
+
+.textDiv {
+  width: 55rem;
+  margin: 3rem 0 3rem 0;
+  min-height: 15rem;
+  border-radius: 0.3rem;
+  box-shadow: 2px 2px 3px 1px rgb(197, 197, 197);
+  box-shadow: 1px 1px 2px 1px rgb(197, 197, 197) inset;
+  background-color: rgb(251, 251, 251);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.text {
+  width: 80%;
+}
+
+.buttonDiv {
+  margin: 1rem 0;
+}
+
+.startButton {
+  font-family: "Bareun_hipi";
+  font-size: 2.5rem;
+  border: none;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.488);
+  cursor: pointer;
+}
+
+.startButton:hover {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.123);
+}
