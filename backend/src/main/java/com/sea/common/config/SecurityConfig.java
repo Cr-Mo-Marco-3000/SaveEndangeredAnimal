@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**",
 						"/swagger-ui/**")
 				.permitAll().anyRequest().permitAll().and().cors();
-		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // HTTP 요청에 JWT 토큰 인증
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);	// HTTP 요청에 JWT 토큰 인증
 																									// 필터를 거치도록 필터를 추가
 	}
 }
