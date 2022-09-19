@@ -3,6 +3,7 @@ package com.sea.domain.user.db.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class User {
 	String userProfileImg;
 
 	@ElementCollection(fetch = FetchType.LAZY)
-	List<String> userTestResult;
+	List<String> userTestResult = new ArrayList<String>();
 
 	public void updateTestResult(List<String> userTestResult) {
 		this.userTestResult = userTestResult;
