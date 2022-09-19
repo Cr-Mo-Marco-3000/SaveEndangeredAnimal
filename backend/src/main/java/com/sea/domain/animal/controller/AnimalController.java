@@ -48,6 +48,7 @@ public class AnimalController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
 			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
 	public ResponseEntity<? extends BaseResponseBody> registerAnimal(@RequestBody AnimalRegisterPostReq registerInfo) {
+		log.info("registerAnimal - 호출");
 		try {
 			Animal animal = animalService.registerAnimal(registerInfo);
 		} catch (Exception e) {
@@ -58,10 +59,11 @@ public class AnimalController {
 	}
 
 	@ApiOperation(value = "동물 이미지 등록")
-	@PostMapping(path = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping(value = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
 			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
 	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPostReq registerInfo, @RequestPart MultipartFile file) {
+		log.info("registerAnimalImage - 호출");
 		log.info("동물키 : {}, 동물한글명 : {}, 동물영문명 : {}, 파일 : {}", registerInfo.getAnimalId(), registerInfo.getAnimalKoreanName(), registerInfo.getAnimalEnglishName(), file);
 
 		try {
@@ -105,8 +107,7 @@ public class AnimalController {
 
 	})
 	public ResponseEntity<? extends BaseResponseBody> getAnimalListByName() {
-
-		log.info("productTitle - 호출");
+		log.info("getAnimalListByName - 호출");
 		List<AnimalNameDto> list = animalService.getAnimalListByName();
 
 		return ResponseEntity.status(200).body(AnimalNameListGetRes.of(200, "Success", list));
@@ -120,6 +121,8 @@ public class AnimalController {
 	})
 	public ResponseEntity<? extends BaseResponseBody> getMyList(@ApiIgnore Authentication authentication,
 			Principal principal) {
+		log.info("getMyList - 호출");
+
 		UserDetails userDetails = (UserDetails) authentication.getDetails();
 		User user = userDetails.getUser();
 
