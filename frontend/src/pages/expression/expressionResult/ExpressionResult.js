@@ -1,4 +1,4 @@
-const ExpressionResult = () => {
+const ExpressionResult = (props) => {
   return <div>result</div>
 }
 
