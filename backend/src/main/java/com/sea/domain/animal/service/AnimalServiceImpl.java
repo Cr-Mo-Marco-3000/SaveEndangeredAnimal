@@ -69,14 +69,16 @@ public class AnimalServiceImpl implements AnimalService {
 	}
 
 	@Override
-	public Animal registerAnimalImage(ImageRegisterPostReq registerInfo, MultipartFile file) throws IllegalStateException, IOException {
+	public Animal registerAnimalImage(ImageRegisterPostReq registerInfo, MultipartFile file) {
 		log.info("file is empty : {}", file.isEmpty());
 
 		if(!file.isEmpty()) {
 			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
 
 			String uuid = UUID.randomUUID().toString();
-			folderPath = registerInfo.getAnimalEnglishName();
+			folderPath += registerInfo.getAnimalEnglishName();
+
+			log.info("폴더 경로 : {}", folderPath);
 
 			String fileName = registerInfo.getAnimalEnglishName() + "/" + uuid + "_" + file.getOriginalFilename();
 
@@ -94,15 +96,21 @@ public class AnimalServiceImpl implements AnimalService {
 				log.info("이미 폴더가 생성되어 있습니다.");
 			}
 
-			File newFile = new File(fileName);
-			file.transferTo(newFile);
-
-			log.info("파일이 생성되었습니다. {}", newFile.getPath());
+			try {
+				File newFile = new File(fileName);
+				file.transferTo(newFile);
+				log.info("파일이 생성되었습니다. {}", newFile.getPath());
+			} catch (Exception e) {
+				log.info("에러발생");
+				e.printStackTrace();
+				return null;
+			}
 
 			String filePath = "/var/images/" + fileName;
 
 			animal.addImg(filePath);
-
+			log.info("이미지가 등록되었습니다. {}", filePath);
+			
 			return animalRepository.save(animal);
 		}
 
