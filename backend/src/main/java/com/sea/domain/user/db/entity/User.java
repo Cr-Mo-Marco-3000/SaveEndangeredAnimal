@@ -2,12 +2,7 @@ package com.sea.domain.user.db.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -35,7 +30,7 @@ public class User {
 	@Column(name = "user_profile_img", length = 200)
 	String userProfileImg;
 
-	@Column(name = "user_test_result", nullable = true)
+	@ElementCollection(fetch = FetchType.LAZY)
 	List<String> userTestResult;
 
 	public void updateTestResult(List<String> userTestResult) {
