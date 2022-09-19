@@ -2,14 +2,13 @@ import styles from "./ExpressionText.module.css"
 import picture from "resources/img/expression/start.jpg"
 import { useState, useEffect } from "react"
 const ExpressionText = (props) => {
-  const selectedWordList = props.selectedWordList
+  // const selectedWordList = props.selectedWordList
   const goToNext = props.goToNext
-  const level = props.data.level
-  console.log(level)
-  console.log(selectedWordList)
-
   let title = props.data.title
-
+  const [selectedWordList, setSelectedWordList] = useState(
+    props.selectedWordList
+  )
+  const [level, setLevel] = useState(props.data.level)
   const [text, setText] = useState(props.data.text)
 
   useEffect(() => {
@@ -23,14 +22,15 @@ const ExpressionText = (props) => {
       let replacedText = text.replace("~", selectedWordList.at(-1).slice(0, -2))
       setText(replacedText)
     }
-  })
+  }, [level, text, selectedWordList])
+
   return (
     <div className={styles.expressionText}>
       <div className={styles.expressionHeader}>
         <h1>{title}</h1>
       </div>
       <div className={styles.imageDiv}>
-        <img className={styles.image} src={picture} alt="" />
+        <img className={styles.image} src={picture} alt="사진" />
       </div>
       <div className={styles.textDiv}>
         <div className={styles.text}>{text}</div>

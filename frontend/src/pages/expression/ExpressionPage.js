@@ -22,7 +22,7 @@ const ExpressionPage = () => {
       level: 2,
       title: "1. 장소",
       picture: "../../../resources/img/expression/start.jpg",
-      text: `정신을 차려 보니 당신은 우두커니 서 있었습니다. 아니면 어딘가 도착하기 위해 걷고 있었는지도 모르겠어요. 근처에서는 신이 난 사람들이 시끄럽게 떠들고 있습니다. 모든 것들이 너무 환해서 눈이 아프네요. 아니면 환청이 들릴 정도로 고요하고 깊은 밤에 호젓하게 홀로 있으신가요? 눈을 감고 혹은 주변을 살펴보고 직접 말씀해주세요.`,
+      text: `정신을 차려 보니 당신은 우두커니 서 있었습니다. 아니면 어딘가 도착하기 위해 걷고 있었는지도 모르겠어요. 근처에서는 신이 난 사람들이 시끄럽게 떠들고 있습니다. 모든 것들이 너무 환해서 눈이 아프네요. 아니면 환청이 들릴 정도로 고요하고 깊은 밤 속 호젓하게 홀로 있으신가요? 눈을 감고 혹은 주변을 살펴보고 직접 말씀해주세요.`,
     },
     4: {
       level: 4,
@@ -34,13 +34,13 @@ const ExpressionPage = () => {
       level: 6,
       title: "3. 성격",
       picture: "",
-      text: "물론 당신은 지금 ~ 있었죠! ~ 있었다니 당신은 정말 대단한 사람인 것 같아요. 아니면 하품이 나올 만큼 지루한 사람일까요? 조금만 더 나아간다면 알 수 있을 것 같은 느낌이 들어요. 당신이 생각하기에 , 주변 사람들이 생각하는  당신은 어떤 사람인가요?",
+      text: "물론 당신은 지금 ~ 있었죠! ~ 있었다니 당신은 정말 대단한 사람인 것 같아요. 아니면 하품이 나올 만큼 지루한 사람일까요? 조금만 더 나아간다면 알 수 있을 것 같은 느낌이 들어요. 당신이 생각하기에 , 주변 사람들이 생각하는 당신은 어떤 사람인가요?",
     },
     8: {
       level: 8,
       title: "4. 그림",
       picture: "",
-      text: "세상 어떤 사람이 봐도 ~ 당신은 깨달았습니다. 지금 자신은 그림 속이라는 것을요. 어쩌면 사실 이미 알고 있었을지도 모릅니다. 눈에 보이는 모든 사물들의 모습이 평소와는 어딘가 달라 보였거든요. 지금까지 그림 속에서 걸어왔던 여정들을 기록하기 위해 마지막으로 하나만 더 알려주세요.",
+      text: "세상 어떤 사람이 봐도 ~ 당신은 깨달았습니다. 지금 자신은 그림 속이라는 것을요. 어쩌면 사실 이미 알고 있었을지도 모릅니다. 눈에 보이는 모든 사물들의 모습이 평소와는 어딘가 달라 보였거든요. 지금까지 당신이 어떤 그림 속을 지나왔는지 저희에게 알려주세요",
     },
   }
 
@@ -325,11 +325,18 @@ const ExpressionPage = () => {
     setLevel(level + 1)
   }
 
-  const down = () => {
-    setLevel(level - 1)
+  const uploadResult = () => {
+    const result = []
+    const place = selectedWordList[0]
+    const doing = selectedWordList[1]
+    const property = selectedWordList[2]
+    const paint = selectedWordList[3]
+    result.push(expressionSelectPage[7]["selections"][property])
+    result.push(expressionSelectPage[5]["selections"][doing])
+    result.push(expressionSelectPage[3]["selections"][place])
+    result.push(expressionSelectPage[9]["selections"][paint])
+    console.log(result)
   }
-
-  const uploadResult = () => {}
 
   return (
     <div className={styles.ExpressionPage}>
@@ -394,12 +401,6 @@ const ExpressionPage = () => {
           uploadResult={uploadResult}
         />
       ) : null}
-      <button className={styles.tempButtonUp} onClick={goToNext}>
-        up
-      </button>
-      <button className={styles.tempButtonDown} onClick={down}>
-        down
-      </button>
     </div>
   )
 }
