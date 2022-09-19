@@ -90,7 +90,7 @@ public class AnimalController {
 	}
 
 	@ApiOperation(value = "동물 상세보기")
-	@GetMapping("/{animalNo}")
+	@GetMapping("/detail/{animalNo}")
 	public ResponseEntity<? extends BaseResponseBody> animalDetail(
 			@ApiParam(value = "동물키") @PathVariable("animalNo") int animalNo) {
 		log.info("animalDetail - 호출");
