@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,9 +36,9 @@ public class User {
 	String userProfileImg;
 
 	@Column(name = "user_test_result", nullable = true)
-	String userTestResult;
+	List<String> userTestResult;
 
-	public void updateTestResult(String userTestResult) {
+	public void updateTestResult(List<String> userTestResult) {
 		this.userTestResult = userTestResult;
 	}
 }
