@@ -4,7 +4,9 @@ import com.sea.common.model.response.BaseResponseBody;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 public class UserUpdateTestResultPutReq  {
-    String result;
+    List<String> list;
 }

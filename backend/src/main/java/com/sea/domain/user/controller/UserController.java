@@ -26,6 +26,8 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user")
@@ -138,12 +140,12 @@ public class UserController {
             @ApiResponse(code = 204, message = "성공"),
             @ApiResponse(code = 400, message = "존재하지 않는 유저입니다.")
     })
-    public ResponseEntity<? extends BaseResponseBody> updateTestResult(@ApiIgnore Authentication authentication , @RequestBody UserUpdateTestResultPutReq testInfo) {
+    public ResponseEntity<? extends BaseResponseBody> updateTestResult(@ApiIgnore Authentication authentication , @RequestBody List<String> list) {
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
 
         try {
-            userService.updateTestResult(user, testInfo);
+            userService.updateTestResult(user, list);
         } catch(Exception e) {
             return ResponseEntity.status(400).body(BaseResponseBody.of(400, "존재하지 않는 유저입니다."));
         }

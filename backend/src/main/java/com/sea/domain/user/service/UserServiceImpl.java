@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service("userService")
@@ -30,8 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateTestResult(User user, UserUpdateTestResultPutReq testInfo) {
-        user.updateTestResult(testInfo.getResult());
+    public User updateTestResult(User user, List<String> list) {
+        user.updateTestResult(list);
 
         return userRepository.save(user);
     }

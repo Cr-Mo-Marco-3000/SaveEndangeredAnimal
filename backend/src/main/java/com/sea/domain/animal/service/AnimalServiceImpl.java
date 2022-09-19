@@ -110,7 +110,7 @@ public class AnimalServiceImpl implements AnimalService {
 
 			animal.addImg(filePath);
 			log.info("이미지가 등록되었습니다. {}", filePath);
-			
+
 			return animalRepository.save(animal);
 		}
 
