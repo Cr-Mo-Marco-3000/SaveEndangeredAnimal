@@ -3,18 +3,17 @@ package com.sea.domain.animal.controller;
 import java.security.Principal;
 import java.util.List;
 
+import com.sea.domain.animal.db.entity.Animal;
+import com.sea.domain.animal.request.ImageRegisterPostReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sea.common.auth.UserDetails;
 import com.sea.common.model.response.BaseResponseBody;
@@ -46,15 +45,29 @@ public class AnimalController {
 
 	@ApiOperation(value = "동물생성")
 	@PostMapping()
-	@ApiResponses({
-			@ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
-			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class),
-			})
-	public ResponseEntity<? extends BaseResponseBody> registerAniaml(@RequestBody AnimalRegisterPostReq registerInfo) {
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
+			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
+	public ResponseEntity<? extends BaseResponseBody> registerAnimal(@RequestBody AnimalRegisterPostReq registerInfo) {
+		try {
+			Animal animal = animalService.registerAnimal(registerInfo);
+		} catch (Exception e) {
+			return ResponseEntity.status(400).body(BaseResponseBody.of(400, "Failed"));
+		}
+
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+
+	@ApiOperation(value = "동물 이미지 등록")
+	@PostMapping(path = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
+			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
+	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPostReq registerInfo, @RequestPart MultipartFile file) {
+		log.info("동물키 : {}, 동물한글명 : {}, 동물영문명 : {}, 파일 : {}", registerInfo.getAnimalId(), registerInfo.getAnimalKoreanName(), registerInfo.getAnimalEnglishName(), file);
 
 		try {
-			animalService.registerAnimal(registerInfo);
+			Animal animal = animalService.registerAnimalImage(registerInfo, file);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.status(400).body(BaseResponseBody.of(400, "Failed"));
 		}
 
