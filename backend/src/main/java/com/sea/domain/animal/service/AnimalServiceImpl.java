@@ -1,12 +1,12 @@
 package com.sea.domain.animal.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
+import com.sea.domain.animal.request.ImageRegisterPostReq;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +29,8 @@ import com.sea.domain.user.db.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,6 +45,9 @@ public class AnimalServiceImpl implements AnimalService {
 
 	@Autowired
 	ItemRepository itemRepository;
+
+	@Value("${default.imageFolder}")
+	String folderPath;
 
 	@Override
 	public Page<AnimalDto> getAnimalList(Pageable pageable) {
@@ -61,6 +66,47 @@ public class AnimalServiceImpl implements AnimalService {
 		Page<AnimalDto> page = new PageImpl<>(list, pageable, total);
 
 		return page;
+	}
+
+	@Override
+	public Animal registerAnimalImage(ImageRegisterPostReq registerInfo, MultipartFile file) throws IllegalStateException, IOException {
+		log.info("file is empty : {}", file.isEmpty());
+
+		if(!file.isEmpty()) {
+			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
+
+			String uuid = UUID.randomUUID().toString();
+			folderPath = registerInfo.getAnimalEnglishName();
+
+			String fileName = registerInfo.getAnimalEnglishName() + "/" + uuid + "_" + file.getOriginalFilename();
+
+			File Folder = new File(folderPath);
+
+			if (!Folder.exists()) {
+				try{
+					Folder.mkdir(); //폴더 생성합니다.
+					log.info("폴더가 생성되었습니다. {}", Folder.getPath());
+				}
+				catch(Exception e){
+					e.getStackTrace();
+				}
+			}else {
+				log.info("이미 폴더가 생성되어 있습니다.");
+			}
+
+			File newFile = new File(fileName);
+			file.transferTo(newFile);
+
+			log.info("파일이 생성되었습니다. {}", newFile.getPath());
+
+			String filePath = "/var/images/" + fileName;
+
+			animal.addImg(filePath);
+
+			return animalRepository.save(animal);
+		}
+
+		return null;
 	}
 
 	// 동물 상세보기
