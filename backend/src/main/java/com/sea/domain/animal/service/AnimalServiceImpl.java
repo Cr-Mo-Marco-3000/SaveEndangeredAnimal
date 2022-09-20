@@ -74,13 +74,11 @@ public class AnimalServiceImpl implements AnimalService {
 
 		if(!file.isEmpty()) {
 			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
-
-			String uuid = UUID.randomUUID().toString();
 			folderPath += "animal/" + registerInfo.getAnimalEnglishName();
 
 			log.info("폴더 경로 : {}", folderPath);
 
-			String fileName = registerInfo.getAnimalEnglishName() + "/" + uuid + "_" + file.getOriginalFilename();
+			String fileName = registerInfo.getAnimalEnglishName() + "/" + file.getOriginalFilename();
 
 			File Folder = new File(folderPath);
 
@@ -207,9 +205,10 @@ public class AnimalServiceImpl implements AnimalService {
 		case 3:
 			maxItem = 1000;
 		}
+		String animalEnglishName = registerInfo.getAnimalEnglishName().replace(" ", "-");
 
 		Animal animal = Animal.builder().animalKoreanName(registerInfo.getAnimalKoreanName())
-				.animalEnglishName(registerInfo.getAnimalEnglishName())
+				.animalEnglishName(animalEnglishName)
 				.animalScientificName(registerInfo.getAnimalScientificName()).animalDesc(registerInfo.getAnimalDesc())
 				.animalType(registerInfo.getAnimalType()).animalEndangeredLevel(registerInfo.getAnimalEndangeredLevel())
 				.animalMaxItem(maxItem).animalNowItem(0).animalYn(1).build();

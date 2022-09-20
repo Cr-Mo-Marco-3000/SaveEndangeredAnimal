@@ -8,5 +8,4 @@ import lombok.ToString;
 public class ImageRegisterPostReq {
 	int animalId;
 	String animalEnglishName;
-	String animalKoreanName;
 }
