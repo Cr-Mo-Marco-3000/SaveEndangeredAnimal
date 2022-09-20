@@ -1,4 +1,5 @@
 import styles from "./ExpressionResult.module.css"
+import api from "../../../api/api.js"
 
 const ExpressionResult = (props) => {
   const result = props.results
