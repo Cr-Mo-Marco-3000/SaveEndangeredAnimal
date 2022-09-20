@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import com.sea.domain.animal.request.ImageRegisterPostReq;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -69,16 +69,16 @@ public class AnimalServiceImpl implements AnimalService {
 	}
 
 	@Override
-	public Animal registerAnimalImage(ImageRegisterPostReq registerInfo, MultipartFile file) {
+	public Animal registerAnimalImage(ImageRegisterPutReq registerInfo, MultipartFile file) {
 		log.info("file is empty : {}", file.isEmpty());
 
 		if(!file.isEmpty()) {
 			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
-			String folderPath = defaultImgPath + "animal/" + registerInfo.getAnimalEnglishName();
+			String folderPath = defaultImgPath + "animal/" + animal.getAnimalEnglishName();
 
 			log.info("폴더 경로 : {}", folderPath);
 
-			String fileName = "animal/" + registerInfo.getAnimalEnglishName() + "/" + file.getOriginalFilename();
+			String fileName = "animal/" + animal.getAnimalEnglishName() + "/" + file.getOriginalFilename();
 
 			File Folder = new File(folderPath);
 

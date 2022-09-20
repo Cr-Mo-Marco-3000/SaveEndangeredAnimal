@@ -5,7 +5,6 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class ImageRegisterPostReq {
+public class ImageRegisterPutReq {
 	int animalId;
-	String animalEnglishName;
 }

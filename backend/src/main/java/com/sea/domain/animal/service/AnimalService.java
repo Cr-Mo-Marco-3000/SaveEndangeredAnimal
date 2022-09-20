@@ -3,7 +3,7 @@ package com.sea.domain.animal.service;
 import java.io.IOException;
 import java.util.List;
 
-import com.sea.domain.animal.request.ImageRegisterPostReq;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,7 +20,7 @@ public interface AnimalService {
 
 	Page<AnimalDto> getAnimalList(Pageable pageable); // 상품 전체 조회
 
-	Animal registerAnimalImage(ImageRegisterPostReq registerInfo, MultipartFile file) throws IOException;
+	Animal registerAnimalImage(ImageRegisterPutReq registerInfo, MultipartFile file) throws IOException;
 
 	List<AnimalNameDto> getAnimalListByName();
 	
