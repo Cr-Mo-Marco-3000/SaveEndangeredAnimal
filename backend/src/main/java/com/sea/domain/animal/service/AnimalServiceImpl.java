@@ -47,7 +47,7 @@ public class AnimalServiceImpl implements AnimalService {
 	ItemRepository itemRepository;
 
 	@Value("${default.imageFolder}")
-	String defaultPath;
+	String defaultImgPath;
 
 	@Override
 	public Page<AnimalDto> getAnimalList(Pageable pageable) {
@@ -74,11 +74,11 @@ public class AnimalServiceImpl implements AnimalService {
 
 		if(!file.isEmpty()) {
 			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
-			String folderPath = defaultPath + "animal/" + registerInfo.getAnimalEnglishName();
+			String folderPath = defaultImgPath + "animal/" + registerInfo.getAnimalEnglishName();
 
 			log.info("폴더 경로 : {}", folderPath);
 
-			String fileName = registerInfo.getAnimalEnglishName() + "/" + file.getOriginalFilename();
+			String fileName = "animal/" + registerInfo.getAnimalEnglishName() + "/" + file.getOriginalFilename();
 
 			File Folder = new File(folderPath);
 
