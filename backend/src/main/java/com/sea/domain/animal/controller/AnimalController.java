@@ -64,7 +64,7 @@ public class AnimalController {
 			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
 	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPostReq registerInfo, @RequestPart MultipartFile file) {
 		log.info("registerAnimalImage - 호출");
-		log.info("동물키 : {}, 동물한글명 : {}, 동물영문명 : {}, 파일 : {}", registerInfo.getAnimalId(), registerInfo.getAnimalKoreanName(), registerInfo.getAnimalEnglishName(), file);
+		log.info("동물키 : {}, 동물영문명 : {}, 파일 : {}", registerInfo.getAnimalId(), registerInfo.getAnimalEnglishName(), file);
 
 		try {
 			Animal animal = animalService.registerAnimalImage(registerInfo, file);
