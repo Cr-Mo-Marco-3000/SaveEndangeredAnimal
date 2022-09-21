@@ -10,6 +10,7 @@ public class CookieUtil {
 
     public Cookie createCookie(String cookieName, String value){
         Cookie cookie = new Cookie(cookieName,value);
+        cookie.setDomain("j7a506.p.ssafy.io");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(JwtTokenUtil.accessTokenExpiration);
         cookie.setPath("/");
