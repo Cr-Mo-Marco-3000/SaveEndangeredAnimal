@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.CookieGenerator;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.Cookie;
@@ -66,6 +67,17 @@ public class UserController {
             final String accessJwt = JwtTokenUtil.createAccessToken(user.getUserId(), user.getUserWalletAddress());
             final String refreshJwt = JwtTokenUtil.createRefreshToken();
 
+            CookieGenerator cg = new CookieGenerator();
+            cg.setCookieName(JwtTokenUtil.ACCESS_TOKEN_NAME);
+            cg.setCookieMaxAge(JwtTokenUtil.accessTokenExpiration);
+            cg.addCookie(response, accessJwt);
+
+            cg = new CookieGenerator();
+            cg.setCookieName(JwtTokenUtil.REFRESH_TOKEN_NAME);
+            cg.setCookieMaxAge(JwtTokenUtil.refreshTokenExpiration);
+            cg.addCookie(response, refreshJwt);
+
+            /*
             // 쿠키
             Cookie accessToken = cookieUtil.createCookie(JwtTokenUtil.ACCESS_TOKEN_NAME, accessJwt);
             Cookie refreshToken = cookieUtil.createCookie(JwtTokenUtil.REFRESH_TOKEN_NAME, refreshJwt);
@@ -73,11 +85,12 @@ public class UserController {
             log.info("cookie 생성[id : {}, value : {}]", accessToken.getName(), accessToken.getValue());
             log.info("cookie 생성[id : {}, value : {}]", refreshToken.getName(), refreshToken.getValue());
 
-            // redis 저장
-            redisUtil.setDataExpire(refreshJwt, userAddress, JwtTokenUtil.refreshTokenExpiration);
-
             response.addCookie(accessToken);
             response.addCookie(refreshToken);
+            */
+
+            // redis 저장
+            redisUtil.setDataExpire(refreshJwt, userAddress, JwtTokenUtil.refreshTokenExpiration);
 
             return ResponseEntity.status(201).body(UserLoginPostRes.of(201, "Success", accessJwt, user.getUserId(), user.getUserNickname()));
         }

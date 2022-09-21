@@ -16,14 +16,14 @@ public class MyDonationDto {
 	
 	LocalDateTime donationCreatedAt;
 	
-	String animalName;
+	String animalKoreanName;
 	
 	String donationStatusCode;
 	
 	public MyDonationDto(Donation donation) {
 		donationAmount = donation.getDonationAmount();
 		donationCreatedAt = donation.getDonationCreatedAt();
-		animalName = donation.getFkAnimalId().getAnimalKoreanName(); //한글? 영어?
+		animalKoreanName = donation.getFkAnimalId().getAnimalKoreanName(); //한글? 영어?
 		donationStatusCode = donation.getDonationStatusCode();
 	}
 }

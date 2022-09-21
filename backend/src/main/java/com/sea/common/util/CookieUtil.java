@@ -1,6 +1,7 @@
 package com.sea.common.util;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.CookieGenerator;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,6 @@ public class CookieUtil {
 
 	public Cookie createCookie(String cookieName, String value) {
 		Cookie cookie = new Cookie(cookieName, value);
-		cookie.setDomain("j7a506.p.ssafy.io");
 		cookie.setHttpOnly(true);
 		cookie.setSecure(false);
 		cookie.setMaxAge(JwtTokenUtil.accessTokenExpiration);
