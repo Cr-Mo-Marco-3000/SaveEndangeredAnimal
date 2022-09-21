@@ -24,6 +24,7 @@ import AnimalListPage from '../animalList/AnimalList';
 import AnimalList from '../animalList/AnimalList';
 import Modal from '../../components/modal/Modal'
 import NFTsale from '../modal/NFTsale/NFTsale'
+import cookies from 'react-cookies';
 
 import SweetTest from '../modal/SweetTest'
 
@@ -35,6 +36,9 @@ export default function Mainpage() {
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => { setModalOpen(true); };
   const closeModal = () => { setModalOpen(false); };
+
+  console.log(cookies.load('id'));
+
 
   return (
     <ThemeProvider theme={theme}>

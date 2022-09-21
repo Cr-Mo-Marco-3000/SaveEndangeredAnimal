@@ -9,18 +9,21 @@ import ExpressionPage from "./pages/expression/ExpressionPage"
 import MyPage from "./pages/mypage/MyPage"
 import AnimalListPage from "./pages/animalList/AnimalList"
 import AnimalList from "./pages/animalList/AnimalList"
+import { CookiesProvider } from 'react-cookie';
 
 function App() {
   let header = (
     <div>
-      <Link to="/login">
+      {/* <Link to="/login">
         <button>로그인</button>
-      </Link>
+      </Link> */}
+      <LoginPage />
     </div>
   )
 
   return (
     <div className="App">
+      <CookiesProvider> 
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -33,6 +36,7 @@ function App() {
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
+      </CookiesProvider> 
     </div>
   )
 }
