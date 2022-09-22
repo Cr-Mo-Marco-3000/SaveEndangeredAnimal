@@ -2,6 +2,7 @@ import style from "./SortBar.module.css"
 function SortBar(props) {
   const changeSort = (event) => {
     props.changeSort(event.target.innerText)
+    props.changePage(1)
   }
   return (
     <div className={style.sortBar}>

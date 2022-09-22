@@ -2,7 +2,6 @@ import * as React from "react"
 import NFTList from "./NFTList/NFTList"
 import Menu from "./MenuBar/Menu"
 import styles from "./SalePage.module.css"
-import api from "api/api.js"
 import { useState } from "react"
 
 export default function SalePage() {

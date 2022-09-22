@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import api from "api/api.js"
-import axios from "axios"
 
 export default function Menu(props) {
   const [animalList, setAnimalList] = React.useState([])
