@@ -17,6 +17,7 @@ const api = {
         const res = await axios({
           url: HOST + USER + "/login",
           method: "POST",
+          withCredentials : true,
           data: {
             walletAddress: walletAddress,
           },

@@ -3,6 +3,7 @@ import { Button, Paper, Stack, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie'; 
 import { ethers } from "ethers";
+import api from "api/api";
 
 const LoginPage = () => {
   const [haveMetamask, sethaveMetamask] = useState(true);
@@ -36,11 +37,12 @@ const LoginPage = () => {
   const connectHandler = async () => {
     if (window.ethereum) {
       try {
-        const res = await window.ethereum.request({
+          const res = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         await accountsChanged(res[0]);
         setIsConnected(true);
+        api.user.login(res[0]);
       } catch (err) {
         console.error(err);
         setErrorMessage("MetaMask 연결 에러");
