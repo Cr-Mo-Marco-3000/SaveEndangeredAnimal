@@ -50,7 +50,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .exposedHeaders("X-AUTH-TOKEN")
                 .allowCredentials(true)
-                .allowedOrigins("*");
+                .allowedOrigins("http://localhost:3000");
     }
 
     @Override
