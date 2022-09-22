@@ -42,12 +42,22 @@ function DetailInfo(props) {
       })
     })
   }
+  React.useEffect(() => {
+    //console.log(animalInfo)
+    setAnimalInfo(props.animalInfo)
+  }, [props.animalInfo])
   return (
     <>
       <div className={styles.Title}>
         <div>
           <div className={styles.animalClass}>
-            {animalInfo.species}/{animalInfo.iucn}({animalInfo.maxNFT}NFT)
+            {animalInfo.animalType}/
+            {animalInfo.animalEndangeredLevel === 1
+              ? "위급"
+              : animalInfo.animalEndangeredLevel === 2
+              ? "위기"
+              : "취약"}
+            ({animalInfo.animalMaxItem}NFT)
             <InfoIcon
               onClick={infoClick}
               style={{
@@ -55,11 +65,11 @@ function DetailInfo(props) {
               }}
             />
           </div>
-          <div className={styles.animalName}>{animalInfo.korName}</div>
+          <div className={styles.animalName}>{animalInfo.animalKoreanName}</div>
         </div>
         <div className={styles.donationSide}>
           <div className={styles.NFTcount}>
-            {animalInfo.nowNFT}개의 NFT가 남아있습니다.
+            {animalInfo.animalNowItem}개의 NFT가 남아있습니다.
           </div>
           <Button
             variant="contained"
@@ -73,7 +83,7 @@ function DetailInfo(props) {
       </div>
       <div className={styles.Info}>
         <p className={styles.InfoTitle}>Information</p>
-        <div className={styles.InfoText}>{animalInfo.description}</div>
+        <div className={styles.InfoText}>{animalInfo.animalDesc}</div>
       </div>
     </>
   )

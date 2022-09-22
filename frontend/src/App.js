@@ -9,6 +9,7 @@ import ExpressionPage from "./pages/expression/ExpressionPage"
 import MyPage from "./pages/mypage/MyPage"
 import AnimalListPage from "./pages/animalList/AnimalList"
 import AnimalList from "./pages/animalList/AnimalList"
+import AnimalDetail from "./pages/animalDetail/AnimalDetailPage"
 import { CookiesProvider } from 'react-cookie';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="main/express/*" element={<ExpressionPage />}></Route>
           <Route path="main/mypage/*" element={<MyPage />}></Route>
           <Route path="main/animalList" element={<AnimalList />}></Route>
+          <Route path="main/animalDetail" element={<AnimalDetail />}></Route>
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
