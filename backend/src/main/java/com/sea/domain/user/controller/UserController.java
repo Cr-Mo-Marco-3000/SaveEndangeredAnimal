@@ -48,7 +48,6 @@ public class UserController {
 
     @ApiOperation(value = "로그인")
     @PostMapping("/login")
-    @CrossOrigin(allowCredentials = "true")
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공", response = UserLoginPostRes.class),
             @ApiResponse(code = 401, message = "Incorrect Wallet")
