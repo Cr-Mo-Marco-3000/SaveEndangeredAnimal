@@ -77,7 +77,7 @@ const api = {
       donationAmount,
       donationStatusCode,
       donationTransactionHash,
-      animalId
+      animalId,
     ) => {
       try {
         const res = await axios({
@@ -121,7 +121,7 @@ const api = {
       saleCashContractAddress,
       saleStartTime,
       saleEndTime,
-      itemId
+      itemId,
     ) => {
       try {
         const res = await axios({
@@ -212,7 +212,7 @@ const api = {
       ScientificName,
       Description,
       Type,
-      EndangeredLevel
+      EndangeredLevel,
     ) => {
       try {
         const res = await axios({
@@ -302,7 +302,7 @@ const api = {
       Title,
       animalId,
       KoreanName,
-      Price
+      Price,
     ) => {
       try {
         const res = await axios({
