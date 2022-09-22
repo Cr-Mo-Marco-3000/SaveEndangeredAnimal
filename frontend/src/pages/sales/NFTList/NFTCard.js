@@ -3,7 +3,18 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material"
 import styles from "./NFTCard.module.css"
 
 export default function NFTCard(props) {
-  const NFTdata = props.animalData
+  //NFT data 로 받아온 값에서 필요한 것은 토큰 id로 부터 얻어와서 처리해야할 것
+  //NFTdata 구성
+  // {
+  //  itemId: int,
+  //  itemTitle: String
+  //  itemPrice: double,
+  //  itemTokenId: String,
+  // animalKoreanName: String,
+  // }
+  const NFTdata = props.NFTData
+  //그 외 데이터는NFT에서 가져와야할 것
+
   return (
     <Card
       sx={{
@@ -25,27 +36,17 @@ export default function NFTCard(props) {
         alt="animalImg"
       />
       <CardContent
-        sx={{ flex: "1 1 auto", boxShadow: "1", height: "1rem" }}
+        sx={{ boxShadow: "1", height: "1rem" }}
         className={styles.cardContent}
       >
-        <Typography
-          sx={{ fontSize: 20, fontWeight: "bold", mr: "3rem" }}
-          component="div"
-        >
-          {NFTdata.animalName}
+        <Typography gutterBottom variant="h5" component="div">
+          {NFTdata.animalKoreanName}
         </Typography>
-        <Typography
-          sx={{ fontSize: 20, fontWeight: "bold" }}
-          component="div"
-          style={
-            NFTdata.endangered === "멸종"
-              ? { color: "red" }
-              : NFTdata.endangered === "위급"
-              ? { color: "blue" }
-              : { color: "green" }
-          }
-        >
-          {NFTdata.endangered}
+        <Typography variant="body2" color="text.secondary">
+          판매기간 :
+        </Typography>
+        <Typography variant="body1" align="right">
+          SSF
         </Typography>
       </CardContent>
     </Card>
