@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service("userService")
@@ -24,14 +25,14 @@ public class UserServiceImpl implements UserService {
         if (user.isPresent()) {
             return user.get();
         } else {
-            User newUser = User.builder().userNickname("noname").userRole("ROLE_USER").userWalletAddress(userWalletAddress).userProfileImg(defaultProfileImg).userTestResult(null).build();
+            User newUser = User.builder().userNickname("noname").userRole("ROLE_USER").userWalletAddress(userWalletAddress).userProfileImg(defaultProfileImg).build();
             return userRepository.save(newUser);
         }
     }
 
     @Override
-    public User updateTestResult(User user, UserUpdateTestResultPutReq testInfo) {
-        user.updateTestResult(testInfo.getResult());
+    public User updateTestResult(User user, List<String> list) {
+        user.updateTestResult(list);
 
         return userRepository.save(user);
     }

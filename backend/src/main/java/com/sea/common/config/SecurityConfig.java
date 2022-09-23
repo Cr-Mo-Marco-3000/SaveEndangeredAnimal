@@ -17,6 +17,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 /**
  * 인증(authentication) 와 인가(authorization) 처리를 위한 스프링 시큐리티 설정 정의.
@@ -61,17 +63,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		http.addFilterBefore(filter, CsrfFilter.class);
+
 		http.csrf().disable() // csrf 미적용
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 사용 하지않음
 				.and().httpBasic().authenticationEntryPoint(customAuthenticationEntryPoint) // 인증 되지 않은 유저가 요청했을때 동작
 				.and().exceptionHandling().accessDeniedHandler(customAccessDeniedHandler) // 액세스 할 수 없는 요청 했을 시 동작
 				.and().authorizeRequests()// 인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
-				.antMatchers("/api/v1/animal/my-list", "/api/v1/user/test-result", "/api/v1/donation").hasAnyRole("USER", "ADMIN") // 로그인한 유저만 접근 가능 경로
+				.antMatchers("/api/v1/animal/image", "/api/v1/animal/my-list", "/api/v1/user/test-result", "/api/v1/donation").hasAnyRole("USER", "ADMIN") // 로그인한 유저만 접근 가능 경로
 				.antMatchers("/api/authentication/**").hasRole("ADMIN") // 관리자만 접근 가능 경로
 				.antMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**",
 						"/swagger-ui/**")
 				.permitAll().anyRequest().permitAll().and().cors();
-		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // HTTP 요청에 JWT 토큰 인증
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);	// HTTP 요청에 JWT 토큰 인증
 																									// 필터를 거치도록 필터를 추가
 	}
 }

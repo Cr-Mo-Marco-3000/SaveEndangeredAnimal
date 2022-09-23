@@ -21,11 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.CookieGenerator;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user")
@@ -64,15 +67,30 @@ public class UserController {
             final String accessJwt = JwtTokenUtil.createAccessToken(user.getUserId(), user.getUserWalletAddress());
             final String refreshJwt = JwtTokenUtil.createRefreshToken();
 
+            CookieGenerator cg = new CookieGenerator();
+            cg.setCookieName(JwtTokenUtil.ACCESS_TOKEN_NAME);
+            cg.setCookieMaxAge(JwtTokenUtil.accessTokenExpiration);
+            cg.addCookie(response, accessJwt);
+
+            cg = new CookieGenerator();
+            cg.setCookieName(JwtTokenUtil.REFRESH_TOKEN_NAME);
+            cg.setCookieMaxAge(JwtTokenUtil.refreshTokenExpiration);
+            cg.addCookie(response, refreshJwt);
+
+            /*
             // 쿠키
             Cookie accessToken = cookieUtil.createCookie(JwtTokenUtil.ACCESS_TOKEN_NAME, accessJwt);
             Cookie refreshToken = cookieUtil.createCookie(JwtTokenUtil.REFRESH_TOKEN_NAME, refreshJwt);
-
-            // redis 저장
-            redisUtil.setDataExpire(refreshJwt, userAddress, JwtTokenUtil.refreshTokenExpiration);
+            
+            log.info("cookie 생성[id : {}, value : {}]", accessToken.getName(), accessToken.getValue());
+            log.info("cookie 생성[id : {}, value : {}]", refreshToken.getName(), refreshToken.getValue());
 
             response.addCookie(accessToken);
             response.addCookie(refreshToken);
+            */
+
+            // redis 저장
+            redisUtil.setDataExpire(refreshJwt, userAddress, JwtTokenUtil.refreshTokenExpiration);
 
             return ResponseEntity.status(201).body(UserLoginPostRes.of(201, "Success", accessJwt, user.getUserId(), user.getUserNickname()));
         }
@@ -89,6 +107,9 @@ public class UserController {
 
         Cookie accessCookie = cookieUtil.getCookie(request,  jwtTokenUtil.ACCESS_TOKEN_NAME);
         Cookie refreshCookie = cookieUtil.getCookie(request, jwtTokenUtil.REFRESH_TOKEN_NAME);
+        
+        log.info("cookie[id : {}, value : {}]", accessCookie.getName(), accessCookie.getValue());
+        log.info("cookie[id : {}, value : {}]", refreshCookie.getName(), refreshCookie.getValue());
 
         // < Access Token 작업 >
         // 1. access token 담겨있는 cookie 있는지 확인
@@ -138,12 +159,12 @@ public class UserController {
             @ApiResponse(code = 204, message = "성공"),
             @ApiResponse(code = 400, message = "존재하지 않는 유저입니다.")
     })
-    public ResponseEntity<? extends BaseResponseBody> updateTestResult(@ApiIgnore Authentication authentication , @RequestBody UserUpdateTestResultPutReq testInfo) {
+    public ResponseEntity<? extends BaseResponseBody> updateTestResult(@ApiIgnore Authentication authentication , @RequestBody List<String> list) {
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
 
         try {
-            userService.updateTestResult(user, testInfo);
+            userService.updateTestResult(user, list);
         } catch(Exception e) {
             return ResponseEntity.status(400).body(BaseResponseBody.of(400, "존재하지 않는 유저입니다."));
         }

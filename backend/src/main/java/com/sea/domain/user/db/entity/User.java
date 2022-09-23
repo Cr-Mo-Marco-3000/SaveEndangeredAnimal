@@ -2,12 +2,9 @@ package com.sea.domain.user.db.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,10 +31,10 @@ public class User {
 	@Column(name = "user_profile_img", length = 200)
 	String userProfileImg;
 
-	@Column(name = "user_test_result", nullable = true)
-	String userTestResult;
+	@ElementCollection(fetch = FetchType.LAZY)
+	List<String> userTestResult = new ArrayList<String>();
 
-	public void updateTestResult(String userTestResult) {
+	public void updateTestResult(List<String> userTestResult) {
 		this.userTestResult = userTestResult;
 	}
 }

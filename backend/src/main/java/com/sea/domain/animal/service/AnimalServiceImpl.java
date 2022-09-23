@@ -1,12 +1,12 @@
 package com.sea.domain.animal.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +29,8 @@ import com.sea.domain.user.db.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,6 +45,9 @@ public class AnimalServiceImpl implements AnimalService {
 
 	@Autowired
 	ItemRepository itemRepository;
+
+	@Value("${default.imageFolder}")
+	String defaultImgPath;
 
 	@Override
 	public Page<AnimalDto> getAnimalList(Pageable pageable) {
@@ -61,6 +66,53 @@ public class AnimalServiceImpl implements AnimalService {
 		Page<AnimalDto> page = new PageImpl<>(list, pageable, total);
 
 		return page;
+	}
+
+	@Override
+	public Animal registerAnimalImage(ImageRegisterPutReq registerInfo, MultipartFile file) {
+		log.info("file is empty : {}", file.isEmpty());
+
+		if(!file.isEmpty()) {
+			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
+			String folderPath = defaultImgPath + "animal/" + animal.getAnimalEnglishName();
+
+			log.info("폴더 경로 : {}", folderPath);
+
+			String fileName = "animal/" + animal.getAnimalEnglishName() + "/" + file.getOriginalFilename();
+
+			File Folder = new File(folderPath);
+
+			if (!Folder.exists()) {
+				try{
+					Folder.mkdir(); //폴더 생성합니다.
+					log.info("폴더가 생성되었습니다. {}", Folder.getPath());
+				}
+				catch(Exception e){
+					e.getStackTrace();
+				}
+			}else {
+				log.info("이미 폴더가 생성되어 있습니다.");
+			}
+
+			try {
+				File newFile = new File(fileName);
+				file.transferTo(newFile);
+				log.info("파일이 생성되었습니다. {}", newFile.getPath());
+			} catch (Exception e) {
+				log.info("에러발생");
+				e.printStackTrace();
+				return null;
+			}
+
+			String filePath = "/var/images/" + fileName;
+
+			animal.addImg(filePath);
+			log.info("이미지가 등록되었습니다. {}", filePath);
+
+			return animalRepository.save(animal);
+		}
+
+		return null;
 	}
 
 	// 동물 상세보기
@@ -153,9 +205,10 @@ public class AnimalServiceImpl implements AnimalService {
 		case 3:
 			maxItem = 1000;
 		}
+		String animalEnglishName = registerInfo.getAnimalEnglishName().replace(" ", "-");
 
 		Animal animal = Animal.builder().animalKoreanName(registerInfo.getAnimalKoreanName())
-				.animalEnglishName(registerInfo.getAnimalEnglishName())
+				.animalEnglishName(animalEnglishName)
 				.animalScientificName(registerInfo.getAnimalScientificName()).animalDesc(registerInfo.getAnimalDesc())
 				.animalType(registerInfo.getAnimalType()).animalEndangeredLevel(registerInfo.getAnimalEndangeredLevel())
 				.animalMaxItem(maxItem).animalNowItem(0).animalYn(1).build();

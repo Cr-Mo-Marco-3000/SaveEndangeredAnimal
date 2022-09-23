@@ -3,18 +3,17 @@ package com.sea.domain.animal.controller;
 import java.security.Principal;
 import java.util.List;
 
+import com.sea.domain.animal.db.entity.Animal;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sea.common.auth.UserDetails;
 import com.sea.common.model.response.BaseResponseBody;
@@ -46,15 +45,31 @@ public class AnimalController {
 
 	@ApiOperation(value = "동물생성")
 	@PostMapping()
-	@ApiResponses({
-			@ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
-			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class),
-			})
-	public ResponseEntity<? extends BaseResponseBody> registerAniaml(@RequestBody AnimalRegisterPostReq registerInfo) {
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
+			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
+	public ResponseEntity<? extends BaseResponseBody> registerAnimal(@RequestBody AnimalRegisterPostReq registerInfo) {
+		log.info("registerAnimal - 호출");
+		try {
+			Animal animal = animalService.registerAnimal(registerInfo);
+		} catch (Exception e) {
+			return ResponseEntity.status(400).body(BaseResponseBody.of(400, "Failed"));
+		}
+
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+
+	@ApiOperation(value = "동물 이미지 등록")
+	@PutMapping(path = "/image", value = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
+			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
+	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPutReq registerInfo, @RequestPart MultipartFile file) {
+		log.info("registerAnimalImage - 호출");
+		log.info("동물키 : {}, 파일 : {}", registerInfo.getAnimalId(), file);
 
 		try {
-			animalService.registerAnimal(registerInfo);
+			Animal animal = animalService.registerAnimalImage(registerInfo, file);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.status(400).body(BaseResponseBody.of(400, "Failed"));
 		}
 
@@ -75,7 +90,7 @@ public class AnimalController {
 	}
 
 	@ApiOperation(value = "동물 상세보기")
-	@GetMapping("/{animalNo}")
+	@GetMapping("/detail/{animalNo}")
 	public ResponseEntity<? extends BaseResponseBody> animalDetail(
 			@ApiParam(value = "동물키") @PathVariable("animalNo") int animalNo) {
 		log.info("animalDetail - 호출");
@@ -92,8 +107,7 @@ public class AnimalController {
 
 	})
 	public ResponseEntity<? extends BaseResponseBody> getAnimalListByName() {
-
-		log.info("productTitle - 호출");
+		log.info("getAnimalListByName - 호출");
 		List<AnimalNameDto> list = animalService.getAnimalListByName();
 
 		return ResponseEntity.status(200).body(AnimalNameListGetRes.of(200, "Success", list));
@@ -107,6 +121,8 @@ public class AnimalController {
 	})
 	public ResponseEntity<? extends BaseResponseBody> getMyList(@ApiIgnore Authentication authentication,
 			Principal principal) {
+		log.info("getMyList - 호출");
+
 		UserDetails userDetails = (UserDetails) authentication.getDetails();
 		User user = userDetails.getUser();
 

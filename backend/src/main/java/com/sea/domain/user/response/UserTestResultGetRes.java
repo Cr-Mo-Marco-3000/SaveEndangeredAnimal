@@ -4,12 +4,14 @@ import com.sea.common.model.response.BaseResponseBody;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class UserTestResultGetRes extends BaseResponseBody {
-    String testResult;
+    List<String> testResult;
 
-    public static UserTestResultGetRes of(Integer statusCode, String message, String testResult) {
+    public static UserTestResultGetRes of(Integer statusCode, String message, List<String> testResult) {
         UserTestResultGetRes res = new UserTestResultGetRes();
         res.setStatusCode(statusCode);
         res.setMessage(message);
