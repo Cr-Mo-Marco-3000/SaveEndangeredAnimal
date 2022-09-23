@@ -1,5 +1,5 @@
 import style from "./AnimalItem.module.css"
-import { Link, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 
 function AnimalItem(props) {
   const koreanName = props.animalItem.animalKoreanName
@@ -8,10 +8,11 @@ function AnimalItem(props) {
   const maxItem = props.animalItem.animalMaxItem
   const endangeredLevel = props.animalItem.animalEndangeredLevel
   const type = props.animalItem.animalType
-  const imageAddress = props.animalItem.animalImageAddress
+  const imageAddress = props.animalItem.animalImg
   const description = props.animalItem.animalDesc.slice(0, 200) + "..."
   const animalId = props.animalItem.animalId
 
+  
   const navigate = useNavigate()
 
   return (
@@ -26,7 +27,7 @@ function AnimalItem(props) {
           <img
             className={style.imageArea_image}
             //src={require(`resources/img/animals/${imageAddress}`)}
-            src={imageAddress}
+            src={imageAddress[0]}
             alt="logoimage"
           />
         </div>
@@ -39,7 +40,7 @@ function AnimalItem(props) {
             </div>
           </div>
           <div className={style.scriptAreaHorizon}>
-            {type} / {endangeredLevel}
+            {type} / {endangeredLevel===1?"위급":endangeredLevel===2?'위기':'취약'}
           </div>
           <div className={style.scriptAreaHorizon}>{description}</div>
         </div>
