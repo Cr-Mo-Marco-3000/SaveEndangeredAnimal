@@ -32,6 +32,9 @@ const Navbar = () => {
         <Button onClick={() => navigate("/main/animalList")}>기금 목록</Button>
         <Button onClick={() => navigate("/main/sale")}>판매페이지</Button>
         <Button onClick={() => navigate("/main/mypage")}>마이페이지</Button>
+        <Button onClick={() => navigate("/main/minting")}>
+          임시민팅페이지
+        </Button>
       </ToolbarStyle>
     </RootStyle>
   )
