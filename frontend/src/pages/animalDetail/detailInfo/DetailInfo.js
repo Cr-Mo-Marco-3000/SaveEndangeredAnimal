@@ -6,6 +6,8 @@ import Button from "@mui/material/Button"
 import SendIcon from "@mui/icons-material/Send"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import Modal from '../../../components/modal/Modal'
+import Donation from "../donation/Donation"
 
 function DetailInfo(props) {
   const MySwal = withReactContent(Swal)
@@ -17,9 +19,10 @@ function DetailInfo(props) {
     "취약 : 멸종위기 가능성이 높음"
   info1.replace(/\n/g, "<br/>")
   const [animalInfo, setAnimalInfo] = useState(props.animalInfo)
-  const donationClick = () => {
-    alert("도네이션!")
-  }
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => { setModalOpen(true); };
+  const closeModal = () => { setModalOpen(false); };
 
   const infoClick = () => {
     MySwal.fire({
@@ -75,9 +78,10 @@ function DetailInfo(props) {
             variant="contained"
             size="large"
             endIcon={<SendIcon />}
-            onClick={donationClick}
+            onClick={openModal}
           >
             Donation
+          <Modal open={modalOpen} close={closeModal} header="기부 하기"><Donation /></Modal>
           </Button>
         </div>
       </div>
