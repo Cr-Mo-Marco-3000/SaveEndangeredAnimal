@@ -1,0 +1,26 @@
+.outDiv {
+  margin: auto;
+  width: 80rem;
+  margin-bottom: 10rem;
+}
+
+.buttonDiv {
+  margin: 5rem 0rem 5rem 0rem;
+}
+
+.button {
+  font-size: medium;
+  background-color: #2c3639;
+  color: #dcd7c9;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 30px;
+  width: 250px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+}
