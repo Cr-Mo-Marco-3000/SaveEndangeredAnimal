@@ -27,8 +27,11 @@ app.add_middleware(
 @app.get('/donation/get-image/{item_id}')
 async def root(item_id):
     model = replicate.models.get("stability-ai/stable-diffusion")
-    output_url = model.predict(prompt=item_id)[0]
-    response = {
-        'picture': output_url
+    output_url = model.predict(prompt=item_id, num_outputs=4)
+    response = {'picture':
+        [output_url[0],
+        output_url[1],
+        output_url[2],
+        output_url[3]]
     }
     return response
