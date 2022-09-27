@@ -17,39 +17,10 @@ const api = {
         const res = await axios({
           url: HOST + USER + "/login",
           method: "POST",
-          withCredentials : true,
+          withCredentials: true,
           data: {
             walletAddress: walletAddress,
           },
-        })
-        return res.data
-      } catch (error) {
-        const res = error.res.data
-        return res
-      }
-    },
-    // 나를 표현하기 => list 그대로 넣기
-    expressions: async (testResult) => {
-      try {
-        const res = await axios({
-          url: HOST + USER + "/test-result",
-          method: "PUT",
-          data: {
-            list: testResult,
-          },
-        })
-        return res.data
-      } catch (error) {
-        const res = error.res.data
-        return res
-      }
-    },
-    // 기존 검사 결과 얻기 => 아마 민팅할때 쓰겠죠?
-    getExpressionsResult: async () => {
-      try {
-        const res = await axios({
-          url: HOST + USER + "/test-result",
-          method: "GET",
         })
         return res.data
       } catch (error) {
@@ -69,6 +40,57 @@ const api = {
         return res
       }
     },
+    // 나를 표현하기 => list 그대로 넣기
+    expressions: async (testResult) => {
+      try {
+        const res = await axios({
+          url: HOST + USER + "/test-result",
+          method: "PUT",
+          data: {
+            list: testResult,
+          },
+        })
+        const response = res.data
+        return response
+      } catch (error) {
+        const response = error.res.data
+        return response
+      }
+    },
+    // 기존 검사 결과 얻기 => 아마 민팅할때 쓰겠죠?
+    getExpressionsResult: async () => {
+      try {
+        const res = await axios({
+          url: HOST + USER + "/test-result",
+          method: "GET",
+        })
+        return res.data
+      } catch (error) {
+        const response = error.res.data
+        return response
+      }
+    },
+
+    // 사진 받아오기
+    getPictureURL: async () => {
+      try {
+        const res = await axios({
+          url: HOST + USER + "/test-result",
+          method: "GET",
+        })
+        console.log("뇽뇽")
+        const wordList = res.data
+        const pictureRes = await axios({
+          url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + wordList,
+          method: "GET",
+        })
+        const response = pictureRes.data.picture
+        return response
+      } catch (error) {
+        const res = error.res.data
+        return res
+      }
+    },
   },
 
   /* ============== Donation  ============== */
@@ -78,7 +100,7 @@ const api = {
       donationAmount,
       donationStatusCode,
       donationTransactionHash,
-      animalId,
+      animalId
     ) => {
       try {
         const res = await axios({
@@ -122,7 +144,7 @@ const api = {
       saleCashContractAddress,
       saleStartTime,
       saleEndTime,
-      itemId,
+      itemId
     ) => {
       try {
         const res = await axios({
@@ -213,7 +235,7 @@ const api = {
       ScientificName,
       Description,
       Type,
-      EndangeredLevel,
+      EndangeredLevel
     ) => {
       try {
         const res = await axios({
@@ -303,7 +325,7 @@ const api = {
       Title,
       animalId,
       KoreanName,
-      Price,
+      Price
     ) => {
       try {
         const res = await axios({
