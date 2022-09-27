@@ -67,16 +67,24 @@ function AnimalList() {
 
   //api에서 데이터 가져오기
   useEffect(() => {
-    api.animal.getAnimalList().then((res) => {
-      //console.log(res.list.content)
-      setAnimalList(res.list.content)
-      //console.log(animalList)
-      //setSort('전체')
-      changeSort(sort)
-    })
-  }, [sort,changeSort])
+    // api.animal.getAnimalList().then((res) => {
+    //   //console.log(res.list.content)
+    //   setAnimalList(res.list.content)
+    //   //console.log(animalList)
+    //   //setSort('전체')
+    //   changeSort(sort)
+    // })
+    const getAnimalList= async ()=>{
+      //console.log(cookies.get("accessToken"))
+      const res=await api.animal.getAnimalList();
+      //console.log(res.list);
+      if(JSON.stringify(res.list.content)!==JSON.stringify(animalList))
+        setAnimalList(res.list.content)
+      changeSort(sort);
+    }
+    getAnimalList();
+  }, [sort,changeSort,animalList])
 
- 
 
   return (
     <div className={style.animallist}>
