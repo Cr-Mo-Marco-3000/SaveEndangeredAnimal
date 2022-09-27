@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import com.sea.domain.animal.request.ImageRegisterPostReq;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -47,7 +47,7 @@ public class AnimalServiceImpl implements AnimalService {
 	ItemRepository itemRepository;
 
 	@Value("${default.imageFolder}")
-	String folderPath;
+	String defaultImgPath;
 
 	@Override
 	public Page<AnimalDto> getAnimalList(Pageable pageable) {
@@ -69,18 +69,16 @@ public class AnimalServiceImpl implements AnimalService {
 	}
 
 	@Override
-	public Animal registerAnimalImage(ImageRegisterPostReq registerInfo, MultipartFile file) {
+	public Animal registerAnimalImage(ImageRegisterPutReq registerInfo, MultipartFile file) {
 		log.info("file is empty : {}", file.isEmpty());
 
 		if(!file.isEmpty()) {
 			Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
-
-			String uuid = UUID.randomUUID().toString();
-			folderPath += registerInfo.getAnimalEnglishName();
+			String folderPath = defaultImgPath + "animal/" + animal.getAnimalEnglishName();
 
 			log.info("폴더 경로 : {}", folderPath);
 
-			String fileName = registerInfo.getAnimalEnglishName() + "/" + uuid + "_" + file.getOriginalFilename();
+			String fileName = "animal/" + animal.getAnimalEnglishName() + "/" + file.getOriginalFilename();
 
 			File Folder = new File(folderPath);
 
@@ -207,9 +205,10 @@ public class AnimalServiceImpl implements AnimalService {
 		case 3:
 			maxItem = 1000;
 		}
+		String animalEnglishName = registerInfo.getAnimalEnglishName().replace(" ", "-");
 
 		Animal animal = Animal.builder().animalKoreanName(registerInfo.getAnimalKoreanName())
-				.animalEnglishName(registerInfo.getAnimalEnglishName())
+				.animalEnglishName(animalEnglishName)
 				.animalScientificName(registerInfo.getAnimalScientificName()).animalDesc(registerInfo.getAnimalDesc())
 				.animalType(registerInfo.getAnimalType()).animalEndangeredLevel(registerInfo.getAnimalEndangeredLevel())
 				.animalMaxItem(maxItem).animalNowItem(0).animalYn(1).build();

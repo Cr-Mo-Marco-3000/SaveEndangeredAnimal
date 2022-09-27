@@ -50,7 +50,7 @@ public class AnimalDto {
 	public AnimalDto(Animal animal) {
 		this.animalId = animal.getAnimalId();
 		this.animalKoreanName = animal.getAnimalKoreanName();
-		this.animalEnglishName = animal.getAnimalEnglishName();
+		this.animalEnglishName = animal.getAnimalEnglishName().replace("-", " ");
 		this.animalScientificName = animal.getAnimalScientificName();
 		this.animalDesc = animal.getAnimalDesc();
 		this.animalMaxItem = animal.getAnimalMaxItem();

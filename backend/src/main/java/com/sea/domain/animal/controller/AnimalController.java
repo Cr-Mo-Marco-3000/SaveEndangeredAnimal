@@ -4,7 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import com.sea.domain.animal.db.entity.Animal;
-import com.sea.domain.animal.request.ImageRegisterPostReq;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -62,9 +62,9 @@ public class AnimalController {
 	@PutMapping(path = "/image", value = "/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = BaseResponseBody.class),
 			@ApiResponse(code = 400, message = "실패", response = BaseResponseBody.class), })
-	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPostReq registerInfo, @RequestPart MultipartFile file) {
+	public ResponseEntity<? extends BaseResponseBody> registerAnimalImage(@RequestPart ImageRegisterPutReq registerInfo, @RequestPart MultipartFile file) {
 		log.info("registerAnimalImage - 호출");
-		log.info("동물키 : {}, 동물한글명 : {}, 동물영문명 : {}, 파일 : {}", registerInfo.getAnimalId(), registerInfo.getAnimalKoreanName(), registerInfo.getAnimalEnglishName(), file);
+		log.info("동물키 : {}, 파일 : {}", registerInfo.getAnimalId(), file);
 
 		try {
 			Animal animal = animalService.registerAnimalImage(registerInfo, file);
