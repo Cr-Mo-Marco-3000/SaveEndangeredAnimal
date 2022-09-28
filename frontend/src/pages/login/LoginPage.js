@@ -4,6 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie'; 
 import { ethers } from "ethers";
 import api from "api/api";
+import coin from '../login/coin.png'
+import sealogo from '../login/sealogo.png'
+import sealogo2 from '../login/sealogo2.png'
+import logo from '../../components/footer/sea.png'
+import './Login.css'
 
 const LoginPage = () => {
   const [haveMetamask, sethaveMetamask] = useState(true);
@@ -75,24 +80,34 @@ const LoginPage = () => {
     setAccount(null);
     setBalance(null);
   };
+  
 
   return (
-    <div>
-      <img src={"https://pbs.twimg.com/profile_images/1403343064203239426/-9bH-cRS_400x400.jpg"} 
-                className="App-logo" alt="logo" />
+    <div className='header section__padding'>
+      <img className='shake-vertical' src={sealogo2} width={650} />
+      <div className="header-content">
+        <div>
+          <h1>
+            우리나라 멸종위기종 NFT 기부 플랫폼<br/><br/> 
+            <h4>멸종위기 동물에게 토큰 기부하고 AI가 그려주는 <br/>
+            동물 NFT 그림 증서 받아가세요!</h4>
+          </h1>
+          <img className='shake-vertical' src={coin} alt="" />
+        </div>
+      </div>
+
+      {/* <img src={"https://pbs.twimg.com/profile_images/1403343064203239426/-9bH-cRS_400x400.jpg"} 
+                className="App-logo" alt="logo" /> */}
 
       <Stack spacing={2}>
-        {/* <Typography variant="h6"> 지갑: {account} </Typography>
-        <Typography variant="h6">
-          잔고 : {balance} {balance ? "ETH" : null}
-        </Typography> */}
-        <Button onClick={connectHandler}>MetaMask 로그인</Button>
+        <button className='button' onClick={connectHandler}>MetaMask 로그인</button>
         {errorMessage ? (
           <Typography variant="body1" color="red">
             Error: {errorMessage}
           </Typography>
         ) : null}
       </Stack>
+      <br /><br /><br /><br /><br /><br />
       </div>
   );
 };

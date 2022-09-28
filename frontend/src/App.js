@@ -10,8 +10,9 @@ import MyPage from "./pages/mypage/MyPage"
 import AnimalListPage from "./pages/animalList/AnimalList"
 import AnimalList from "./pages/animalList/AnimalList"
 import AnimalDetail from "./pages/animalDetail/AnimalDetailPage"
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider } from "react-cookie"
 import SalePage from "pages/sales/SalePage"
+import Minting from "pages/minting/Minting"
 
 function App() {
   let header = (
@@ -25,22 +26,23 @@ function App() {
 
   return (
     <div className="App">
-      <CookiesProvider> 
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={header}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/main/*" element={<MainPage />}></Route>
-          <Route path="main/express/*" element={<ExpressionPage />}></Route>
-          <Route path="main/mypage/*" element={<MyPage />}></Route>
-          <Route path="main/animalList" element={<AnimalList />}></Route>
-          <Route path="main/sale" element={<SalePage />}></Route>
-          <Route path="main/animalDetail" element={<AnimalDetail />}></Route>
-        </Routes>
-        {/* <Footer /> */}
-      </BrowserRouter>
-      </CookiesProvider> 
+      <CookiesProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={header}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/main/*" element={<MainPage />}></Route>
+            <Route path="main/express/*" element={<ExpressionPage />}></Route>
+            <Route path="main/mypage/*" element={<MyPage />}></Route>
+            <Route path="main/animalList" element={<AnimalList />}></Route>
+            <Route path="main/sale" element={<SalePage />}></Route>
+            <Route path="main/animalDetail" element={<AnimalDetail />}></Route>
+            <Route path="main/minting" element={<Minting />}></Route>
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </CookiesProvider>
     </div>
   )
 }

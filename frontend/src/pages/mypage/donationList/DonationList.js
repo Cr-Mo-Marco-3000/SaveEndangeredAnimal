@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { Pagination } from "@mui/material"
 import usePagination from "components/pagination/Pagination"
 import Table from "@mui/material/Table"
@@ -8,30 +8,41 @@ import TableCell from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import Paper from "@mui/material/Paper"
+//import Paper from "@mui/material/Paper"
 import styles from "./DonationList.module.css"
+import api from "api/api"
+import { Cookies } from "react-cookie"
 
 export default function DonationList() {
-  const allData = []
-  for (let index = 0; index < 56; index++) {
-    const newItem = {
-      animalName: "원숭이",
-      status: "판매 완료",
-      price: 15,
-      time: "2022-09-15",
-    }
-    allData.push(newItem)
-  }
+  // list: [
+  //   donationAmount: double,
+  //   donationCreatedAt: LocalDateTime,
+  //   animalKoreanName: String,
+  //   donationStatusCode: String
+  //   ]
+  const [donationList,setDonationList] = useState([]);
+  //const cookies=new Cookies()
 
   const [page, setPage] = useState(1) // 처음 페이지는 1이다.
   const PER_PAGE = 10
-  const count = Math.ceil(allData.length / PER_PAGE)
-  const data = usePagination(allData, PER_PAGE)
+  const count = Math.ceil(donationList.length / PER_PAGE)
+  const data = usePagination(donationList, PER_PAGE)
 
   const handleChange = (e, p) => {
     setPage(p)
     data.jump(p)
   }
+
+  useEffect(()=>{
+    const getDonationList= async ()=>{
+      //console.log(cookies.get("accessToken"))
+      const res=await api.donation.viewDonationLog();
+      console.log(res);
+      setDonationList(res.list)
+    }
+    getDonationList();
+
+  },[])
 
   return (
     <>
@@ -55,11 +66,11 @@ export default function DonationList() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.animalName}
+                  {row.animalKoreanName}
                 </TableCell>
-                <TableCell align="right">{row.status}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
-                <TableCell align="right">{row.time}</TableCell>
+                <TableCell align="right">{row.donationStatusCode}</TableCell>
+                <TableCell align="right">{row.donationAmount}</TableCell>
+                <TableCell align="right">{row.donationCreatedAt}</TableCell>
               </TableRow>
             ))}
           </TableBody>

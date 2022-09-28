@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState } from "react"
 import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
 import InputLabel from "@mui/material/InputLabel"
@@ -6,12 +7,24 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import api from "api/api.js"
+import Modal from '../../../components/modal/Modal'
+import NFTsale from '../nftsale/NFTsale'
 
 export default function Menu(props) {
   const [animalList, setAnimalList] = React.useState([])
   //그 중 선택한 동물 값 저장 변수
   const [animalName, setAnimalName] = React.useState("전체보기")
   //동물 리스트 불러올 때 쓸 useEffect
+
+  // 판매 하기 모달 
+  const [modalOpen1, setModalOpen1] = useState(false);
+  const openModal1 = () => { setModalOpen1(true); };
+  const closeModall = () => { setModalOpen1(false); };
+
+  // 구매 하기 모달 
+  const [modalOpen2, setModalOpen2] = useState(false);
+  const openModal2 = () => { setModalOpen2(true); };
+  const closeModal2 = () => { setModalOpen2(false); };
 
   //then 처리 내부
   //   React.useEffect(() => {
@@ -53,8 +66,12 @@ export default function Menu(props) {
           ))}
         </Select>
       </FormControl>
-      <Button variant="contained">판매내역</Button>
-      <Button variant="contained">판매하기</Button>
+      <Button variant="contained" >판매내역</Button>
+      <Button variant="contained" onClick={openModal1} >판매하기</Button>
+      <Modal open={modalOpen1} close={closeModall} header="판매하기"><NFTsale /></Modal>
+
+
+      <Modal open={modalOpen2} close={closeModal2} header="구매하기">구매</Modal>
     </Stack>
   )
 }

@@ -4,7 +4,7 @@ import ExpressionStart from "./expressionStart/ExpressionStart"
 import ExpressionText from "./expressionLevels/ExpressionText"
 import ExpressionSelections from "./expressionLevels/ExpressionsSelections"
 import ExpressionResult from "./expressionResult/ExpressionResult"
-
+import api from "../../api/api"
 const ExpressionPage = () => {
   const [level, setLevel] = useState(1)
   const [selectedWordList, setSelectedWordList] = useState([])
@@ -335,7 +335,7 @@ const ExpressionPage = () => {
     result.push(expressionSelectPage[5]["selections"][doing])
     result.push(expressionSelectPage[3]["selections"][place])
     result.push(expressionSelectPage[9]["selections"][paint])
-    console.log(result)
+    const response = api.expression(result)
   }
 
   return (
