@@ -1,7 +1,7 @@
 FROM node:16.17.0 as build-stage
 WORKDIR /var/jenkins_home/workspace/save-endangered-animal/frontend
 COPY package*.json ./
-RUN npm install react-reveal@1.2.2 --legacy-peer-deps
+
 RUN npm install 
 COPY . .
 RUN npm run build
