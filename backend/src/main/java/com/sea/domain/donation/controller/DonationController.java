@@ -2,6 +2,9 @@ package com.sea.domain.donation.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sea.common.auth.UserDetails;
 import com.sea.common.model.response.BaseResponseBody;
+import com.sea.common.util.JwtTokenUtil;
 import com.sea.domain.donation.db.entity.Donation;
 import com.sea.domain.donation.dto.DonationDto;
 import com.sea.domain.donation.dto.MyDonationDto;
@@ -35,14 +39,16 @@ public class DonationController {
 	@Autowired
 	DonationService donationService;
 	
+	@Autowired
+	JwtTokenUtil jwtTokenUtil;
+	
 	@ApiOperation(value = "기부하기")
 	@PostMapping()
-	public ResponseEntity<? extends BaseResponseBody> registerDonation(@ApiIgnore Authentication authentication,
+	public ResponseEntity<? extends BaseResponseBody> registerDonation(HttpServletRequest request,
 			@RequestBody DonationRegisterPostReq registerInfo){
-		UserDetails userDetails = (UserDetails) authentication.getDetails();
-		User user = userDetails.getUser();
+		int userId = jwtTokenUtil.getUserId(request.getCookies());
 		
-		Donation donation = donationService.createDonation(registerInfo, user);
+		Donation donation = donationService.createDonation(registerInfo, userId);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	
@@ -50,13 +56,10 @@ public class DonationController {
 	@ApiOperation(value = "내 기부 내역 확인")
 	@GetMapping()
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = DonationDto.class), })
-	public ResponseEntity<? extends BaseResponseBody> getDonationList(@ApiIgnore Authentication authentication) {
-		UserDetails userDetails = (UserDetails) authentication.getDetails();
-		User user = userDetails.getUser();
+	public ResponseEntity<? extends BaseResponseBody> getDonationList(HttpServletRequest request) {
+		int userId = jwtTokenUtil.getUserId(request.getCookies());
 		
-		System.out.println(user.getUserNickname());
-		
-		List<MyDonationDto> list = donationService.getDonationList(user);
+		List<MyDonationDto> list = donationService.getDonationList(userId);
 		return ResponseEntity.status(200).body(MyDonationListGetRes.of(200, "Success", list));
 	}
 }

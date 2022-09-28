@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().httpBasic().authenticationEntryPoint(customAuthenticationEntryPoint) // 인증 되지 않은 유저가 요청했을때 동작
 				.and().exceptionHandling().accessDeniedHandler(customAccessDeniedHandler) // 액세스 할 수 없는 요청 했을 시 동작
 				.and().authorizeRequests()// 인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
-				.antMatchers().hasAnyRole("USER", "ADMIN") // 로그인한 유저만 접근 가능 경로
+				.antMatchers("*").hasAnyRole("USER", "ADMIN") // 로그인한 유저만 접근 가능 경로
 				.antMatchers().hasRole("ADMIN") // 관리자만 접근 가능 경로
 				.antMatchers("*")
 				.permitAll().anyRequest().permitAll().and().cors();

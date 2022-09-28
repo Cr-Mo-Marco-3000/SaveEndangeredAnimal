@@ -13,6 +13,7 @@ import com.sea.domain.donation.db.repository.DonationRepository;
 import com.sea.domain.donation.dto.MyDonationDto;
 import com.sea.domain.donation.request.DonationRegisterPostReq;
 import com.sea.domain.user.db.entity.User;
+import com.sea.domain.user.db.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +28,13 @@ public class DonationServiceImpl implements DonationService {
 
 	@Autowired
 	DonationRepository donationRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
-	public List<MyDonationDto> getDonationList(User user) {
+	public List<MyDonationDto> getDonationList(int userId) {
+		User user = userRepository.findById(userId).get();
 		List<Donation> donations = donationRepository.findByFkUserId(user).get();
 
 		List<MyDonationDto> list = new ArrayList<>();
@@ -44,9 +49,9 @@ public class DonationServiceImpl implements DonationService {
 	}
 
 	@Override
-	public Donation createDonation(DonationRegisterPostReq registerInfo, User user) {
-		System.out.println(registerInfo.getDonationStatusCode());
+	public Donation createDonation(DonationRegisterPostReq registerInfo, int userId) {
 		Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
+		User user = userRepository.findById(userId).get();
 
 		Donation donation = Donation.builder().donationAmount(registerInfo.getDonationAmount())
 				.donationStatusCode(registerInfo.getDonationStatusCode())
