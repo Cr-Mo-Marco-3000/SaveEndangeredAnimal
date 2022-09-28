@@ -2,7 +2,8 @@ import { alpha, styled } from "@mui/material/styles"
 import { Box, Stack, Button, AppBar, Toolbar } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
 import style from "./Navbar.module.css"
-// import image fromt ''
+import React, {useEffect, useState} from 'react';
+import Web3 from "web3"
 
 const Navbar = () => {
   const APPBAR_MOBILE = 64
@@ -26,10 +27,34 @@ const Navbar = () => {
 
   const navigate = useNavigate()
 
+  const web3 = new Web3(window.ethereum);
+  const [balance, setBalance] = useState();
+  const [isaccount, setIsAccount] = useState(false);
+
+  const getCurrentAccount = async() => {
+    try {
+      const currentAccounts = await web3.eth.getAccounts();
+      // console.log(currentAccounts[0]);
+      const bal = await web3.eth.getBalance(currentAccounts[0]);
+      // console.log(balance);
+      setBalance(bal);
+      setIsAccount(true);
+      // console.log(web3);
+      return currentAccounts[0];
+    } catch {
+      console.log("err");
+    }
+  }
+
+  useEffect(()=> {
+    getCurrentAccount();
+  },[]);
+
   return (
     <RootStyle>
       <ToolbarStyle>
-        <div onClick={() => navigate("/main")} className={style.logoDiv}>
+        <div 
+          onClick={() => navigate("/main")} className={style.logoDiv}>
           <img className={style.logo} src="/images/logo/sea.png" alt="logo" />
         </div>
         <Button

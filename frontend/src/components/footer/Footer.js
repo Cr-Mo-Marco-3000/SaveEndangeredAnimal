@@ -32,7 +32,7 @@ export default function Footer() {
             <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
               <CDBFooterLink href="/main">Main Page</CDBFooterLink>
               <CDBFooterLink href="/main/express">Expression Page</CDBFooterLink>
-              <CDBFooterLink href="/main/animalList">Animal List Page</CDBFooterLink>
+              {/* <CDBFooterLink href="/main/animalList">Animal List Page</CDBFooterLink> */}
               <CDBFooterLink href="/main/sale">Animal Sale Page</CDBFooterLink>
               <CDBFooterLink href="/main/mypage">My Page</CDBFooterLink>
             </CDBBox>
@@ -67,7 +67,6 @@ export default function Footer() {
                   </CDBBtn>
                 </CDBBox>
             </CDBBox>
-            
           </CDBBox>
         </CDBBox>
         <small className="text-center mt-5">&copy; Sea, 2022. All rights reserved.</small>

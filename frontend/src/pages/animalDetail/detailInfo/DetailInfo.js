@@ -86,10 +86,8 @@ function DetailInfo(props) {
             onClick={openModal}
           >
             Donation
-            <Modal open={modalOpen} close={closeModal} header="기부 하기">
-              <Donation />
-            </Modal>
           </Button>
+          <Modal open={modalOpen} close={closeModal} header="기부 하기"><Donation /></Modal>
         </div>
       </div>
       <div className={styles.Info}>
