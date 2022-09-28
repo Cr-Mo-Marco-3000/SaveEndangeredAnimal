@@ -1,10 +1,10 @@
 package com.sea.domain.animal.service;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sea.domain.animal.db.entity.Animal;
 import com.sea.domain.animal.db.repository.AnimalRepository;
@@ -19,6 +20,7 @@ import com.sea.domain.animal.dto.AnimalDto;
 import com.sea.domain.animal.dto.AnimalNameDto;
 import com.sea.domain.animal.dto.MyAnimalDto;
 import com.sea.domain.animal.request.AnimalRegisterPostReq;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import com.sea.domain.donation.db.entity.Donation;
 import com.sea.domain.donation.db.repository.DonationRepository;
 import com.sea.domain.donation.dto.DonationDto;
@@ -26,11 +28,10 @@ import com.sea.domain.item.db.entity.Item;
 import com.sea.domain.item.db.repository.ItemRepository;
 import com.sea.domain.item.dto.ItemDto;
 import com.sea.domain.user.db.entity.User;
+import com.sea.domain.user.db.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -46,6 +47,9 @@ public class AnimalServiceImpl implements AnimalService {
 	@Autowired
 	ItemRepository itemRepository;
 
+	@Autowired
+	UserRepository userRepository;
+	
 	@Value("${default.imageFolder}")
 	String defaultImgPath;
 
@@ -143,7 +147,10 @@ public class AnimalServiceImpl implements AnimalService {
 	}
 
 	@Override
-	public List<MyAnimalDto> getMyAnimalListByUserName(User user) {
+	public List<MyAnimalDto> getMyAnimalListByWalletAddress(String walletAddress) {
+
+		User user = userRepository.findUserByUserWalletAddress(walletAddress).orElse(null);
+		
 		List<Animal> animals = animalRepository
 				.findAll(Sort.by(Sort.Direction.DESC, "animalType").by(Sort.Direction.ASC, "animalId"));
 

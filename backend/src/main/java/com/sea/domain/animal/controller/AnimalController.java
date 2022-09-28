@@ -1,39 +1,42 @@
 package com.sea.domain.animal.controller;
 
-import java.security.Principal;
 import java.util.List;
 
-import com.sea.domain.animal.db.entity.Animal;
-import com.sea.domain.animal.request.ImageRegisterPutReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sea.common.auth.UserDetails;
 import com.sea.common.model.response.BaseResponseBody;
+import com.sea.domain.animal.db.entity.Animal;
 import com.sea.domain.animal.dto.AnimalDto;
 import com.sea.domain.animal.dto.AnimalNameDto;
 import com.sea.domain.animal.dto.MyAnimalDto;
 import com.sea.domain.animal.request.AnimalRegisterPostReq;
+import com.sea.domain.animal.request.ImageRegisterPutReq;
 import com.sea.domain.animal.response.AnimalDetailGetRes;
 import com.sea.domain.animal.response.AnimalListGetRes;
 import com.sea.domain.animal.response.AnimalNameListGetRes;
 import com.sea.domain.animal.response.MyListGetRes;
 import com.sea.domain.animal.service.AnimalService;
-import com.sea.domain.user.db.entity.User;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
 @RestController
@@ -119,14 +122,10 @@ public class AnimalController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = AnimalDto.class),
 
 	})
-	public ResponseEntity<? extends BaseResponseBody> getMyList(@ApiIgnore Authentication authentication,
-			Principal principal) {
+	public ResponseEntity<? extends BaseResponseBody> getMyList(@RequestParam(value = "walletAddress") String walletAddress) {
 		log.info("getMyList - 호출");
 
-		UserDetails userDetails = (UserDetails) authentication.getDetails();
-		User user = userDetails.getUser();
-
-		List<MyAnimalDto> list = animalService.getMyAnimalListByUserName(user);
+		List<MyAnimalDto> list = animalService.getMyAnimalListByWalletAddress(walletAddress);
 
 		return ResponseEntity.status(200).body(MyListGetRes.of(200, "Success", list));
 	}

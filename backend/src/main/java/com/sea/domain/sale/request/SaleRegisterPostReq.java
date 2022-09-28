@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class SaleRegisterPostReq {
+	String walletAddres;
 	String saleContractAddress;
 	String saleCashContractAddress;
 	int saleStartTime;

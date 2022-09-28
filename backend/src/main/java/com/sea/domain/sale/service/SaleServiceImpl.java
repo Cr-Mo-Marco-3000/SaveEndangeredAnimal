@@ -25,22 +25,23 @@ public class SaleServiceImpl implements SaleService {
 	SaleRepository saleRepository;
 
 	@Override
-	public Sale createSale(SaleRegisterPostReq registerInfo, User user) {
+	public Sale createSale(SaleRegisterPostReq registerInfo) {
+		
 		Item item = itemRepository.findById(registerInfo.getItemId()).get();
 
 		Sale sale = Sale.builder().saleContractAddress(registerInfo.getSaleContractAddress())
 				.saleCashContractAddress(registerInfo.getSaleCashContractAddress())
-				.saleSellerAddress(user.getUserWalletAddress()).saleStartTime(registerInfo.getSaleStartTime())
+				.saleSellerAddress(registerInfo.getWalletAddres()).saleStartTime(registerInfo.getSaleStartTime())
 				.saleEndTime(registerInfo.getSaleEndTime()).fkItemId(item).build();
 
 		return saleRepository.save(sale);
 	}
 
 	@Override
-	public boolean deleteSale(SaleCancleDeleteReq cancleInfo, User user) {
+	public boolean deleteSale(SaleCancleDeleteReq cancleInfo) {
 		Sale sale = saleRepository.findById(cancleInfo.getSaleId()).get();
 
-		if (!sale.getSaleSellerAddress().equals(user.getUserWalletAddress())) {
+		if (!sale.getSaleSellerAddress().equals(cancleInfo.getWalletAddress())) {
 			return false;
 		}
 

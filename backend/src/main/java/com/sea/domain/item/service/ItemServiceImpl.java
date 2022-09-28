@@ -58,12 +58,12 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Item registerItem(ItemRegisterPostReq registerInfo, String userWalletAddress) {
+	public Item registerItem(ItemRegisterPostReq registerInfo) {
 		
 		Donation donation = donationRepository.findById(registerInfo.getDonationId()).get();
 				
 		Item item = Item.builder().itemImgUrl(registerInfo.getItemImgUrl()).itemTokenId(registerInfo.getItemTokenId())
-				.itemOwnerAddress(userWalletAddress).itemTitle(registerInfo.getItemTitle())
+				.itemOwnerAddress(registerInfo.getWalletAddress()).itemTitle(registerInfo.getItemTitle())
 				.itemPrice(registerInfo.getItemPrice()).fkDonationId(donation)
 				.build();
 

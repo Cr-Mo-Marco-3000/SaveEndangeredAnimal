@@ -33,8 +33,8 @@ public class DonationServiceImpl implements DonationService {
 	UserRepository userRepository;
 
 	@Override
-	public List<MyDonationDto> getDonationList(int userId) {
-		User user = userRepository.findById(userId).get();
+	public List<MyDonationDto> getDonationList(String walletAddress) {
+		User user = userRepository.findUserByUserWalletAddress(walletAddress).get();
 		List<Donation> donations = donationRepository.findByFkUserId(user).get();
 
 		List<MyDonationDto> list = new ArrayList<>();
@@ -49,9 +49,9 @@ public class DonationServiceImpl implements DonationService {
 	}
 
 	@Override
-	public Donation createDonation(DonationRegisterPostReq registerInfo, int userId) {
+	public Donation createDonation(DonationRegisterPostReq registerInfo) {
 		Animal animal = animalRepository.findByAnimalId(registerInfo.getAnimalId()).get();
-		User user = userRepository.findById(userId).get();
+		User user = userRepository.findUserByUserWalletAddress(registerInfo.getWalletAddress()).get();
 
 		Donation donation = Donation.builder().donationAmount(registerInfo.getDonationAmount())
 				.donationStatusCode(registerInfo.getDonationStatusCode())

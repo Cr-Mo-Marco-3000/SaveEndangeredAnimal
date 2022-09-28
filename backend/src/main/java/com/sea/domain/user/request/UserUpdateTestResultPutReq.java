@@ -6,10 +6,6 @@ import lombok.Getter;
 
 @Getter
 public class UserUpdateTestResultPutReq  {
+	String walletAddress;
     String[] list;
-
-	@Override
-	public String toString() {
-		return "UserUpdateTestResultPutReq [list=" + Arrays.toString(list) + "]";
-	}
 }
