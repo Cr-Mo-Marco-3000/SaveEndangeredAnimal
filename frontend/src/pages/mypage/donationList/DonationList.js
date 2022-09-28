@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Pagination } from "@mui/material"
 import usePagination from "components/pagination/Pagination"
 import Table from "@mui/material/Table"
@@ -20,8 +20,8 @@ export default function DonationList() {
   //   animalKoreanName: String,
   //   donationStatusCode: String
   //   ]
-  const [donationList,setDonationList] = useState([]);
-  //const cookies=new Cookies()
+  const [donationList, setDonationList] = useState([])
+  const cookies = new Cookies()
 
   const [page, setPage] = useState(1) // 처음 페이지는 1이다.
   const PER_PAGE = 10
@@ -33,16 +33,16 @@ export default function DonationList() {
     data.jump(p)
   }
 
-  useEffect(()=>{
-    const getDonationList= async ()=>{
-      //console.log(cookies.get("accessToken"))
-      const res=await api.donation.viewDonationLog();
-      console.log(res);
+  useEffect(() => {
+    console.log("이예이예이예")
+    const getDonationList = async () => {
+      console.log(cookies.get("accessToken"))
+      const res = await api.donation.viewDonationLog(cookies.get("accessToken"))
+      //console.log(res)
       setDonationList(res.list)
     }
-    getDonationList();
-
-  },[])
+    getDonationList()
+  }, [])
 
   return (
     <>

@@ -1,10 +1,16 @@
 import styles from "./ExpressionResult.module.css"
 import api from "../../../api/api.js"
+import { useNavigate } from "react-router-dom"
 
 const ExpressionResult = (props) => {
   const result = props.results
-  console.log(result)
+  //console.log(result)
   const uploadResult = props.uploadResult
+  const navigate = useNavigate()
+  const findAnimal = () => {
+    uploadResult()
+    navigate("/main/animalList")
+  }
   return (
     <div className={styles.expressionStart}>
       <div className={styles.expressionHeader}>
@@ -30,7 +36,7 @@ const ExpressionResult = (props) => {
           <span className={styles.colorSpanLast}>{" " + result[3]}</span> 세상
           속에서는 당신과 함께 할 수 있지만
         </div>
-        <button onClick={uploadResult} className={styles.startButton}>
+        <button onClick={findAnimal} className={styles.startButton}>
           동물들을 찾으러 가기
         </button>
       </div>

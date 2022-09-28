@@ -30,7 +30,7 @@ export default function NFTList(props) {
   // }
   //이대로 NFT data가 제대로 갱신되는지는 후에 해볼 영역
   React.useEffect(() => {
-    console.log(props.animalName)
+    //console.log(props.animalName)
 
     api.item.getItem("ALL").then((response) => {
       //console.log(response.list)

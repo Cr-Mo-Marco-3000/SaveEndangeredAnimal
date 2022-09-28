@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const HOST = "http://j7a506.p.ssafy.io:8080/api/v1"
+//const HOST = "http://localhost:8080/api/v1"
 
 const USER = "/user"
 const DONATION = "/donation"
@@ -42,7 +43,7 @@ const api = {
       }
     },
     // 나를 표현하기 => list 그대로 넣기
-    expressions: async (testResult) => {
+    expression: async (testResult) => {
       try {
         const res = await axios({
           url: HOST + USER + "/test-result",
@@ -52,10 +53,11 @@ const api = {
             list: testResult,
           },
         })
-        const response = res.data
-        return response
+        //console.log("여기까지 옴?")
+        return res
       } catch (error) {
-        const response = error.res.data
+        //console.log("에러")
+        const response = error.res
         return response
       }
     },
@@ -75,7 +77,7 @@ const api = {
     },
 
     // 사진 받아오기
-    getPictureURL: async () => {
+    getPictureURL: async (animalName) => {
       try {
         const res = await axios({
           url: HOST + USER + "/test-result",
@@ -83,8 +85,19 @@ const api = {
         })
         console.log("뇽뇽")
         const wordList = res.data
+        const centence =
+          wordList[0] +
+          " " +
+          animalName +
+          " " +
+          wordList[1] +
+          " " +
+          wordList[2] +
+          " " +
+          wordList[3]
+        console.log(centence)
         const pictureRes = await axios({
-          url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + wordList,
+          url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + centence,
           method: "GET",
         })
         const response = pictureRes.data.picture
@@ -103,7 +116,7 @@ const api = {
       donationAmount,
       donationStatusCode,
       donationTransactionHash,
-      animalId
+      animalId,
     ) => {
       try {
         const res = await axios({
@@ -125,11 +138,14 @@ const api = {
       }
     },
     // 기부 내역 살펴보기
-    viewDonationLog: async () => {
+    viewDonationLog: async (accessToken) => {
       try {
         const res = await axios({
           url: HOST + DONATION,
           method: "GET",
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
           withCredentials: true,
         })
         const data = res.data
@@ -149,7 +165,7 @@ const api = {
       saleCashContractAddress,
       saleStartTime,
       saleEndTime,
-      itemId
+      itemId,
     ) => {
       try {
         const res = await axios({
@@ -245,7 +261,7 @@ const api = {
       ScientificName,
       Description,
       Type,
-      EndangeredLevel
+      EndangeredLevel,
     ) => {
       try {
         const res = await axios({
@@ -340,7 +356,7 @@ const api = {
       Title,
       animalId,
       KoreanName,
-      Price
+      Price,
     ) => {
       try {
         const res = await axios({

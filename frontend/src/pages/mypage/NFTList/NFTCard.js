@@ -25,17 +25,26 @@ export default function NFTCard(props) {
         alt="animalImg"
       />
       <CardContent
-        sx={{ flex: "1 1 auto", boxShadow: "1", height: "1rem" }}
+        sx={{
+          flex: "1 1 auto",
+          boxShadow: "1",
+          height: "1rem",
+        }}
         className={styles.cardContent}
       >
         <Typography
-          sx={{ fontSize: 20, fontWeight: "bold", mr: "3rem" }}
+          sx={{
+            fontSize: 20,
+            fontWeight: "bold",
+            mr: "2.5rem",
+            lineHeight: "1.1rem",
+          }}
           component="div"
         >
           {NFTdata.animalName}
         </Typography>
         <Typography
-          sx={{ fontSize: 20, fontWeight: "bold" }}
+          sx={{ fontSize: 20, fontWeight: "bold", lineHeight: "1.1rem" }}
           component="div"
           style={
             NFTdata.endangered === "멸종"
