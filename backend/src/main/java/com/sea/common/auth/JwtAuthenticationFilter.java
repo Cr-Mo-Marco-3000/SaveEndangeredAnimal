@@ -1,26 +1,27 @@
 package com.sea.common.auth;
 
-import com.sea.common.util.CookieUtil;
-import com.sea.common.util.JwtTokenUtil;
-import com.sea.common.util.RedisUtil;
-import com.sea.domain.user.db.entity.User;
-import com.sea.domain.user.service.UserService;
-import io.jsonwebtoken.ExpiredJwtException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.rememberme.InvalidCookieException;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.sea.common.util.CookieUtil;
+import com.sea.common.util.JwtTokenUtil;
+import com.sea.domain.user.db.entity.User;
+import com.sea.domain.user.service.UserService;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 요청 헤더에 jwt 토큰이 있는 경우, 토큰 검증 및 인증 처리 로직 정의.
@@ -33,9 +34,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private CookieUtil cookieUtil;
-
-	@Autowired
-	private RedisUtil redisUtil;
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
@@ -81,30 +79,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			
 		}
 
-		try { // Refresh Token을 읽어 Access Token을 사용자에게 재생성하고, 요청을 허가시킴
-			if (refreshToken != null) {
-				userAddress = redisUtil.getData(refreshToken);
-				if (userAddress != null) {
-					log.info("jwt - access token 읽어오기 성공");
-					User user = userService.getUserByAddress(userAddress);
-					UserDetails userDetails = new UserDetails(user);
-
-					UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(
-							user.getUserId(), null, AuthorityUtils.createAuthorityList(user.getUserRole()));
-					jwtAuthentication.setDetails(userDetails);
-
-					SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
-
-					// Access Token 재생성
-					String newToken = jwtTokenUtil.createAccessToken(user.getUserId(), userAddress);
-
-					Cookie newAccessToken = cookieUtil.createCookie(jwtTokenUtil.ACCESS_TOKEN_NAME, newToken);
-					response.addCookie(newAccessToken);
-				}
-			}
-		} catch (ExpiredJwtException e) {
-
-		}
 		filterChain.doFilter(request, response);
 	}
 }
