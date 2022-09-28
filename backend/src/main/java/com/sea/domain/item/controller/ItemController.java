@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sea.common.auth.UserDetails;
 import com.sea.common.model.response.BaseResponseBody;
-import com.sea.domain.animal.request.AnimalRegisterPostReq;
 import com.sea.domain.item.db.entity.Item;
 import com.sea.domain.item.dto.ItemDto;
 import com.sea.domain.item.request.ItemRegisterPostReq;
@@ -75,15 +74,17 @@ public class ItemController {
 	@GetMapping()
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = ItemDto.class), })
 		public ResponseEntity<? extends BaseResponseBody> getDonationList(@ApiIgnore Authentication authentication, @RequestParam String type) {
-			UserDetails userDetails = (UserDetails) authentication.getDetails();
-			User user = userDetails.getUser();
 			
 			List<ItemDto> list = new ArrayList<>();
 			
 			if ("ALL".equals(type))
 				list = itemService.getItemList();
-			else
+			else {
+				UserDetails userDetails = (UserDetails) authentication.getDetails();
+				User user = userDetails.getUser();
+				
 				list = itemService.getMyItemList(user.getUserWalletAddress());
+				}
 			
 			return ResponseEntity.status(200).body(ItemListGetRes.of(200, "Success", list));
 

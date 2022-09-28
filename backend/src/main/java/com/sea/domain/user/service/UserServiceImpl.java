@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateTestResult(User user, List<String> list) {
-        user.updateTestResult(list);
+    public void updateTestResult(User user, UserUpdateTestResultPutReq updateInfo) {
+        user.updateTestResult(updateInfo.getList());
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
