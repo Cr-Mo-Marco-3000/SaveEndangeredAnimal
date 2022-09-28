@@ -52,7 +52,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true)
-                .allowedOriginPatterns("*");
+                .allowedOrigins("http://localhost:3000", "http://1.227.216.139:3000", "http://14.33.85.254:3000");
     }
 
     @Override
