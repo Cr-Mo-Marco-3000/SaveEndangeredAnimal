@@ -34,9 +34,9 @@ export default function DonationList() {
   }
 
   useEffect(() => {
-    console.log("이예이예이예")
+    //console.log("이예이예이예")
     const getDonationList = async () => {
-      console.log(cookies.get("accessToken"))
+      //console.log(cookies.get("accessToken"))
       const res = await api.donation.viewDonationLog(cookies.get("accessToken"))
       //console.log(res)
       setDonationList(res.list)

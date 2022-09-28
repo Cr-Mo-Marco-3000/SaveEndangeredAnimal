@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Cookies } from "react-cookie"
 
 const HOST = "http://j7a506.p.ssafy.io:8080/api/v1"
 //const HOST = "http://localhost:8080/api/v1"
@@ -8,6 +9,10 @@ const DONATION = "/donation"
 const SALE = "/sale"
 const ANIMAL = "/animal"
 const ITEM = "/item"
+
+const cookies = new Cookies()
+const walletAddress = cookies.get("id")
+//console.log(walletAddress)
 
 const api = {
   /* ============== User  ============== */
@@ -50,6 +55,7 @@ const api = {
           method: "PUT",
           withCredentials: true,
           data: {
+            walletAddress: walletAddress,
             list: testResult,
           },
         })
@@ -65,11 +71,12 @@ const api = {
     getExpressionsResult: async () => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result",
+          url: HOST + USER + "/test-result" + "?walletAddress=" + walletAddress,
           method: "GET",
           withCredentials: true,
         })
-        return res.data
+        console.log(res.data.testResult)
+        return res.data.testResult
       } catch (error) {
         const response = error.res.data
         return response
@@ -80,11 +87,12 @@ const api = {
     getPictureURL: async (animalName) => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result",
+          url: HOST + USER + "/test-result" + "?walletAddress=" + walletAddress,
           method: "GET",
         })
-        console.log("뇽뇽")
-        const wordList = res.data
+        //console.log("뇽뇽")
+        console.log(res.data.testResult)
+        const wordList = res.data.testResult
         const centence =
           wordList[0] +
           " " +
@@ -128,6 +136,7 @@ const api = {
             donationStatusCode: donationStatusCode,
             donationTransactionHash: donationTransactionHash,
             animalId: animalId,
+            walletAddress: walletAddress,
           },
         })
         const data = res.data
@@ -141,7 +150,7 @@ const api = {
     viewDonationLog: async (accessToken) => {
       try {
         const res = await axios({
-          url: HOST + DONATION,
+          url: HOST + DONATION + "?walletAddress=" + walletAddress,
           method: "GET",
           headers: {
             Authorization: "Bearer " + accessToken,
@@ -173,6 +182,7 @@ const api = {
           method: "POST",
           withCredentials: true,
           data: {
+            walletAddress: walletAddress,
             saleContractAddress: saleContractAddress,
             saleCashContractAddress: saleCashContractAddress,
             saleStartTime: saleStartTime,
@@ -240,7 +250,7 @@ const api = {
     getMyCurrentSale: async () => {
       try {
         const res = await axios({
-          url: HOST + SALE + "/ex",
+          url: HOST + SALE + "/ex" + "?walletAddress=" + walletAddress,
           method: "GET",
           withCredentials: true,
         })
@@ -334,7 +344,7 @@ const api = {
     getDonatedAnimalListByMe: async () => {
       try {
         const res = await axios({
-          url: HOST + ANIMAL + `/my-list`,
+          url: HOST + ANIMAL + `/my-list` + "?walletAddress=" + walletAddress,
           method: "GET",
           withCredentials: true,
         })
@@ -364,6 +374,7 @@ const api = {
           method: "POST",
           withCredentials: true,
           data: {
+            walletAddress: walletAddress,
             donationId: donationId,
             itemImgUrl: ImgUrl,
             itemTokenId: TokenId,
@@ -399,14 +410,27 @@ const api = {
     // type에는 ALL이나 USER가 들어감
     getItem: async (type) => {
       try {
-        const res = await axios({
-          url: HOST + ITEM,
-          method: "GET",
-          withCredentials: true,
-          params: {
-            type: type,
-          },
-        })
+        let res = ""
+        if (type === "ALL") {
+          res = await axios({
+            url: HOST + ITEM,
+            method: "GET",
+            withCredentials: true,
+            params: {
+              type: type,
+            },
+          })
+        } else {
+          res = await axios({
+            url: HOST + ITEM,
+            method: "GET",
+            withCredentials: true,
+            params: {
+              type: type,
+              walletAddress: walletAddress,
+            },
+          })
+        }
         const response = res.data
         return response
       } catch (error) {

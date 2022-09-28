@@ -337,7 +337,7 @@ const ExpressionPage = () => {
     result.push(expressionSelectPage[9]["selections"][paint])
     const response = await api.user.expression(result)
     //await api.expression(result)
-    //console.log(response)
+    console.log(response)
   }
 
   return (
