@@ -1,8 +1,9 @@
 import * as React from "react"
 import { Card, CardContent, CardMedia, Typography } from "@mui/material"
-import styles from "./NFTCard.module.css"
+import styles from "./SaleCard.module.css"
+import { width } from "@mui/system"
 
-export default function NFTCard(props) {
+export default function SaleCard(props) {
   //NFT data 로 받아온 값에서 필요한 것은 토큰 id로 부터 얻어와서 처리해야할 것
   //NFTdata 구성
   // {
@@ -12,9 +13,11 @@ export default function NFTCard(props) {
   //  itemTokenId: String,
   // animalKoreanName: String,
   // }
-  const NFTdata = props.NFTData
+  const saleData = props.SaleData
+  console.log(saleData)
   //그 외 데이터는NFT에서 가져와야할 것
-
+  const saleStartTime= new Date(props.SaleData.saleStartTime)
+  const saleEndTime= new Date(props.SaleData.saleEndTime)
   return (
     <Card
       sx={{
@@ -32,22 +35,24 @@ export default function NFTCard(props) {
         //   pt: '56.25%',
         // }}
         //image="https://source.unsplash.com/random"
-        image={NFTdata.animalImg}
+        image={saleData.itemImgUrl}
         alt="animalImg"
       />
       <CardContent
-        sx={{ boxShadow: "1", height: "1rem" }}
+        sx={{ boxShadow: "1" }}
         className={styles.cardContent}
       >
-        <Typography gutterBottom variant="h5" component="div">
-          {NFTdata.animalKoreanName}
+        <Typography >
+          {saleData.animalKoreanName}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          판매기간 :
+        <div>
+        <Typography >
+          판매기간 : {saleStartTime.toLocaleString()} ~ {saleEndTime.toLocaleString()}
         </Typography>
-        <Typography variant="body1" align="right">
-          SSF
+        <Typography  >
+          {saleData.salePrice} ETH
         </Typography>
+        </div>
       </CardContent>
     </Card>
   )

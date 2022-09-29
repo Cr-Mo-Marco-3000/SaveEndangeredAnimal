@@ -1,13 +1,13 @@
 import * as React from "react"
 import { Grid } from "@mui/material"
-import NFTCard from "./NFTCard"
+import SaleCard from "./SaleCard"
 import { useState } from "react"
 import { Pagination } from "@mui/material"
 import usePagination from "components/pagination/Pagination"
-import styles from "./NFTList.module.css"
+import styles from "./SaleList.module.css"
 import api from "api/api.js"
 
-export default function NFTList(props) {
+export default function SaleList(props) {
   //allData는 aixos 에서 가져올 것
   const [allData, setAllData] = React.useState([])
   const [realData,setRealData]=React.useState([]);
@@ -43,13 +43,13 @@ export default function NFTList(props) {
     //   }
     // })
     const getNFTList=async ()=>{
-      const result=await api.item.getItem("ALL");
-      //console.log(result.list)
+      const result=await api.sale.getSaleList()
+      console.log(result)
       setAllData(result.list)
     }
 
     getNFTList()
-    console.log("한번만")
+    //console.log("한번만")
     
   }, [])
 
@@ -81,7 +81,7 @@ React.useEffect(()=>{
       <Grid container spacing={3}>
         {data.currentData().map((data, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={3}>
-            <NFTCard NFTData={data}></NFTCard>
+            <SaleCard SaleData={data}></SaleCard>
           </Grid>
         ))}
       </Grid>
