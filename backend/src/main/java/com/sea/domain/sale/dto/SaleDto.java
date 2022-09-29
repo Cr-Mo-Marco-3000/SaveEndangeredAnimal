@@ -16,10 +16,10 @@ public class SaleDto {
 	int itemId;
 	int saleStartTime;
 	int saleEndTime;
-
 	String itemTitle;
-
 	double salePrice;
+	String animalKoreanName;
+
 
 	public SaleDto(Sale sale) {
 		this.saleId = sale.getSaleId();
@@ -35,5 +35,6 @@ public class SaleDto {
 		this.saleEndTime = sale.getSaleEndTime();
 		this.salePrice = sale.getSalePrice();
 		this.itemTitle = sale.getFkItemId().getItemTitle();
+		this.animalKoreanName = sale.getFkItemId().getFkDonationId().getFkAnimalId().getAnimalKoreanName();
 	}
 }
