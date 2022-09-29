@@ -60,7 +60,7 @@ public class SaleController {
 	}
 
 	@ApiOperation(value = "판매 목록 불러오기")
-	@DeleteMapping()
+	@GetMapping()
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 400, message = "실패"), })
 	public ResponseEntity<? extends BaseResponseBody> getSaleList() {
 
