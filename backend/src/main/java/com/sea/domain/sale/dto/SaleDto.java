@@ -2,8 +2,10 @@ package com.sea.domain.sale.dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sea.domain.sale.db.entity.Sale;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class SaleDto {
 	int saleId;
 	String saleContractAddress;

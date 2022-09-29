@@ -53,9 +53,8 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public List<SaleDto> getSaleList() {
-		List<Sale> sales = saleRepository.findAll();
+		List<Sale> sales = saleRepository.findBySaleYn(0).orElse(new ArrayList<>());
 		List<SaleDto> list = new ArrayList<SaleDto>();
-
 		for (Sale sale : sales) {
 			SaleDto dto = new SaleDto(sale);
 			list.add(dto);
