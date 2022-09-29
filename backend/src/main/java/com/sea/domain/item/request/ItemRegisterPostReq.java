@@ -9,5 +9,4 @@ public class ItemRegisterPostReq {
 	String itemTokenId;
 	int donationId;
 	String itemTitle;
-	double itemPrice;
 }

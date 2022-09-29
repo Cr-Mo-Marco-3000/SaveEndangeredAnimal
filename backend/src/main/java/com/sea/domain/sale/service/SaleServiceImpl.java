@@ -32,7 +32,7 @@ public class SaleServiceImpl implements SaleService {
 		Sale sale = Sale.builder().saleContractAddress(registerInfo.getSaleContractAddress())
 				.saleCashContractAddress(registerInfo.getSaleCashContractAddress())
 				.saleSellerAddress(registerInfo.getWalletAddres()).saleStartTime(registerInfo.getSaleStartTime())
-				.saleEndTime(registerInfo.getSaleEndTime()).fkItemId(item).build();
+				.saleEndTime(registerInfo.getSaleEndTime()).fkItemId(item).salePrice(registerInfo.getSalePrice()).build();
 
 		return saleRepository.save(sale);
 	}

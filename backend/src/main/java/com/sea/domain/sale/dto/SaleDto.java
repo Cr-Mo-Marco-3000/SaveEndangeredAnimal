@@ -17,6 +17,10 @@ public class SaleDto {
 	int saleStartTime;
 	int saleEndTime;
 
+	String itemTitle;
+
+	double salePrice;
+
 	public SaleDto(Sale sale) {
 		this.saleId = sale.getSaleId();
 		this.saleContractAddress = sale.getSaleContractAddress();
@@ -29,5 +33,7 @@ public class SaleDto {
 		this.itemId = sale.getFkItemId().getItemId();
 		this.saleStartTime = sale.getSaleStartTime();
 		this.saleEndTime = sale.getSaleEndTime();
+		this.salePrice = sale.getSalePrice();
+		this.itemTitle = sale.getFkItemId().getItemTitle();
 	}
 }

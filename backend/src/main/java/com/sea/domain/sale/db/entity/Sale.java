@@ -50,6 +50,9 @@ public class Sale {
 	
 	@Column(name = "sale_buyer_address", length = 200, nullable = true)
 	String saleBuyerAddress;
+
+	@Column(name = "sale_price")
+	double salePrice;
 	
 	@CreationTimestamp
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)

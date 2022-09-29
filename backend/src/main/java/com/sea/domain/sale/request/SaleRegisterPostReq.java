@@ -10,4 +10,5 @@ public class SaleRegisterPostReq {
 	int saleStartTime;
 	int saleEndTime;
 	int itemId;
+	double salePrice;
 }

@@ -68,7 +68,7 @@ public class ItemServiceImpl implements ItemService {
 				
 		Item item = Item.builder().itemImgUrl(registerInfo.getItemImgUrl()).itemTokenId(registerInfo.getItemTokenId())
 				.itemOwnerAddress(registerInfo.getWalletAddress()).itemTitle(registerInfo.getItemTitle())
-				.itemPrice(registerInfo.getItemPrice()).fkDonationId(donation)
+				.itemPrice(donation.getDonationAmount()).fkDonationId(donation)
 				.build();
 
 		donation.getFkAnimalId().addNowItem();
