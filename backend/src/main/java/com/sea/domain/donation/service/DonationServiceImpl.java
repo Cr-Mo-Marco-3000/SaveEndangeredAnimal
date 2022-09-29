@@ -2,6 +2,7 @@ package com.sea.domain.donation.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,10 +55,25 @@ public class DonationServiceImpl implements DonationService {
 		User user = userRepository.findUserByUserWalletAddress(registerInfo.getWalletAddress()).get();
 
 		Donation donation = Donation.builder().donationAmount(registerInfo.getDonationAmount())
-				.donationStatusCode(registerInfo.getDonationStatusCode())
+				.donationStatusCode("NFT 생성중...")
 				.donationTransactionHash(registerInfo.getDonationTransactionHash()).fkUserId(user).fkAnimalId(animal)
 				.build();
 
 		return donationRepository.save(donation);
+	}
+
+	@Override
+	public Donation updateDonation(int donationId) {
+		Optional<Donation> optional = donationRepository.findById(donationId);
+
+		if(optional.isPresent()) {
+			Donation donation = optional.get();
+
+			donation.update();
+
+			return donationRepository.save(donation);
+		} else {
+			return null;
+		}
 	}
 }

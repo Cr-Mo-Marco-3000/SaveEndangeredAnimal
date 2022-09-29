@@ -4,14 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.sea.domain.donation.request.DonationUpdatePatchReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sea.common.model.response.BaseResponseBody;
 import com.sea.domain.donation.db.entity.Donation;
@@ -51,5 +47,16 @@ public class DonationController {
 		
 		List<MyDonationDto> list = donationService.getDonationList(walletAddress);
 		return ResponseEntity.status(200).body(MyDonationListGetRes.of(200, "Success", list));
+	}
+
+	@PatchMapping
+	public ResponseEntity<? extends BaseResponseBody> updateStatusCode(@RequestBody DonationUpdatePatchReq updateInfo) {
+
+		Donation donation = donationService.updateDonation(updateInfo.getDonationId());
+
+		if(donation == null)
+			return ResponseEntity.status(400).body(BaseResponseBody.of(400, "Fail"));
+
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 }

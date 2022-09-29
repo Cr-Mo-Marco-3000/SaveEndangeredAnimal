@@ -3,6 +3,7 @@ package com.sea.domain.item.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sea.domain.animal.db.entity.Animal;
 import com.sea.domain.animal.db.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,9 +66,13 @@ public class ItemServiceImpl implements ItemService {
 	public Item registerItem(ItemRegisterPostReq registerInfo) {
 		
 		Donation donation = donationRepository.findById(registerInfo.getDonationId()).get();
+
+		Animal animal = donation.getFkAnimalId();
+
+		String title = animal.getAnimalKoreanName() + "#" + (animal.getAnimalNowItem() + 1);
 				
 		Item item = Item.builder().itemImgUrl(registerInfo.getItemImgUrl()).itemTokenId(registerInfo.getItemTokenId())
-				.itemOwnerAddress(registerInfo.getWalletAddress()).itemTitle(registerInfo.getItemTitle())
+				.itemOwnerAddress(registerInfo.getWalletAddress()).itemTitle(title)
 				.itemPrice(donation.getDonationAmount()).fkDonationId(donation)
 				.build();
 

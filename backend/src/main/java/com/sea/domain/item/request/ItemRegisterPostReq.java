@@ -8,5 +8,4 @@ public class ItemRegisterPostReq {
 	String itemImgUrl;
 	String itemTokenId;
 	int donationId;
-	String itemTitle;
 }

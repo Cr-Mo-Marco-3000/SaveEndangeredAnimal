@@ -11,5 +11,6 @@ public interface DonationService {
 
 	List<MyDonationDto> getDonationList(String walletAddress);
 	Donation createDonation(DonationRegisterPostReq registerInfo);
-	
+
+    Donation updateDonation(int donationId);
 }
