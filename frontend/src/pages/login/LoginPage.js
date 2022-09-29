@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { ethers } from "ethers";
 import api from "api/api";
 import coin from '../login/coin.png'
+import loading from '../login/loading.gif'
 import sealogo3 from '../login/sealogo3.png'
 import logo from '../../components/footer/sea.png'
 import './Login.css'
@@ -117,7 +118,7 @@ const LoginPage = () => {
                 className="App-logo" alt="logo" /> */}
 
       <Stack spacing={2}>
-        <button className='button' onClick={connectHandler}>MetaMask 로그인</button>
+        <button className='button' onClick={connectHandler}>METAMASK LOGIN</button>
         {errorMessage ? (
           <Typography variant="body1" color="red">
             Error: {errorMessage}

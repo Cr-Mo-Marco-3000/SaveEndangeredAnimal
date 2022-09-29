@@ -87,7 +87,7 @@ function DetailInfo(props) {
           >
             Donation
           </Button>
-          <Modal open={modalOpen} close={closeModal} header="기부 하기"><Donation /></Modal>
+          <Modal open={modalOpen} close={closeModal} header="기부하기"><Donation /></Modal>
         </div>
       </div>
       <div className={styles.Info}>

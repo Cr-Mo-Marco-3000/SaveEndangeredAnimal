@@ -1,16 +1,17 @@
 import React from 'react';
 import { CDBFooter, CDBFooterLink, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
 import logo from '../footer/sea.png'
+import { Link } from 'react-router-dom';
+import styles from './Footer.module.css'
 
 export default function Footer() {
   return (
     // <CDBFooter className="shadow"> 
-    <CDBFooter className="bg"> 
-    <br/><br/><br/><br/>
+    <CDBFooter className={styles.bg}> 
     {/* <CDBBox><img alt="logo" src={logo} width="50px" /></CDBBox> */}
       <CDBBox display="flex" flex="column" className="mx-auto py-5" style={{ width: '70%' }}>
         <CDBBox display="flex" justifyContent="between" className="flex-wrap">
-          <CDBBox>
+          <CDBBox className={styles.write}>
             <br/><br/>
               <img alt="logo" src={logo} width="50px" />
               <p className="h5 mb-4" style={{ fontWeight: '600' }}>
@@ -24,29 +25,29 @@ export default function Footer() {
               서울특별시 강남구 테헤란로 212
             </p>
           </CDBBox>
-          <CDBBox>
+          <CDBBox className={styles.write}>
             <br/><br/>
             <p className="h5 mb-5" style={{ fontWeight: '600' }}>
               Pages
             </p>
             <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
-              <CDBFooterLink href="/main">Main Page</CDBFooterLink>
-              <CDBFooterLink href="/main/express">Expression Page</CDBFooterLink>
-              {/* <CDBFooterLink href="/main/animalList">Animal List Page</CDBFooterLink> */}
-              <CDBFooterLink href="/main/sale">Animal Sale Page</CDBFooterLink>
-              <CDBFooterLink href="/main/mypage">My Page</CDBFooterLink>
+              <a href="/main">Main Page</a><br/>
+              <a href="/main/express">Expression Page</a><br/>
+              <a href="/main/animalList">Animal List Page</a><br/>
+              <a href="/main/sale">Animal Sale Page</a><br/>
+              <a href="/main/mypage">My Page</a><br/>
             </CDBBox>
           </CDBBox>
-          <CDBBox>
+          <CDBBox className={styles.write}>
             <br/><br/>
             <p className="h5 mb-5" style={{ fontWeight: '600' }}>
             Contact.
             </p>
             <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
-              <CDBFooterLink href="/">Contact.</CDBFooterLink>
-              <CDBFooterLink color="inherit" href="https://www.nie.re.kr/endangered_species/home/main/main.do">
+              <a href="/">Contact.</a><br/>
+              <a color="inherit" href="https://www.nie.re.kr/endangered_species/home/main/main.do">
            멸종위기 야생생물 포털{' '}{new Date().getFullYear()}{'.'}
-         </CDBFooterLink>
+         </a>
             </CDBBox>
 
             <CDBBox
@@ -67,9 +68,10 @@ export default function Footer() {
                   </CDBBtn>
                 </CDBBox>
             </CDBBox>
+            
           </CDBBox>
         </CDBBox>
-        <small className="text-center mt-5">&copy; Sea, 2022. All rights reserved.</small>
+        <small className={styles.write}>&copy; Sea, 2022. All rights reserved.</small>
       </CDBBox>
       <br/><br/><br/><br/>
     </CDBFooter>
