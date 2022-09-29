@@ -31,18 +31,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateTestResult(User user, List<String> list) {
-        user.updateTestResult(list);
+    public void updateTestResult(UserUpdateTestResultPutReq updateInfo) {
+    	User user = userRepository.findUserByUserWalletAddress(updateInfo.getWalletAddress()).get();
+    	
+        user.updateTestResult(updateInfo.getList());
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
-    public User getTestResultByUserId(int userId) {
-        Optional<User> user = userRepository.findById(userId);
+    public List<String> getTestResultByUserId(String walletAddress) {
+        Optional<User> user = userRepository.findUserByUserWalletAddress(walletAddress);
 
         if (user.isPresent()) {
-            return user.get();
+            return user.get().getUserTestResult();
         } else {
             return null;
         }
