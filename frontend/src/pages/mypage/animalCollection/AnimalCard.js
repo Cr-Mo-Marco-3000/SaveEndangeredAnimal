@@ -9,7 +9,7 @@ export default function AnimalCard(props) {
   const animalData = {
     ...props,
   }
-
+  //console.log(animalData)
   //nft 수집 여부에 따라서 다른 CSS 먹이자
   return (
     <Card

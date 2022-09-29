@@ -10,12 +10,12 @@ import api from "api/api.js"
 export default function NFTList(props) {
   //allData는 aixos 에서 가져올 것
   const [allData, setAllData] = React.useState([])
-
+  const [realData,setRealData]=React.useState([]);
   //페이징 처리
   const [page, setPage] = useState(1) // 처음 페이지는 1이다.
   const PER_PAGE = 8
-  const count = Math.ceil(allData.length / PER_PAGE)
-  const data = usePagination(allData, PER_PAGE)
+  const count = Math.ceil(realData.length / PER_PAGE)
+  const data = usePagination(realData, PER_PAGE)
 
   //props.animalName 이 '전체보기'면 전체 리스트 동물의
   //한글이름이면 그 이름에 맞게 필터링해서 NFT 리스트
@@ -32,25 +32,49 @@ export default function NFTList(props) {
   React.useEffect(() => {
     //console.log(props.animalName)
 
-    api.item.getItem("ALL").then((response) => {
-      //console.log(response.list)
-      setAllData([response])
-      console.log(response)
-      if (props.animalName !== "전체보기" && allData.length != 0) {
-        allData = allData.filter(
-          (data) => data.animalKoreanName === props.animalName,
-        )
-      }
-      data.setNewData(allData)
-      setPage(1)
-      data.jump(1)
-    })
-  }, [props.animalName])
+    // api.item.getItem("ALL").then((response) => {
+    //   //console.log(response.list)
+    //   setAllData([response])
+    //   //console.log(response)
+    //   if (props.animalName !== "전체보기" && allData.length !== 0) {
+    //     setAllData(allData.filter(
+    //       (data) => data.animalKoreanName === props.animalName,
+    //     ))
+    //   }
+    // })
+    const getNFTList=async ()=>{
+      const result=await api.item.getItem("ALL");
+      //console.log(result.list)
+      setAllData(result.list)
+    }
+
+    getNFTList()
+    console.log("한번만")
+    
+  }, [])
 
   const handleChange = (e, p) => {
     setPage(p)
     data.jump(p)
   }
+
+  React.useEffect(()=>{
+    data.setNewData(realData)
+    return()=>{
+    }
+},[realData,data])
+
+React.useEffect(()=>{
+  let newList=[];
+  if (props.animalName !== "전체보기" && allData.length !== 0){
+    newList=allData.filter(
+            (data) => data.animalKoreanName === props.animalName,
+          )
+  }else{
+    newList=allData
+  }
+  setRealData(newList);
+},[props.animalName,allData])
 
   return (
     <div className={styles.outDiv}>
