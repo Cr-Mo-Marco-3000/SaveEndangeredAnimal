@@ -68,11 +68,11 @@ public class Sale {
 	@JoinColumn(name = "fk_item_id")
 	Item fkItemId;
 	
-	@Column(name = "sale_start_time")
-	int saleStartTime;
+	@Column(name = "sale_start_time", columnDefinition = "BIGINT(20)")
+	long saleStartTime;
 	
-	@Column(name = "sale_end_time")
-	int saleEndTime;
+	@Column(name = "sale_end_time", columnDefinition = "BIGINT(20)")
+	long saleEndTime;
 
 	public void updateBuyerAddress(String saleBuyerAddress) {
 		this.saleBuyerAddress = saleBuyerAddress;

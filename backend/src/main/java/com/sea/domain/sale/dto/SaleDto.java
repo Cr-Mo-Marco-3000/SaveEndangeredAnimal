@@ -14,12 +14,12 @@ public class SaleDto {
 	LocalDateTime saleCreatedAt;
 	LocalDateTime saleCompletedAt;
 	int itemId;
-	int saleStartTime;
-	int saleEndTime;
+	long saleStartTime;
+	long saleEndTime;
 	String itemTitle;
 	double salePrice;
 	String animalKoreanName;
-
+	String itemImgUrl;
 
 	public SaleDto(Sale sale) {
 		this.saleId = sale.getSaleId();
@@ -35,6 +35,7 @@ public class SaleDto {
 		this.saleEndTime = sale.getSaleEndTime();
 		this.salePrice = sale.getSalePrice();
 		this.itemTitle = sale.getFkItemId().getItemTitle();
+		this.itemImgUrl = sale.getFkItemId().getItemImgUrl();
 		this.animalKoreanName = sale.getFkItemId().getFkDonationId().getFkAnimalId().getAnimalKoreanName();
 	}
 }
