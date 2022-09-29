@@ -3,6 +3,7 @@ package com.sea.domain.item.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sea.domain.animal.db.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,9 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
 	DonationRepository donationRepository;
+
+	@Autowired
+	AnimalRepository animalRepository;
 
 	@Override
 	public List<ItemDto> getMyItemList(String userWalletAddress) {
@@ -66,6 +70,8 @@ public class ItemServiceImpl implements ItemService {
 				.itemOwnerAddress(registerInfo.getWalletAddress()).itemTitle(registerInfo.getItemTitle())
 				.itemPrice(registerInfo.getItemPrice()).fkDonationId(donation)
 				.build();
+
+		donation.getFkAnimalId().addNowItem();
 
 		return itemRepository.save(item);
 	}
