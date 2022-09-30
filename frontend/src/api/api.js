@@ -2,7 +2,7 @@ import axios from "axios"
 import { Cookies } from "react-cookie"
 
 const HOST = "http://j7a506.p.ssafy.io:8080/api/v1"
-//const HOST = "http://localhost:8080/api/v1"
+// const HOST = "http://localhost:8080/api/v1"
 
 const USER = "/user"
 const DONATION = "/donation"
@@ -71,7 +71,12 @@ const api = {
     getExpressionsResult: async () => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result" + "?walletAddress=" + cookies.get("id"),
+          url:
+            HOST +
+            USER +
+            "/test-result" +
+            "?walletAddress=" +
+            cookies.get("id"),
           method: "GET",
           withCredentials: true,
         })
@@ -87,7 +92,12 @@ const api = {
     getPictureURL: async (animalName) => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result" + "?walletAddress=" + cookies.get("id"),
+          url:
+            HOST +
+            USER +
+            "/test-result" +
+            "?walletAddress=" +
+            cookies.get("id"),
           method: "GET",
         })
         //console.log("뇽뇽")
@@ -121,10 +131,10 @@ const api = {
   donation: {
     // 기부하기
     donate: async (
+      walletAddress,
       donationAmount,
-      donationStatusCode,
       donationTransactionHash,
-      animalId,
+      animalId
     ) => {
       try {
         const res = await axios({
@@ -133,7 +143,6 @@ const api = {
           withCredentials: true,
           data: {
             donationAmount: donationAmount,
-            donationStatusCode: donationStatusCode,
             donationTransactionHash: donationTransactionHash,
             animalId: animalId,
             walletAddress: cookies.get("id"),
@@ -171,7 +180,7 @@ const api = {
       saleCashContractAddress,
       saleStartTime,
       saleEndTime,
-      itemId,
+      itemId
     ) => {
       try {
         const res = await axios({
@@ -268,7 +277,7 @@ const api = {
       ScientificName,
       Description,
       Type,
-      EndangeredLevel,
+      EndangeredLevel
     ) => {
       try {
         const res = await axios({
@@ -341,7 +350,8 @@ const api = {
     getDonatedAnimalListByMe: async () => {
       try {
         const res = await axios({
-          url: HOST + ANIMAL + `/my-list` + "?walletAddress=" + cookies.get("id"),
+          url:
+            HOST + ANIMAL + `/my-list` + "?walletAddress=" + cookies.get("id"),
           method: "GET",
           withCredentials: true,
         })
@@ -357,13 +367,10 @@ const api = {
   item: {
     // NFT 등록
     registerItem: async (
+      walletAddress,
       donationId,
-      ImgUrl,
-      TokenId,
-      Title,
-      animalId,
-      KoreanName,
-      Price,
+      itemImgUrl, //
+      itemTokenId
     ) => {
       try {
         const res = await axios({
@@ -373,12 +380,8 @@ const api = {
           data: {
             walletAddress: cookies.get("id"),
             donationId: donationId,
-            itemImgUrl: ImgUrl,
-            itemTokenId: TokenId,
-            itemTitle: Title,
-            animalId: animalId,
-            animalKoreanName: KoreanName,
-            itemPrice: Price,
+            itemImgUrl: itemImgUrl,
+            itemTokenId: itemTokenId,
           },
         })
         const response = res.data
