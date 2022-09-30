@@ -1,12 +1,18 @@
 import axios from "axios"
+import { Cookies } from "react-cookie"
 
 const HOST = "http://j7a506.p.ssafy.io:8080/api/v1"
+// const HOST = "http://localhost:8080/api/v1"
 
 const USER = "/user"
 const DONATION = "/donation"
 const SALE = "/sale"
 const ANIMAL = "/animal"
 const ITEM = "/item"
+
+const cookies = new Cookies()
+//const walletAddress = cookies.get("id")
+//console.log(walletAddress)
 
 const api = {
   /* ============== User  ============== */
@@ -33,6 +39,7 @@ const api = {
         const res = await axios({
           url: HOST + USER + "/logout",
           method: "GET",
+          withCredentials: true,
         })
         return res.data
       } catch (error) {
@@ -41,19 +48,22 @@ const api = {
       }
     },
     // 나를 표현하기 => list 그대로 넣기
-    expressions: async (testResult) => {
+    expression: async (testResult) => {
       try {
         const res = await axios({
           url: HOST + USER + "/test-result",
           method: "PUT",
+          withCredentials: true,
           data: {
+            walletAddress: cookies.get("id"),
             list: testResult,
           },
         })
-        const response = res.data
-        return response
+        //console.log("여기까지 옴?")
+        return res
       } catch (error) {
-        const response = error.res.data
+        //console.log("에러")
+        const response = error.res
         return response
       }
     },
@@ -61,10 +71,17 @@ const api = {
     getExpressionsResult: async () => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result",
+          url:
+            HOST +
+            USER +
+            "/test-result" +
+            "?walletAddress=" +
+            cookies.get("id"),
           method: "GET",
+          withCredentials: true,
         })
-        return res.data
+        console.log(res.data.testResult)
+        return res.data.testResult
       } catch (error) {
         const response = error.res.data
         return response
@@ -72,16 +89,31 @@ const api = {
     },
 
     // 사진 받아오기
-    getPictureURL: async () => {
+    getPictureURL: async (animalName) => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result",
+          url:
+            HOST +
+            USER +
+            "/test-result" +
+            "?walletAddress=" +
+            cookies.get("id"),
           method: "GET",
         })
-        console.log("뇽뇽")
-        const wordList = res.data
+        //console.log("뇽뇽")
+        const wordList = res.data.testResult
+        const centence =
+          wordList[0] +
+          " " +
+          animalName +
+          " " +
+          wordList[1] +
+          " " +
+          wordList[2] +
+          " " +
+          wordList[3]
         const pictureRes = await axios({
-          url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + wordList,
+          url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + centence,
           method: "GET",
         })
         const response = pictureRes.data.picture
@@ -97,8 +129,8 @@ const api = {
   donation: {
     // 기부하기
     donate: async (
+      walletAddress,
       donationAmount,
-      donationStatusCode,
       donationTransactionHash,
       animalId
     ) => {
@@ -106,11 +138,12 @@ const api = {
         const res = await axios({
           url: HOST + DONATION,
           method: "POST",
+          withCredentials: true,
           data: {
             donationAmount: donationAmount,
-            donationStatusCode: donationStatusCode,
             donationTransactionHash: donationTransactionHash,
             animalId: animalId,
+            walletAddress: cookies.get("id"),
           },
         })
         const data = res.data
@@ -124,8 +157,9 @@ const api = {
     viewDonationLog: async () => {
       try {
         const res = await axios({
-          url: HOST + DONATION,
+          url: HOST + DONATION + "?walletAddress=" + cookies.get("id"),
           method: "GET",
+          withCredentials: true,
         })
         const data = res.data
         return data
@@ -150,7 +184,9 @@ const api = {
         const res = await axios({
           url: HOST + SALE,
           method: "POST",
+          withCredentials: true,
           data: {
+            walletAddress: cookies.get("id"),
             saleContractAddress: saleContractAddress,
             saleCashContractAddress: saleCashContractAddress,
             saleStartTime: saleStartTime,
@@ -170,6 +206,7 @@ const api = {
       try {
         const res = await axios({
           url: HOST + SALE,
+          withCredentials: true,
           method: "GET",
         })
         const data = res.data
@@ -185,6 +222,7 @@ const api = {
         const res = await axios({
           url: HOST + SALE,
           method: "PUT",
+          withCredentials: true,
           data: {
             saleId: saleId,
             saleBuyerAddress: saleBuyerAddress,
@@ -203,6 +241,7 @@ const api = {
         const res = await axios({
           url: HOST + SALE + `/${saleNumber}`,
           method: "GET",
+          withCredentials: true,
         })
         const response = res.data
         return response
@@ -215,8 +254,9 @@ const api = {
     getMyCurrentSale: async () => {
       try {
         const res = await axios({
-          url: HOST + SALE + "/ex",
+          url: HOST + SALE + "/ex" + "?walletAddress=" + cookies.get("id"),
           method: "GET",
+          withCredentials: true,
         })
         const response = res.data
         return response
@@ -240,6 +280,7 @@ const api = {
       try {
         const res = await axios({
           url: HOST + ANIMAL,
+          withCredentials: true,
           method: "POST",
           data: {
             animalKoreanName: KoreanName,
@@ -263,6 +304,7 @@ const api = {
       try {
         const res = await axios({
           url: HOST + ANIMAL,
+          withCredentials: true,
           method: "GET",
         })
         const response = res.data
@@ -278,6 +320,7 @@ const api = {
         const res = await axios({
           url: HOST + ANIMAL + `/detail/${animalId}`,
           method: "GET",
+          withCredentials: true,
         })
         const response = res.data
         return response
@@ -292,6 +335,7 @@ const api = {
         const res = await axios({
           url: HOST + ANIMAL + `/name-list`,
           method: "GET",
+          withCredentials: true,
         })
         const response = res.data
         return response
@@ -304,8 +348,10 @@ const api = {
     getDonatedAnimalListByMe: async () => {
       try {
         const res = await axios({
-          url: HOST + ANIMAL + `/my-list`,
+          url:
+            HOST + ANIMAL + `/my-list` + "?walletAddress=" + cookies.get("id"),
           method: "GET",
+          withCredentials: true,
         })
         const response = res.data
         return response
@@ -319,26 +365,21 @@ const api = {
   item: {
     // NFT 등록
     registerItem: async (
+      walletAddress,
       donationId,
-      ImgUrl,
-      TokenId,
-      Title,
-      animalId,
-      KoreanName,
-      Price
+      itemImgUrl,
+      itemTokenId
     ) => {
       try {
         const res = await axios({
           url: HOST + ITEM,
           method: "POST",
+          withCredentials: true,
           data: {
+            walletAddress: cookies.get("id"),
             donationId: donationId,
-            itemImgUrl: ImgUrl,
-            itemTokenId: TokenId,
-            itemTitle: Title,
-            animalId: animalId,
-            animalKoreanName: KoreanName,
-            itemPrice: Price,
+            itemImgUrl: itemImgUrl,
+            itemTokenId: itemTokenId,
           },
         })
         const response = res.data
@@ -353,6 +394,7 @@ const api = {
       try {
         const res = await axios({
           url: HOST + ITEM,
+          withCredentials: true,
           method: "PUT",
         })
         const response = res.data
@@ -366,13 +408,27 @@ const api = {
     // type에는 ALL이나 USER가 들어감
     getItem: async (type) => {
       try {
-        const res = await axios({
-          url: HOST + ITEM,
-          method: "GET",
-          params: {
-            type: type,
-          },
-        })
+        let res = ""
+        if (type === "ALL") {
+          res = await axios({
+            url: HOST + ITEM,
+            method: "GET",
+            withCredentials: true,
+            params: {
+              type: type,
+            },
+          })
+        } else {
+          res = await axios({
+            url: HOST + ITEM,
+            method: "GET",
+            withCredentials: true,
+            params: {
+              type: type,
+              walletAddress: cookies.get("id"),
+            },
+          })
+        }
         const response = res.data
         return response
       } catch (error) {

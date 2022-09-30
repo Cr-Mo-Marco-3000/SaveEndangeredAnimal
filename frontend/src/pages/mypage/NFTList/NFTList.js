@@ -1,29 +1,16 @@
 import * as React from "react"
 import { Grid } from "@mui/material"
 import NFTCard from "./NFTCard"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Pagination } from "@mui/material"
 import usePagination from "components/pagination/Pagination"
 import styles from "./NFTList.module.css"
+import api from "api/api"
 
 export default function NFTList() {
-  const allData = []
-  for (let index = 0; index < 27; index++) {
-    let endangered = ""
-    if (index % 3 === 0) {
-      endangered = "멸종"
-    } else if (index % 3 === 1) {
-      endangered = "위급"
-    } else {
-      endangered = "위기"
-    }
-    const newItem = {
-      animalImg: "https://source.unsplash.com/random",
-      animalName: "여우",
-      endangered: endangered,
-    }
-    allData.push(newItem)
-  }
+  //유저 주소에 따른 NFT List 가져오기
+  //alldata에 유저에 따른 NFT 받기
+  const [allData, setAllData] = useState([])
 
   const [page, setPage] = useState(1) // 처음 페이지는 1이다.
   const PER_PAGE = 8
@@ -35,12 +22,27 @@ export default function NFTList() {
     data.jump(p)
   }
 
+  //
+  useEffect(() => {
+    const getNFTList = async () => {
+      const result = await api.item.getItem("User")
+      //console.log(result.list)
+      setAllData(result.list)
+    }
+
+    getNFTList()
+  }, [])
+
+  useEffect(() => {
+    data.setNewData(allData)
+    return () => {}
+  }, [allData, data])
   return (
     <div className={styles.outDiv}>
       <Grid container spacing={3}>
         {data.currentData().map((data, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={3}>
-            <NFTCard animalData={data}></NFTCard>
+            <NFTCard NFTData={data}></NFTCard>
           </Grid>
         ))}
       </Grid>
@@ -49,7 +51,10 @@ export default function NFTList() {
         page={page}
         color="primary"
         size="large"
-        sx={{ margin: 2 }}
+        sx={{
+          margin: 2,
+          display: "inline-block",
+        }}
         onChange={handleChange}
       />
     </div>

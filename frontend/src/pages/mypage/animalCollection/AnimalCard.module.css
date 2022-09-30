@@ -1,32 +1,51 @@
-.haveNFTImg{
-
+.haveNFTImg {
+  height: 10rem;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  display: block;
+  margin: auto;
 }
 
-.haveNotNFTImg{
-    opacity: 0.5;
-    border-color: red;
-    border: 0.1rem;
+.haveNotNFTImg {
+  height: 10rem;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  display: block;
+  margin: auto;
+
+  opacity: 0.5;
+  border-color: red;
+  border: 0.1rem;
 }
 
-.cardContent{
-    background-color:#D3E0EA;
-    display:flex;
-    justify-content: center;
-    margin-top: 0.3rem;
-    border-radius: 0.5rem;
-    flex: 1 1 auto; 
-    box-shadow:1;
-    height:1rem;
+.cardContent {
+  background-color: #d3e0ea;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.3rem;
+  border-radius: 0.5rem;
+  flex: 1 1 auto;
+  box-shadow: 1;
+  height: 1rem;
 }
 
-.cardContentNotNFT{
-    background-color:#b0b0b0;
-    opacity: 60%;
-    display:flex;
-    justify-content: center;
-    margin-top: 0.3rem;
-    border-radius: 0.5rem;
-    flex: 1 1 auto; 
-    box-shadow:1;
-    height:1rem;
+.cardContentNotNFT {
+  background-color: #b0b0b0;
+  opacity: 50%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.3rem;
+  border-radius: 0.5rem;
+  flex: 1 1 auto;
+  box-shadow: 1;
+  height: 1rem;
+}
+
+.card:hover {
+  align-content: center;
+  width: 105%;
+  height: 105%;
+  cursor: pointer;
 }

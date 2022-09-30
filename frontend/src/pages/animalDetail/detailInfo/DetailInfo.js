@@ -6,7 +6,7 @@ import Button from "@mui/material/Button"
 import SendIcon from "@mui/icons-material/Send"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
-import Modal from '../../../components/modal/Modal'
+import Modal from "../../../components/modal/Modal"
 import Donation from "../donation/Donation"
 
 function DetailInfo(props) {
@@ -20,9 +20,13 @@ function DetailInfo(props) {
   info1.replace(/\n/g, "<br/>")
   const [animalInfo, setAnimalInfo] = useState(props.animalInfo)
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => { setModalOpen(true); };
-  const closeModal = () => { setModalOpen(false); };
+  const [modalOpen, setModalOpen] = useState(false)
+  const openModal = () => {
+    setModalOpen(true)
+  }
+  const closeModal = () => {
+    setModalOpen(false)
+  }
 
   const infoClick = () => {
     MySwal.fire({
@@ -40,8 +44,8 @@ function DetailInfo(props) {
         html: `
         <b>
         위급 : 100개<br>
-        위기 : 200개<br>
-        취약 : 300개</b>`,
+        위기 : 300개<br>
+        취약 : 1000개</b>`,
       })
     })
   }
@@ -72,7 +76,8 @@ function DetailInfo(props) {
         </div>
         <div className={styles.donationSide}>
           <div className={styles.NFTcount}>
-            {animalInfo.animalNowItem}개의 NFT가 남아있습니다.
+            {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
+            남아있습니다.
           </div>
           <Button
             variant="contained"
@@ -81,8 +86,8 @@ function DetailInfo(props) {
             onClick={openModal}
           >
             Donation
-          <Modal open={modalOpen} close={closeModal} header="기부 하기"><Donation /></Modal>
           </Button>
+          <Modal open={modalOpen} close={closeModal} header="기부하기"><Donation /></Modal>
         </div>
       </div>
       <div className={styles.Info}>

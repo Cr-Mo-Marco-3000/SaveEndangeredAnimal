@@ -25,6 +25,7 @@ import AnimalList from '../animalList/AnimalList';
 import Modal from '../../components/modal/Modal'
 import NFTsale from '../sales/nftsale/NFTsale'
 import NFTpurchase from '../sales/nftpurchase/NFTPurchase'
+import NFTTest from './NFTest'
 import cookies from 'react-cookies';
 import { ethers } from "ethers";
 import SweetTest from '../modal/SweetTest'
@@ -39,8 +40,7 @@ export default function Mainpage() {
   const openModal = () => { setModalOpen(true); };
   const closeModal = () => { setModalOpen(false); };
 
-  
-  // const buySomething = 
+
   // console.log(cookies.load('id'));
 
   return (
@@ -83,7 +83,7 @@ export default function Mainpage() {
               <Button variant="contained">기부하러 가기</Button>
               {/* <Button onClick={buySomething}>구매</Button> */}
               <button onClick={openModal} >테스트 모달</button>
-              <Modal open={modalOpen} close={closeModal} header="테스트모달"><NFTsale /></Modal>
+              <Modal open={modalOpen} close={closeModal} header="테스트모달"><NFTTest /></Modal>
               {/* <Modal open={modalOpen} close={closeModal} header="테스트모달"><NFTsale /></Modal> */}
           
             </Stack>

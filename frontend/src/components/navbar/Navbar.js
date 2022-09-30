@@ -1,8 +1,11 @@
 import { alpha, styled } from "@mui/material/styles"
-import { Box, Stack, Button, AppBar, Toolbar } from "@mui/material"
+import { Box,  Typography, Button, AppBar, Toolbar } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
 import style from "./Navbar.module.css"
-// import image fromt ''
+import React, {useEffect, useState} from 'react';
+import { ethers } from "ethers";
+import api from "api/api";
+import Web3 from "web3"
 
 const Navbar = () => {
   const APPBAR_MOBILE = 64
@@ -26,15 +29,144 @@ const Navbar = () => {
 
   const navigate = useNavigate()
 
+  const web3 = new Web3(window.ethereum);
+  const [balance, setBalance] = useState(null);
+  const [isAccount, setIsAccount] = useState(false);
+
+  const getCurrentAccount = async() => {
+    try {
+      const currentAccounts = await web3.eth.getAccounts();
+      const bal = await web3.eth.getBalance(currentAccounts[0]);
+      setBalance(bal);
+      setIsAccount(true);
+      return currentAccounts[0];
+    } catch {
+      console.log("err");
+    }
+  }
+
+  useEffect(()=> {
+    if (window.ethereum) {
+      getCurrentAccount();
+    };
+  },[]);
+
+  const main = async() => {
+    if(isAccount) {
+      navigate("/main")
+    } else {
+      if (window.ethereum) {
+        try {
+            const res = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          api.user.login(res[0]);
+          navigate("/main")
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        alert("MetaMask를 설치하세요.")   
+        window.open('https://metamask.io/download.html');
+      }
+    }
+  }
+
+  const connect1 = async() => {
+    if(isAccount) {
+      navigate("/main/express")
+    } else {
+      if (window.ethereum) {
+        try {
+            const res = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          api.user.login(res[0]);
+          navigate("/main/express")
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        alert("MetaMask를 설치하세요.")   
+        window.open('https://metamask.io/download.html');
+      }
+    }
+  }
+
+  const connect2 = async () => {
+    if(isAccount) {
+      navigate("/main/animalList")
+    } else {
+      if (window.ethereum) {
+        try {
+            const res = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          api.user.login(res[0]);
+          navigate("/main/animalList")
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        alert("MetaMask를 설치하세요.")   
+        window.open('https://metamask.io/download.html');
+      }
+    }
+  };
+
+  const connect3 = async () => {
+    if(isAccount) {
+      navigate("/main/sale")
+    } else {
+      if (window.ethereum) {
+        try {
+            const res = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          api.user.login(res[0]);
+          navigate("/main/sale")
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        alert("MetaMask를 설치하세요.")   
+        window.open('https://metamask.io/download.html');
+      }
+    }
+  };
+
+  const connect4 = async () => {
+    if(isAccount) {
+      navigate("/main/mypage")
+    } else {
+      if (window.ethereum) {
+        try {
+            const res = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          api.user.login(res[0]);
+          navigate("/main/mypage")
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        alert("MetaMask를 설치하세요.")   
+        window.open('https://metamask.io/download.html');
+      }
+    }
+  };
+
+
   return (
     <RootStyle>
       <ToolbarStyle>
-        <div onClick={() => navigate("/main")} className={style.logoDiv}>
+        <div 
+          onClick={main} className={style.logoDiv}>
           <img className={style.logo} src="/images/logo/sea.png" alt="logo" />
         </div>
         <Button
           className={style.logoCharacterButton}
-          onClick={() => navigate("/main")}
+          onClick={main}
         >
           <span className={style.logoCharacter}>S</span>
           <span className={style.logoCharacter}>E</span>
@@ -44,8 +176,10 @@ const Navbar = () => {
         <div className={style.navButtonDiv}>
           <button
             className={style.navButton}
-            onClick={() => navigate("/main/express")}
+            // onClick={() => navigate("/main/express")}
+            onClick={connect1}
           >
+           
             나 표현하기
           </button>
           <hr className={style.navButtonUnderLine} />
@@ -53,7 +187,8 @@ const Navbar = () => {
         <div className={style.navButtonDiv}>
           <button
             className={style.navButton}
-            onClick={() => navigate("/main/animalList")}
+            // onClick={() => navigate("/main/animalList")}
+            onClick={connect2}
           >
             기금 목록
           </button>
@@ -62,7 +197,8 @@ const Navbar = () => {
         <div className={style.navButtonDiv}>
           <button
             className={style.navButton}
-            onClick={() => navigate("/main/sale")}
+            // onClick={() => navigate("/main/sale")}
+            onClick={connect3}
           >
             판매페이지
           </button>
@@ -71,13 +207,14 @@ const Navbar = () => {
         <div className={style.navButtonDiv}>
           <button
             className={style.navButton}
-            onClick={() => navigate("/main/mypage")}
+            // onClick={() => navigate("/main/mypage")}
+            onClick={connect4}
           >
             마이페이지
           </button>
           <hr className={style.navButtonUnderLine} />
         </div>
-        <div className={style.navButtonDiv}>
+        {/* <div className={style.navButtonDiv}>
           <button
             className={style.navButton}
             onClick={() => navigate("/main/minting")}
@@ -85,7 +222,7 @@ const Navbar = () => {
             민팅페이지
           </button>
           <hr className={style.navButtonUnderLine} />
-        </div>
+        </div> */}
       </ToolbarStyle>
     </RootStyle>
   )

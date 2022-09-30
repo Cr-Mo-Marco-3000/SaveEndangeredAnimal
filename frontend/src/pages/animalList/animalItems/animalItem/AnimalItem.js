@@ -1,5 +1,5 @@
 import style from "./AnimalItem.module.css"
-import {  useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function AnimalItem(props) {
   const koreanName = props.animalItem.animalKoreanName
@@ -12,7 +12,6 @@ function AnimalItem(props) {
   const description = props.animalItem.animalDesc.slice(0, 200) + "..."
   const animalId = props.animalItem.animalId
 
-  
   const navigate = useNavigate()
 
   return (
@@ -40,7 +39,12 @@ function AnimalItem(props) {
             </div>
           </div>
           <div className={style.scriptAreaHorizon}>
-            {type} / {endangeredLevel===1?"위급":endangeredLevel===2?'위기':'취약'}
+            {type} /{" "}
+            {endangeredLevel === 1
+              ? "위급"
+              : endangeredLevel === 2
+              ? "위기"
+              : "취약"}
           </div>
           <div className={style.scriptAreaHorizon}>{description}</div>
         </div>

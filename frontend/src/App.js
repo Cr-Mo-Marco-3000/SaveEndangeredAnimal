@@ -29,17 +29,30 @@ function App() {
       <CookiesProvider>
         <BrowserRouter>
           <Navbar />
-          <Routes>
-            <Route path="/" element={header}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/main/*" element={<MainPage />}></Route>
-            <Route path="main/express/*" element={<ExpressionPage />}></Route>
-            <Route path="main/mypage/*" element={<MyPage />}></Route>
-            <Route path="main/animalList" element={<AnimalList />}></Route>
-            <Route path="main/sale" element={<SalePage />}></Route>
-            <Route path="main/animalDetail" element={<AnimalDetail />}></Route>
-            <Route path="main/minting" element={<Minting />}></Route>
-          </Routes>
+          <article>
+            <div
+              className="mainArticleDiv"
+              // style={{ position: "relative", "z-index": "5" }}
+            >
+              <Routes>
+                <Route path="/" element={header}></Route>
+                <Route path="/login" element={<LoginPage />}></Route>
+                <Route path="/main/*" element={<MainPage />}></Route>
+                <Route
+                  path="main/express/*"
+                  element={<ExpressionPage />}
+                ></Route>
+                <Route path="main/mypage/*" element={<MyPage />}></Route>
+                <Route path="main/animalList" element={<AnimalList />}></Route>
+                <Route path="main/sale" element={<SalePage />}></Route>
+                <Route
+                  path="main/animalDetail"
+                  element={<AnimalDetail />}
+                ></Route>
+                <Route path="main/minting" element={<Minting />}></Route>
+              </Routes>
+            </div>
+          </article>
           <Footer />
         </BrowserRouter>
       </CookiesProvider>
