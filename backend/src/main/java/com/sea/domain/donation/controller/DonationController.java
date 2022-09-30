@@ -14,6 +14,7 @@ import com.sea.domain.donation.db.entity.Donation;
 import com.sea.domain.donation.dto.DonationDto;
 import com.sea.domain.donation.dto.MyDonationDto;
 import com.sea.domain.donation.request.DonationRegisterPostReq;
+import com.sea.domain.donation.response.DonationReigsterPostRes;
 import com.sea.domain.donation.response.MyDonationListGetRes;
 import com.sea.domain.donation.service.DonationService;
 
@@ -36,7 +37,7 @@ public class DonationController {
 	public ResponseEntity<? extends BaseResponseBody> registerDonation(@RequestBody DonationRegisterPostReq registerInfo){
 		
 		Donation donation = donationService.createDonation(registerInfo);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(DonationReigsterPostRes.of(200, "Success", donation.getDonationId()));
 	}
 	
 	// READ
