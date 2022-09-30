@@ -115,7 +115,7 @@ export default function NFTsale() {
         
         <Box gridColumn="span 12">
             <Typography gutterBottom variant="subtitle1" component="div">
-              현재 가격 : 1000 RopstenETH
+              현재 가격 : 1000 ETH
             </Typography>
             <Typography gutterBottom variant="subtitle1" component="div">
               판매 가격 설정 : 
@@ -128,7 +128,7 @@ export default function NFTsale() {
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 ></input>
               
-              RopstenETH
+             ETH
               {/* <img
                   src={require("resources/img/logo/ethereumLogo.png")}
                   alt="ethreumLogo"
