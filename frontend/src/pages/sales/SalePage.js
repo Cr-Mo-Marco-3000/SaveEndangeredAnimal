@@ -1,5 +1,5 @@
 import * as React from "react"
-import NFTList from "./NFTList/NFTList"
+import SaleList from "./SaleList/SaleList"
 import Menu from "./MenuBar/Menu"
 import styles from "./SalePage.module.css"
 import { useState } from "react"
@@ -9,7 +9,7 @@ export default function SalePage() {
   return (
     <div className={styles.outDiv}>
       <Menu setAnimalName={setAnimalName} />
-      <NFTList animalName={animalName} />
+      <SaleList animalName={animalName} />
     </div>
   )
 }

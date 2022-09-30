@@ -16,6 +16,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
 
+import styles from './NFTsale.module.css'
 
 const Img = styled('img')({
   margin: 'auto',
@@ -82,6 +83,15 @@ export default function NFTsale() {
           Swal.fire('진행 중단', '', 'error')
     })
   }
+
+  const [salePrice, setSalePrice] = useState(null)
+
+  const onChangeAccount = (e) => {
+    setSalePrice(
+         e.target.value
+    );
+    console.log(salePrice);
+  };   
   
   return (
       <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
@@ -89,7 +99,7 @@ export default function NFTsale() {
           <Grid container spacing={3}>
             {data.currentData().map((data, idx) => (
               <Grid item key={idx} xs={12} sm={6} md={3}>
-                <NFTCard animalData={data}></NFTCard>
+                {/* <NFTCard animalData={data}></NFTCard> */}
               </Grid>
             ))}
           </Grid>
@@ -105,24 +115,30 @@ export default function NFTsale() {
         
         <Box gridColumn="span 12">
             <Typography gutterBottom variant="subtitle1" component="div">
-              현재 가격 : 1000
-              <img
-                  src={require("resources/img/logo/ethereumLogo.png")}
-                  alt="ethreumLogo"
-                ></img>
+              현재 가격 : 1000 RopstenETH
             </Typography>
             <Typography gutterBottom variant="subtitle1" component="div">
-              판매 가격 설정 : 1000 
-              <img
+              판매 가격 설정 : 
+              <input
+                  className={styles.input}
+                  type="number"
+                  step="0.01"
+                  placeholder="판매가격을 입력하세요"
+                  onChange={onChangeAccount}
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                ></input>
+              
+              RopstenETH
+              {/* <img
                   src={require("resources/img/logo/ethereumLogo.png")}
                   alt="ethreumLogo"
-                ></img>
+                ></img> */}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              <div>
-              <div>
-              판매 시작일 : </div>
+              <Typography gutterBottom variant="subtitle1" component="div">
+              판매 시작일 : 
                 <DatePicker 
+                 className={styles.input}
                   dateFormat="yyyy년 MM월 dd일"
                   selected={startDate} 
                   onChange={date => setStartDate(date)} 
@@ -130,9 +146,12 @@ export default function NFTsale() {
                   startDate={startDate}
                   endDate={endDate}
                   locale={ko}
-                  /> </div>
+                  />
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle1" component="div">
                 판매 종료일 : 
                 <DatePicker 
+                 className={styles.input}
                   dateFormat="yyyy년 MM월 dd일"
                   selected={endDate} 
                   onChange={date => setEndDate(date)} 
@@ -141,13 +160,16 @@ export default function NFTsale() {
                   minDate={startDate}
                   locale={ko}
                   />
-            </Typography><br/>
+            </Typography></Typography><br/>
             <Grid item>
               <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                <Button onClick={saleClick}
+                <button 
+                  className={styles.button}
+                  onClick={saleClick}
                   style={{
                     cursor: "pointer",
-                  }}>판매하기</Button>
+                  }}>판매하기
+                  </button>
               </Typography>
               
             </Grid>

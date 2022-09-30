@@ -21,7 +21,6 @@ export default function DonationList() {
   //   donationStatusCode: String
   //   ]
   const [donationList, setDonationList] = useState([])
-  const cookies = new Cookies()
 
   const [page, setPage] = useState(1) // 처음 페이지는 1이다.
   const PER_PAGE = 10
@@ -37,13 +36,18 @@ export default function DonationList() {
     //console.log("이예이예이예")
     const getDonationList = async () => {
       //console.log(cookies.get("accessToken"))
-      const res = await api.donation.viewDonationLog(cookies.get("accessToken"))
-      //console.log(res)
+      const res = await api.donation.viewDonationLog()
+      console.log(res.list)
       setDonationList(res.list)
     }
     getDonationList()
   }, [])
 
+  useEffect(()=>{
+    data.setNewData(donationList)
+    return()=>{
+    }
+  },[donationList,data])
   return (
     <>
       <TableContainer className={styles.outDiv}>
@@ -69,8 +73,8 @@ export default function DonationList() {
                   {row.animalKoreanName}
                 </TableCell>
                 <TableCell align="right">{row.donationStatusCode}</TableCell>
-                <TableCell align="right">{row.donationAmount}</TableCell>
-                <TableCell align="right">{row.donationCreatedAt}</TableCell>
+                <TableCell align="right">{row.donationAmount} eth</TableCell>
+                <TableCell align="right">{row.donationCreatedAt[0]}년 {row.donationCreatedAt[1]}월 {row.donationCreatedAt[2]}일 {row.donationCreatedAt[3]}:{row.donationCreatedAt[4]}.{row.donationCreatedAt[5]}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -102,7 +102,7 @@ const Navbar = () => {
           </button>
           <hr className={style.navButtonUnderLine} />
         </div>
-        <div className={style.navButtonDiv}>
+        {/* <div className={style.navButtonDiv}>
           <button
             className={style.navButton}
             onClick={() => navigate("/main/minting")}
@@ -110,7 +110,7 @@ const Navbar = () => {
             민팅페이지
           </button>
           <hr className={style.navButtonUnderLine} />
-        </div>
+        </div> */}
       </ToolbarStyle>
     </RootStyle>
   )

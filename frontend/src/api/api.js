@@ -11,7 +11,7 @@ const ANIMAL = "/animal"
 const ITEM = "/item"
 
 const cookies = new Cookies()
-const walletAddress = cookies.get("id")
+//const walletAddress = cookies.get("id")
 //console.log(walletAddress)
 
 const api = {
@@ -55,7 +55,7 @@ const api = {
           method: "PUT",
           withCredentials: true,
           data: {
-            walletAddress: walletAddress,
+            walletAddress: cookies.get("id"),
             list: testResult,
           },
         })
@@ -71,7 +71,7 @@ const api = {
     getExpressionsResult: async () => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result" + "?walletAddress=" + walletAddress,
+          url: HOST + USER + "/test-result" + "?walletAddress=" + cookies.get("id"),
           method: "GET",
           withCredentials: true,
         })
@@ -87,7 +87,7 @@ const api = {
     getPictureURL: async (animalName) => {
       try {
         const res = await axios({
-          url: HOST + USER + "/test-result" + "?walletAddress=" + walletAddress,
+          url: HOST + USER + "/test-result" + "?walletAddress=" + cookies.get("id"),
           method: "GET",
         })
         //console.log("뇽뇽")
@@ -136,7 +136,7 @@ const api = {
             donationStatusCode: donationStatusCode,
             donationTransactionHash: donationTransactionHash,
             animalId: animalId,
-            walletAddress: walletAddress,
+            walletAddress: cookies.get("id"),
           },
         })
         const data = res.data
@@ -147,14 +147,11 @@ const api = {
       }
     },
     // 기부 내역 살펴보기
-    viewDonationLog: async (accessToken) => {
+    viewDonationLog: async () => {
       try {
         const res = await axios({
-          url: HOST + DONATION + "?walletAddress=" + walletAddress,
+          url: HOST + DONATION + "?walletAddress=" + cookies.get("id"),
           method: "GET",
-          headers: {
-            Authorization: "Bearer " + accessToken,
-          },
           withCredentials: true,
         })
         const data = res.data
@@ -182,7 +179,7 @@ const api = {
           method: "POST",
           withCredentials: true,
           data: {
-            walletAddress: walletAddress,
+            walletAddress: cookies.get("id"),
             saleContractAddress: saleContractAddress,
             saleCashContractAddress: saleCashContractAddress,
             saleStartTime: saleStartTime,
@@ -250,7 +247,7 @@ const api = {
     getMyCurrentSale: async () => {
       try {
         const res = await axios({
-          url: HOST + SALE + "/ex" + "?walletAddress=" + walletAddress,
+          url: HOST + SALE + "/ex" + "?walletAddress=" + cookies.get("id"),
           method: "GET",
           withCredentials: true,
         })
@@ -344,7 +341,7 @@ const api = {
     getDonatedAnimalListByMe: async () => {
       try {
         const res = await axios({
-          url: HOST + ANIMAL + `/my-list` + "?walletAddress=" + walletAddress,
+          url: HOST + ANIMAL + `/my-list` + "?walletAddress=" + cookies.get("id"),
           method: "GET",
           withCredentials: true,
         })
@@ -374,7 +371,7 @@ const api = {
           method: "POST",
           withCredentials: true,
           data: {
-            walletAddress: walletAddress,
+            walletAddress: cookies.get("id"),
             donationId: donationId,
             itemImgUrl: ImgUrl,
             itemTokenId: TokenId,
@@ -427,7 +424,7 @@ const api = {
             withCredentials: true,
             params: {
               type: type,
-              walletAddress: walletAddress,
+              walletAddress: cookies.get("id"),
             },
           })
         }

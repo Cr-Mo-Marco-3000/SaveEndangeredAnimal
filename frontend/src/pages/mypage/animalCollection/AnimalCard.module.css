@@ -1,8 +1,20 @@
 .haveNFTImg{
-
+  height: 10rem;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  display: block;
+  margin: auto;
 }
 
 .haveNotNFTImg{
+  height: 10rem;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  display: block;
+  margin: auto;
+
     opacity: 0.5;
     border-color: red;
     border: 0.1rem;
@@ -21,7 +33,7 @@
 
 .cardContentNotNFT{
     background-color:#b0b0b0;
-    opacity: 60%;
+    opacity: 50%;
     display:flex;
     justify-content: center;
     margin-top: 0.3rem;
