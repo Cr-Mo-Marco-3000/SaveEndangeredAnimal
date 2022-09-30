@@ -101,7 +101,6 @@ const api = {
           method: "GET",
         })
         //console.log("뇽뇽")
-        console.log(res.data.testResult)
         const wordList = res.data.testResult
         const centence =
           wordList[0] +
@@ -113,7 +112,6 @@ const api = {
           wordList[2] +
           " " +
           wordList[3]
-        console.log(centence)
         const pictureRes = await axios({
           url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + centence,
           method: "GET",
@@ -369,7 +367,7 @@ const api = {
     registerItem: async (
       walletAddress,
       donationId,
-      itemImgUrl, //
+      itemImgUrl,
       itemTokenId
     ) => {
       try {

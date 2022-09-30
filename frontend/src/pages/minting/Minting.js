@@ -17,8 +17,12 @@ import abi from "../../abis/createNFT/abi.json"
 import bytecode from "../../abis/createNFT/bytecode.json"
 import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
 import Swal from "sweetalert2"
+import { useNavigate } from "react-router-dom"
 
 const Minting = () => {
+  // 내비게이트용
+  const navigate = useNavigate()
+
   const [loading, setLoading] = useState(false)
   //이미지 //아마 이후는 parameter 등으로 오는 정보 받는 걸로 변경
   const [imgs, setImgs] = useState([
@@ -37,7 +41,6 @@ const Minting = () => {
   const animalEngName = location.state.animalEnglishName
   const animalNowItem = location.state.animalNowItem
   const donationId = location.state.donationId
-  console.log(donationId)
 
   function changeSelectImg(imgLink) {
     setSelectImg(imgLink)
@@ -45,8 +48,10 @@ const Minting = () => {
 
   useEffect(() => {
     const makeImgs = async () => {
+      setLoading(true)
       const result = await api.user.getPictureURL(animalEngName)
       setImgs(result)
+      setLoading(false)
     }
 
     makeImgs()
@@ -91,8 +96,14 @@ const Minting = () => {
     initiating()
     // }, [account, contract])
   }, [account])
-
+  const [flag, setFlag] = useState(true)
   const minting = async function () {
+    Swal.fire({
+      icon: "info",
+      title: "민팅을 시작합니다",
+      text: "민팅 과정 중 거래가 두 번 발생합니다",
+      confirmButtonText: "확인",
+    })
     setLoading(true)
     const result = await IPFS.createToken(
       animalKorName + "#" + animalNowItem,
@@ -101,7 +112,6 @@ const Minting = () => {
     )
 
     // 이 이후에 result값을 web3로 토큰 값으로 넘기면 됩니다.
-
     const web3 = window.web3
     const myBytecode = "0x" + bytecode.object
     const myAbi = JSON.stringify(abi.abi)
@@ -118,18 +128,32 @@ const Minting = () => {
       })
       .then(async (response) => {
         // 민팅
-        console.log(response)
+        const address = response["_address"]
         const resFromEth = await response.methods
           .mintToken()
           .send({ from: account })
-        const resFromServer = await api.Item.setLoading(false)
+        const resFromServer = await api.item.registerItem(
+          account,
+          donationId,
+          result,
+          address
+        )
+        setLoading(false)
+        Swal.fire({
+          icon: "success",
+          title: "NFT 발급 성공!",
+          text: "확인을 누르시면 마이페이지로 이동합니다",
+        }).then(() => {
+          navigate("/main/mypage")
+        })
       })
       .catch((err) => {
+        console.log(err)
         Swal.fire({
           icon: "error",
-          title: "Egg 저런!",
+          title: "오류 발생!",
           text: "오류가 발생했습니다! 잠시 뒤 다시 시도해 주세요!",
-          confirmButtonColor: "#85586A",
+          confirmButtonColor: "red",
         })
         setLoading(false)
       })
