@@ -10,7 +10,7 @@ import api from "api/api.js"
 export default function SaleList(props) {
   //allData는 aixos 에서 가져올 것
   const [allData, setAllData] = React.useState([])
-  const [realData,setRealData]=React.useState([]);
+  const [realData, setRealData] = React.useState([])
   //페이징 처리
   const [page, setPage] = useState(1) // 처음 페이지는 1이다.
   const PER_PAGE = 8
@@ -42,15 +42,14 @@ export default function SaleList(props) {
     //     ))
     //   }
     // })
-    const getNFTList=async ()=>{
-      const result=await api.sale.getSaleList()
-      console.log(result)
+    const getNFTList = async () => {
+      const result = await api.sale.getSaleList()
+      //console.log(result)
       setAllData(result.list)
     }
 
     getNFTList()
     //console.log("한번만")
-    
   }, [])
 
   const handleChange = (e, p) => {
@@ -58,27 +57,26 @@ export default function SaleList(props) {
     data.jump(p)
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     data.setNewData(realData)
-    return()=>{
-    }
-},[realData,data])
+    return () => {}
+  }, [realData, data])
 
-React.useEffect(()=>{
-  let newList=[];
-  if (props.animalName !== "전체보기" && allData.length !== 0){
-    newList=allData.filter(
-            (data) => data.animalKoreanName === props.animalName,
-          )
-  }else{
-    newList=allData
-  }
-  setRealData(newList);
-},[props.animalName,allData])
+  React.useEffect(() => {
+    let newList = []
+    if (props.animalName !== "전체보기" && allData.length !== 0) {
+      newList = allData.filter(
+        (data) => data.animalKoreanName === props.animalName,
+      )
+    } else {
+      newList = allData
+    }
+    setRealData(newList)
+  }, [props.animalName, allData])
 
   return (
     <div className={styles.outDiv}>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {data.currentData().map((data, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={3}>
             <SaleCard SaleData={data}></SaleCard>

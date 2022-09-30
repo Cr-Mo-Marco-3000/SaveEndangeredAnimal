@@ -14,10 +14,10 @@ export default function SaleCard(props) {
   // animalKoreanName: String,
   // }
   const saleData = props.SaleData
-  console.log(saleData)
+  //console.log(saleData)
   //그 외 데이터는NFT에서 가져와야할 것
-  const saleStartTime= new Date(props.SaleData.saleStartTime)
-  const saleEndTime= new Date(props.SaleData.saleEndTime)
+  const saleStartTime = new Date(props.SaleData.saleStartTime)
+  const saleEndTime = new Date(props.SaleData.saleEndTime)
   return (
     <Card
       sx={{
@@ -38,20 +38,23 @@ export default function SaleCard(props) {
         image={saleData.itemImgUrl}
         alt="animalImg"
       />
-      <CardContent
-        sx={{ boxShadow: "1" }}
-        className={styles.cardContent}
-      >
-        <Typography >
+      <CardContent sx={{ boxShadow: "1" }} className={styles.cardContent}>
+        <Typography gutterBottom variant="h5" component="div">
           {saleData.animalKoreanName}
         </Typography>
         <div>
-        <Typography >
-          판매기간 : {saleStartTime.toLocaleString()} ~ {saleEndTime.toLocaleString()}
-        </Typography>
-        <Typography  >
-          {saleData.salePrice} ETH
-        </Typography>
+          <Typography variant="body2" color="text.secondary">
+            판매기간 :
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {saleStartTime.toLocaleString()} ~
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {saleEndTime.toLocaleString()}
+          </Typography>
+          <Typography sx={{ textAlign: "end" }}>
+            {saleData.salePrice} ETH
+          </Typography>
         </div>
       </CardContent>
     </Card>

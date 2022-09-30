@@ -1,8 +1,7 @@
-.cardContent{
-    background-color:#D3E0EA;
-    display:block;
-    justify-content: space-between;
-    margin-top: 0.3rem;
-    border-radius: 0.5rem;
-    
+.cardContent {
+  background-color: #d3e0ea;
+  display: block;
+  text-align: left;
+  margin-top: 0.3rem;
+  border-radius: 0.5rem;
 }
