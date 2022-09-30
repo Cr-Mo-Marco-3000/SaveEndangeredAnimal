@@ -12,6 +12,11 @@ import styles from "./Minting.module.css"
 import * as IPFS from "components/ipfs/IPFS"
 import api from "api/api"
 import { useLocation } from "react-router-dom"
+import Web3 from "web3"
+import abi from "../../abis/createNFT/abi.json"
+import bytecode from "../../abis/createNFT/bytecode.json"
+import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
+import Swal from "sweetalert2"
 
 const Minting = () => {
   const [loading, setLoading] = useState(false)
@@ -31,6 +36,8 @@ const Minting = () => {
   const animalKorName = location.state.animalKoreanName
   const animalEngName = location.state.animalEnglishName
   const animalNowItem = location.state.animalNowItem
+  const donationId = location.state.donationId
+  console.log(donationId)
 
   function changeSelectImg(imgLink) {
     setSelectImg(imgLink)
@@ -39,7 +46,6 @@ const Minting = () => {
   useEffect(() => {
     const makeImgs = async () => {
       const result = await api.user.getPictureURL(animalEngName)
-      console.log(result)
       setImgs(result)
     }
 
@@ -48,20 +54,90 @@ const Minting = () => {
 
   useEffect(() => {}, [imgs])
 
+  // ======= 여기서부터 민팅 ====================
+
+  const [account, setAccount] = useState("")
+  // const [contract, setContract] = useState(null)
+
+  // web3와 메타마스크 프로바이더와 연결
+  const loadWeb3 = async () => {
+    // const provider = await detectEthereumProvider()
+    // console.log(provider)
+    // if (provider) {
+    //   if (provider.selectedAddress) {
+    //     window.web3 = new Web3(provider)
+    //       } else {
+    //           alert("메타마스크를 연결해주세요!")
+    //         }
+    //       } else {
+    //   alert("멧타마스크를 설치해주세요!")
+    // }
+    // console.log(provider.selectedAddress)
+    window.web3 = new Web3(window.ethereum)
+  }
+
+  // 민팅할 계정 가져오기 => 현재 사용자 계정
+  const loadAccount = async () => {
+    const web3 = window.web3
+    const loadedAccount = await web3.eth.getAccounts()
+    setAccount(loadedAccount[0])
+  }
+
+  useEffect(() => {
+    const initiating = async () => {
+      await loadWeb3()
+      await loadAccount()
+    }
+    initiating()
+    // }, [account, contract])
+  }, [account])
+
   const minting = async function () {
     setLoading(true)
     const result = await IPFS.createToken(
       animalKorName + "#" + animalNowItem,
       animalDesc,
-      selectImg,
+      selectImg
     )
-    setLoading(false)
 
-    console.log(result)
-    //이 이후에 result값을 web3로 토큰 값으로 넘기면 됩니다.
+    // 이 이후에 result값을 web3로 토큰 값으로 넘기면 됩니다.
+
+    const web3 = window.web3
+    const myBytecode = "0x" + bytecode.object
+    const myAbi = JSON.stringify(abi.abi)
+    // const myAbi = abi.abi
+    // 컨트랙트 생성
+    const contract = new web3.eth.Contract(JSON.parse(myAbi))
+      .deploy({
+        data: myBytecode,
+        // 여기 동물 이름을 인자로 받는, Contract 디플로이
+        arguments: [animalKorName, result],
+      })
+      .send({
+        from: account,
+      })
+      .then(async (response) => {
+        // 민팅
+        console.log(response)
+        const resFromEth = await response.methods
+          .mintToken()
+          .send({ from: account })
+        const resFromServer = await api.Item.setLoading(false)
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Egg 저런!",
+          text: "오류가 발생했습니다! 잠시 뒤 다시 시도해 주세요!",
+          confirmButtonColor: "#85586A",
+        })
+        setLoading(false)
+      })
   }
+
   return (
     <div className={styles.outDiv}>
+      {loading && <LoadingSpinner></LoadingSpinner>}
       <Grid container spacing={6}>
         {imgs.map((link, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={6}>
