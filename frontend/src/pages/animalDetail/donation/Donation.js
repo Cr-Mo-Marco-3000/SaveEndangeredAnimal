@@ -62,13 +62,13 @@ export default function Donation(props) {
       // balance : 잔고
       if (result.isConfirmed) {
         if(donation==null){
-          Swal.fire('미입력', '토큰을 입력해주세요.<br />0.01 RopstenETH 이상 기부 가능합니다.', 'error')
+          Swal.fire('미입력', '토큰을 입력해주세요.<br />0.01 ETH 이상 기부 가능합니다.', 'error')
         }
         else if(balance<0.01){
           Swal.fire('잔액 미달', '토큰잔액이 최소 기부금 미달입니다.<br />충전 후 기부해주세요.', 'error')
         }
         else if(donation<0.01){
-          Swal.fire('최소 기부금 미달', '기부금은 0.01 RopstenETH 이상 가능합니다.<br />충전 후 기부해주세요.', 'error')
+          Swal.fire('최소 기부금 미달', '기부금은 0.01 ETH 이상 가능합니다.<br />충전 후 기부해주세요.', 'error')
         }
         else if(donation>balance){
           Swal.fire('잔액 부족', '잔액이 부족합니다. <br />충전 후 기부해주세요', 'error')
@@ -179,11 +179,12 @@ export default function Donation(props) {
               <Typography variant="subtitle1" component="div" color="black">
                 당신은 {animalInfo.animalKoreanName}의 생존을 위해 기부하시려 합니다.<br />
                 현재 {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가 남아 있습니다.<br/><br />
-                NFT를 얻을 수 있는 최소 금액은 <br/> 0.01 RopstenETH입니다.<br/>
+                NFT를 얻을 수 있는 최소 금액은 <br/> 0.01 ETH입니다.<br/>
+                {/* RopstenETH */}
                 </Typography>
                 <br/>
                 <Typography variant="body2" gutterBottom color="text.secondary">
-                현재 잔고 : {balance} RopstenETH
+                현재 잔고 : {balance} ETH
               </Typography><br/>
             <Grid item>
               <Typography sx={{ cursor: "pointer" }} variant="body2">
