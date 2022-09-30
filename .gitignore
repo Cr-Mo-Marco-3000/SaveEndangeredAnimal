@@ -1,15 +1,5 @@
-# vscode
-# react
-# solidity
-# soliditytruffle
-# java
-# gradle
-# Windows
-# Eclpise
-# Intellij
-
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,react,solidity,soliditytruffle,java,gradle
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,react,solidity,soliditytruffle,java,gradle
+# Created by https://www.toptal.com/developers/gitignore/api/windows,java,react,solidity,soliditytruffle,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,java,react,solidity,soliditytruffle,visualstudiocode
 
 ### Java ###
 # Compiled class file
@@ -39,7 +29,6 @@ replay_pid*
 
 ### react ###
 .DS_*
-*.log
 logs
 **/*.backup.*
 **/*.back.*
@@ -203,6 +192,31 @@ blockchain/history
 yarn.lock
 package-lock.json
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# Support for Project snippet scope
+.vscode/*.code-snippets
+
+# Ignore code-workspaces
+*.code-workspace
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -229,4 +243,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,solidity,soliditytruffle,react
+# End of https://www.toptal.com/developers/gitignore/api/windows,java,react,solidity,soliditytruffle,visualstudiocode

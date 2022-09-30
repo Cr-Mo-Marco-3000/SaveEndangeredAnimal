@@ -129,13 +129,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "deposit",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "ended",
 				"outputs": [
 					{
@@ -206,7 +199,7 @@
 				],
 				"name": "purchase",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -284,12 +277,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/NFTcreator.sol": {
-			"keccak256": "0xe2522be6a4175b6e57389705a4f788bf123ff970f527a44730748b4005798852",
+		"contracts/Donate.sol": {
+			"keccak256": "0xed94bbf8bee065d1b107543d57269ff8228860c7efc70d5881d81506f757d6a8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d48b0f3d63bf9cc63f2e8398ef9456f0c8d911f07efbe549b7fd68e3e942a60b",
-				"dweb:/ipfs/QmVzv7EtL3oqqUPs5Uhgm33e6SvkwrgZnFvUiJA6ser573"
+				"bzz-raw://81db08c70643262220ec7e5b60d4c3b7ec5d26b53be99126d236984d28a6fc60",
+				"dweb:/ipfs/QmWPud8d1zhHQtH8EPDNvpgdC7YUjdRD2vjRgF3QyqFL3a"
+			]
+		},
+		"contracts/NFTcreator.sol": {
+			"keccak256": "0x1d73af489984f697cfda20390ff3e5a2f826f547854966fdf33a3060822dc508",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a66f35ce3914f5a4231e97c745cd2770489a7e30fb02635d61e38a0c6a4d18bf",
+				"dweb:/ipfs/QmRL4GErcnf1yUbC5CD21mAcpeucDV7W992zzqQPKvX4nQ"
 			]
 		},
 		"contracts/SSFToken.sol": {
@@ -301,11 +302,11 @@
 			]
 		},
 		"contracts/SaleFactory.sol": {
-			"keccak256": "0x6e4998eb269a60687eb12c068d3c3eeef2ed7315959f8e89899b6cd99e2cde4b",
+			"keccak256": "0x633e4b6173bebb2937819c48fb7f4bf0414814d18ffb19ae594b13a838389b0f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://68660f52d2309b1ee95a8f1f4cc08dd07d7d1e52ed0d28fc0930b24e43f010a0",
-				"dweb:/ipfs/QmZ1fSGVsPf6Qbb4WC5RRc25KSFB4tHt6tSdW6NwntDyc7"
+				"bzz-raw://44f379bbb686c73f6fe246d6112ea8fd5b04bbf9b9cfbfe5c54bb81d77538d84",
+				"dweb:/ipfs/Qmc6EFHRdiRcdQjUkkX64JdT74kDihW16QQxGiF7SJBqzs"
 			]
 		},
 		"contracts/access/Ownable.sol": {
