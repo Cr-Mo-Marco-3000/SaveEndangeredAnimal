@@ -43,7 +43,7 @@
   font-style: normal;
   font-weight: 800;
   font-size: 30px;
-  line-height: 0.3rem;
+  line-height: 2rem;
   display: flex;
   align-items: center;
   text-align: center;
@@ -52,7 +52,7 @@
 }
 
 .InfoText {
-  padding: 1rem;
+  padding: 2rem;
   background-color: #f6f5f5;
   margin-bottom: 2rem;
   border-radius: 1rem;

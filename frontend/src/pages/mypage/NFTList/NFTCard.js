@@ -1,15 +1,30 @@
 import * as React from "react"
 import { Card, CardContent, CardMedia, Typography } from "@mui/material"
 import styles from "./NFTCard.module.css"
+import Swal from "sweetalert2"
 
 export default function NFTCard(props) {
   const NFTdata = {
     img: props.NFTData.itemImgUrl,
     endangered: props.NFTData.animalEndangeredLevel,
     animalName: props.NFTData.animalKoreanName,
-
   }
-  console.log(NFTdata.img)
+  //console.log(NFTdata.img)
+
+  const NFTClick = () => {
+    Swal.fire({
+      width: "80rem",
+      padding: "0rem 2rem 1rem 2rem",
+      heightAuto: true,
+      imageUrl: NFTdata.img,
+      // imageHeight: 1080,
+      // imageWidth: 1920,
+      imageAlt: "NFT Image",
+      //confirmButtonText: "닫기",
+      showConfirmButton: false,
+    })
+  }
+
   return (
     <Card
       sx={{
@@ -18,6 +33,7 @@ export default function NFTCard(props) {
         flexDirection: "column",
         boxShadow: 3,
       }}
+      onClick={NFTClick}
     >
       <CardMedia
         sx={{ boxShadow: 3 }}
@@ -60,11 +76,11 @@ export default function NFTCard(props) {
               : { color: "green" }
           }
         >
-          { NFTdata.endangered === "1"
-              ? "위급"
-              : NFTdata.endangered === "2"
-              ? "위기"
-              : "취약"}
+          {NFTdata.endangered === "1"
+            ? "위급"
+            : NFTdata.endangered === "2"
+            ? "위기"
+            : "취약"}
         </Typography>
       </CardContent>
     </Card>

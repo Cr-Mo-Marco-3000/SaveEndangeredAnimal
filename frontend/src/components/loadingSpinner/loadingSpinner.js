@@ -1,5 +1,11 @@
 import style from "./loadingSpinner.module.css"
-const LoadingSpinner = () => {
+const LoadingSpinner = (props) => {
+  let text = "Loading..."
+
+  if (props.text !== undefined) {
+    text = props.text
+  }
+
   return (
     <div className={style.wrapper}>
       <div>
@@ -9,7 +15,7 @@ const LoadingSpinner = () => {
           alt="로딩스피너"
         />
       </div>
-      <div className={style.loadingText}>Loading...</div>
+      <div className={style.loadingText}>{text}</div>
     </div>
   )
 }

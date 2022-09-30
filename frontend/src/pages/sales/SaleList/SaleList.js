@@ -88,7 +88,10 @@ export default function SaleList(props) {
         page={page}
         color="primary"
         size="large"
-        sx={{ margin: 2 }}
+        sx={{
+          margin: 2,
+          display: "inline-block",
+        }}
         onChange={handleChange}
       />
     </div>

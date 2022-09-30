@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Grid } from "@mui/material"
 import AnimalCard from "./AnimalCard"
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Pagination } from "@mui/material"
 import UsePagination from "components/pagination/Pagination"
 import styles from "./AnimalCollection.module.css"
@@ -10,9 +10,9 @@ import api from "api/api.js"
 export default function AnimalCollection() {
   //동물 리스트 받아오기
   //동물 리스트 데이터에 NFT소유 여부(boolean) 넣어서 데이터 재가공 하기
-  const [animalList,setAnimalList] = useState([]);
-   //내가 소유한 NFT리스트 받아오기
-  const [NFTList,setNFTList] = useState([]);
+  const [animalList, setAnimalList] = useState([])
+  //내가 소유한 NFT리스트 받아오기
+  const [NFTList, setNFTList] = useState([])
   // 반복 돌면서 {animalName, animalImage , haveNFT: false}
   // for (let index = 0; index < 30; index++) {
   //   const newItem = {
@@ -36,8 +36,8 @@ export default function AnimalCollection() {
   const PER_PAGE = 8
   //const [count,setCount] = useState(Math.ceil(animalList.length / PER_PAGE))
   //const [data,setData] = useState(UsePagination(animalList, PER_PAGE))
-  const count= Math.ceil(animalList.length / PER_PAGE)
-  const data= UsePagination(animalList, PER_PAGE)
+  const count = Math.ceil(animalList.length / PER_PAGE)
+  const data = UsePagination(animalList, PER_PAGE)
 
   const handleChange = (e, p) => {
     setPage(p)
@@ -49,39 +49,35 @@ export default function AnimalCollection() {
   //   setCount(Math.ceil(animalList.length / PER_PAGE))
   // }
   useEffect(() => {
-   
-    const getAnimalCollection= async ()=>{
+    const getAnimalCollection = async () => {
       //NFT 리스트 가져와서 소유 동물 표시
-      let nftMap=new Map();
-      const NFTRes=await api.item.getItem("User");
+      let nftMap = new Map()
+      const NFTRes = await api.item.getItem("User")
       //console.log(NFTRes.list)
-      NFTRes.list.map((data,idx)=>(
-        nftMap.set(data.animalKoreanName,true)
-      ))
+      NFTRes.list.map((data, idx) => nftMap.set(data.animalKoreanName, true))
       //동물 리스트 가져오기
-      const animalListRes=await api.animal.getAnimalList();
+      const animalListRes = await api.animal.getAnimalList()
       //console.log(animalListRes.list.content)
-      let animalL=[]
-      animalListRes.list.content.map((data,idx)=>(
+      let animalL = []
+      animalListRes.list.content.map((data, idx) =>
         animalL.push({
           animalName: data.animalKoreanName,
-          animalImg : data.animalImg[0],
-          haveNFT : nftMap.get(data.animalKoreanName)===true? true:false,
-        })
-      ))
+          animalImg: data.animalImg[0],
+          animalId: data.animalId,
+          haveNFT: nftMap.get(data.animalKoreanName) === true ? true : false,
+        }),
+      )
       setAnimalList(animalL)
-    //  setPageOpt()
+      //  setPageOpt()
       //console.log(animalList)
-      
     }
-    getAnimalCollection();
+    getAnimalCollection()
   }, [])
 
-  useEffect(()=>{
-      data.setNewData(animalList)
-      return()=>{
-      }
-  },[animalList,data])
+  useEffect(() => {
+    data.setNewData(animalList)
+    return () => {}
+  }, [animalList, data])
   //투명에 회색 배경 처리는 카드 내부에서 하자
   //이곳에선 동물 리스트만 띄우면 될 것 같다
   return (
@@ -89,11 +85,11 @@ export default function AnimalCollection() {
       <Grid container spacing={3}>
         {data.currentData().map((data, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={3}>
-            
             <AnimalCard
               animalImg={data.animalImg}
               animalName={data.animalName}
               haveNFT={data.haveNFT}
+              animalId={data.animalId}
             />
           </Grid>
         ))}
@@ -103,7 +99,10 @@ export default function AnimalCollection() {
         page={page}
         color="primary"
         size="large"
-        sx={{ margin: 2 }}
+        sx={{
+          margin: 2,
+          display: "inline-block",
+        }}
         onChange={handleChange}
       />
     </div>

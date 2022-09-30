@@ -37,17 +37,16 @@ export default function DonationList() {
     const getDonationList = async () => {
       //console.log(cookies.get("accessToken"))
       const res = await api.donation.viewDonationLog()
-      console.log(res.list)
+      //console.log(res.list)
       setDonationList(res.list)
     }
     getDonationList()
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     data.setNewData(donationList)
-    return()=>{
-    }
-  },[donationList,data])
+    return () => {}
+  }, [donationList, data])
   return (
     <>
       <TableContainer className={styles.outDiv}>
@@ -74,7 +73,11 @@ export default function DonationList() {
                 </TableCell>
                 <TableCell align="right">{row.donationStatusCode}</TableCell>
                 <TableCell align="right">{row.donationAmount} eth</TableCell>
-                <TableCell align="right">{row.donationCreatedAt[0]}년 {row.donationCreatedAt[1]}월 {row.donationCreatedAt[2]}일 {row.donationCreatedAt[3]}:{row.donationCreatedAt[4]}.{row.donationCreatedAt[5]}</TableCell>
+                <TableCell align="right">
+                  {row.donationCreatedAt[0]}년 {row.donationCreatedAt[1]}월{" "}
+                  {row.donationCreatedAt[2]}일 {row.donationCreatedAt[3]}:
+                  {row.donationCreatedAt[4]}.{row.donationCreatedAt[5]}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -84,7 +87,10 @@ export default function DonationList() {
           page={page}
           color="primary"
           size="large"
-          sx={{ margin: 2 }}
+          sx={{
+            margin: 2,
+            display: "inline-block",
+          }}
           onChange={handleChange}
         />
       </TableContainer>
