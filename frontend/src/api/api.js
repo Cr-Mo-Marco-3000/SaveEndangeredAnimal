@@ -149,7 +149,7 @@ const api = {
         const data = res.data
         return data
       } catch (error) {
-        const res = error.res.data
+        const res = error.response.data
         return res
       }
     },

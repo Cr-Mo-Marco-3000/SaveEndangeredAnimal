@@ -18,6 +18,7 @@ import bytecode from "../../abis/createNFT/bytecode.json"
 import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const Minting = () => {
   // 내비게이트용
@@ -128,6 +129,12 @@ const Minting = () => {
       })
       .then(async (response) => {
         // 민팅
+        let imageUrl = ""
+        const getIpfsImage = await axios.get(result).then((res) => {
+          const ipfsImage = res.data.image.slice(7)
+          imageUrl = "https://ipfs.io/ipfs/" + ipfsImage
+        })
+        console.log(imageUrl)
         const address = response["_address"]
         const resFromEth = await response.methods
           .mintToken()
@@ -135,7 +142,7 @@ const Minting = () => {
         const resFromServer = await api.item.registerItem(
           account,
           donationId,
-          result,
+          imageUrl,
           address
         )
         setLoading(false)
