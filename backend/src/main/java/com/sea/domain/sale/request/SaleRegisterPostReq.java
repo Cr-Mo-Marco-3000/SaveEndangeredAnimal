@@ -8,7 +8,6 @@ import java.math.BigInteger;
 public class SaleRegisterPostReq {
 	String walletAddres;
 	String saleContractAddress;
-	String saleCashContractAddress;
 	long saleStartTime;
 	long saleEndTime;
 	int itemId;

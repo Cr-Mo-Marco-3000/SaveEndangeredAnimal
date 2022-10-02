@@ -10,7 +10,6 @@ public class SaleDto {
 	int saleId;
 	String saleContractAddress;
 	int saleYn;
-	String saleCashContractAddress;
 	String saleSellerAddress;
 	String saleBuyerAddress;
 	LocalDateTime saleCreatedAt;
@@ -27,7 +26,6 @@ public class SaleDto {
 		this.saleId = sale.getSaleId();
 		this.saleContractAddress = sale.getSaleContractAddress();
 		this.saleYn = sale.getSaleYn();
-		this.saleCashContractAddress = sale.getSaleCashContractAddress();
 		this.saleSellerAddress = sale.getSaleSellerAddress();
 		this.saleBuyerAddress = sale.getSaleBuyerAddress();
 		this.saleCreatedAt = sale.getSaleCreatedAt();

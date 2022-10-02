@@ -30,7 +30,6 @@ public class SaleServiceImpl implements SaleService {
 		Item item = itemRepository.findById(registerInfo.getItemId()).get();
 
 		Sale sale = Sale.builder().saleContractAddress(registerInfo.getSaleContractAddress())
-				.saleCashContractAddress(registerInfo.getSaleCashContractAddress())
 				.saleSellerAddress(registerInfo.getWalletAddres()).saleStartTime(registerInfo.getSaleStartTime())
 				.saleEndTime(registerInfo.getSaleEndTime()).fkItemId(item).salePrice(registerInfo.getSalePrice()).build();
 

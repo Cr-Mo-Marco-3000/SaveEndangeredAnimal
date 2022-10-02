@@ -42,9 +42,6 @@ public class Sale {
 	@Column(name = "sale_yn", columnDefinition = "TINYINT(1)")
 	int saleYn;
 	
-	@Column(name = "sale_cash_contract_address", length = 200)
-	String saleCashContractAddress; 
-	
 	@Column(name = "sale_seller_address", length = 200)
 	String saleSellerAddress;
 	
