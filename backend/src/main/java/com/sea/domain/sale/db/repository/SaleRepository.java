@@ -11,7 +11,7 @@ import com.sea.domain.sale.db.entity.Sale;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Integer>{
 
-	Optional<List<Sale>> findBySaleSellerAddressAndSaleYn(String userWalletAddress, int i);
-	Optional<List<Sale>> findBySaleYn(int i);
+	Optional<List<Sale>> findBySaleSellerAddressAndSaleYnAndSaleEndTimeLessThan(String userWalletAddress, int i, long now);
+	Optional<List<Sale>> findBySaleYnAndSaleEndTimeLessThan(int i, long now);
 	
 }

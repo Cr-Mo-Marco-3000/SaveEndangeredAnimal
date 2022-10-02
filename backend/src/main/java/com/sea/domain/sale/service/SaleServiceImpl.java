@@ -1,5 +1,7 @@
 package com.sea.domain.sale.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,6 @@ import com.sea.domain.sale.dto.SaleDto;
 import com.sea.domain.sale.request.SaleCancleDeleteReq;
 import com.sea.domain.sale.request.SaleCompletePutReq;
 import com.sea.domain.sale.request.SaleRegisterPostReq;
-import com.sea.domain.user.db.entity.User;
 
 @Service("saleService")
 public class SaleServiceImpl implements SaleService {
@@ -52,7 +53,8 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public List<SaleDto> getSaleList() {
-		List<Sale> sales = saleRepository.findBySaleYn(0).orElse(new ArrayList<>());
+		long now = Date.valueOf(LocalDate.now().plusDays(1)).getTime();
+		List<Sale> sales = saleRepository.findBySaleYnAndSaleEndTimeLessThan(0, now).orElse(new ArrayList<>());
 		List<SaleDto> list = new ArrayList<SaleDto>();
 		for (Sale sale : sales) {
 			SaleDto dto = new SaleDto(sale);
@@ -80,7 +82,9 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public List<SaleDto> getMySaleList(String userWalletAddress) {
-		List<Sale> sales = saleRepository.findBySaleSellerAddressAndSaleYn(userWalletAddress, 1).orElse(null);
+		long now = Date.valueOf(LocalDate.now().plusDays(1)).getTime();
+		
+		List<Sale> sales = saleRepository.findBySaleSellerAddressAndSaleYnAndSaleEndTimeLessThan(userWalletAddress, 1, now).orElse(null);
 		List<SaleDto> list = new ArrayList<SaleDto>();
 
 		for (Sale sale : sales) {
