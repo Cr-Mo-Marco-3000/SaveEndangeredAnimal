@@ -13,11 +13,12 @@ export default function NFTCard(props) {
 
   const NFTClick = () => {
     Swal.fire({
-      width: "80rem",
-      padding: "0rem 2rem 1rem 2rem",
+      background: "rgba(211, 224, 234, 0.6)",
+      width: "60rem",
+      padding: "0rem 0rem 1rem 0rem",
       heightAuto: true,
       imageUrl: NFTdata.img,
-      // imageHeight: 1080,
+      imageHeight: 900,
       // imageWidth: 1920,
       imageAlt: "NFT Image",
       //confirmButtonText: "닫기",
