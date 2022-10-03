@@ -51,7 +51,15 @@ export default function SaleCard(props) {
           alt="animalImg"
         />
         <CardContent sx={{ boxShadow: "1" }} className={styles.cardContent}>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontWeight: 900,
+            }}
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
             {saleData.animalKoreanName}
           </Typography>
           <div>
@@ -59,12 +67,11 @@ export default function SaleCard(props) {
               판매기간 :
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {saleStartTime.toLocaleString()} ~
+              {saleStartTime.toLocaleString().split("오")[0]} ~{" "}
+              {saleEndTime.toLocaleString().split("오")[0]}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {saleEndTime.toLocaleString()}
-            </Typography>
-            <Typography sx={{ textAlign: "end" }}>
+
+            <Typography sx={{ textAlign: "end", paddingTop: "1rem" }}>
               {saleData.salePrice} ETH
             </Typography>
           </div>

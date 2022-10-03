@@ -73,10 +73,10 @@
 .navButtonUnderLine {
   position: absolute;
   top: 1.5rem;
-  border-color: #286778;
-  border: solid 1px #286778;
+  border-color: #75b870;
+  border: solid 1px #75b870;
   border-radius: 1px;
-  background-color: #286778;
+  background-color: #75b870;
   display: none;
   left: 10%;
   right: 10%;
@@ -98,6 +98,6 @@
 }
 
 .navButton:hover {
-  color: #286778;
+  color: #75b870;
   transition: color 0.1s;
 }

@@ -19,6 +19,7 @@ import Web3 from "web3"
 import nftAbi from "../../../abis/createNFT/abi.json"
 import transactionAbi from "../../../abis/transaction/abi.json"
 import transactionByteCode from "../../../abis/transaction/bytecode.json"
+import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
 
 export default function NFTsale() {
   const MySwal = withReactContent(Swal)
@@ -30,6 +31,7 @@ export default function NFTsale() {
   const [startDate, setStartDate] = useState(new Date()) // 달력은 뜨지만 현재 날짜로 고정되어 있음
   const [endDate, setEndDate] = useState(new Date())
   const [salePrice, setSalePrice] = useState(null)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e, p) => {
@@ -54,6 +56,7 @@ export default function NFTsale() {
         icon: "warning",
       })
       if (swalResponse.isConfirmed) {
+        setLoading(true)
         console.log(selectNFTdata)
         window.web3 = new Web3(window.ethereum)
         const web3 = window.web3
@@ -67,6 +70,7 @@ export default function NFTsale() {
         console.log(salePrice)
         console.log("거래소 만드는 계약 전")
         const makeTraderContract = new web3.eth.Contract(myAbi)
+
         const traderResponse = await makeTraderContract
           .deploy({
             data: "0x" + transactionByteCode.object,
@@ -106,9 +110,10 @@ export default function NFTsale() {
           start,
           end,
           salePrice,
-          itemId
+          itemId,
         )
         console.log(res)
+        setLoading(false)
         Swal.fire({
           icon: "success",
           title: "등록 완료!",
@@ -119,6 +124,7 @@ export default function NFTsale() {
         console.log("취소")
       }
     } catch (error) {
+      setLoading(false)
       console.log("앙냥냥")
     }
   }
@@ -142,7 +148,7 @@ export default function NFTsale() {
         // saleContractAddress,
         // saleCashContractAddress,
         startDate,
-        endDate
+        endDate,
         // itemId,
       )
     }
@@ -158,8 +164,12 @@ export default function NFTsale() {
     return () => {}
   }, [allData, data])
 
+  useEffect(() => {}, [loading])
   return (
     <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+      {loading && (
+        <LoadingSpinner text="Registering NFT sales..."></LoadingSpinner>
+      )}
       <Box gridColumn="span 12">
         <Grid container spacing={3}>
           {data.currentData().map((data, idx) => (
@@ -223,7 +233,7 @@ export default function NFTsale() {
               selected={endDate}
               onChange={(date) => setEndDate(date)}
               selectsEnd
-              endDate={endDate.setHours(23,59,59,59)}
+              endDate={endDate.setHours(23, 59, 59, 59)}
               minDate={startDate}
               locale={ko}
             />

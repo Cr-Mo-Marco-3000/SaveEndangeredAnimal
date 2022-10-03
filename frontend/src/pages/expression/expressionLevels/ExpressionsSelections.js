@@ -27,7 +27,7 @@ const ExpressionSelections = (props) => {
 
   return (
     <div className={style.expressionText}>
-      <div>
+      <div className={style.expressionHeader}>
         {question.length > 20 ? <h2>{question}</h2> : null}
         {question.length <= 20 ? <h1>{question}</h1> : null}
       </div>
