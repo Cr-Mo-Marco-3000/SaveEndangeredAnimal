@@ -61,21 +61,21 @@ public class UserController {
 	@ApiOperation(value = "나를 표현하기")
 	@PutMapping("/test-result")
 	@ApiResponses({ @ApiResponse(code = 204, message = "성공"), @ApiResponse(code = 400, message = "존재하지 않는 유저입니다.") })
-	public ResponseEntity<? extends BaseResponseBody> updateTestResult(@RequestBody UserUpdateTestResultPutReq updateInfo) {
-		
-		try {
-			userService.updateTestResult(updateInfo);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public ResponseEntity<? extends BaseResponseBody> updateTestResult(
+			@RequestBody UserUpdateTestResultPutReq updateInfo) {
+		User user = userService.updateTestResult(updateInfo);
+
+		if (user == null)
 			return ResponseEntity.status(400).body(BaseResponseBody.of(400, "존재하지 않는 유저입니다."));
-		}
+
 		return ResponseEntity.status(204).body(BaseResponseBody.of(200, "Success"));
 	}
 
 	@ApiOperation(value = "검사 결과 얻기")
 	@GetMapping("/test-result")
 	@ApiResponses({ @ApiResponse(code = 204, message = "성공"), @ApiResponse(code = 400, message = "존재하지 않는 유저입니다.") })
-	public ResponseEntity<? extends BaseResponseBody> getTestResult(@RequestParam(value = "walletAddress") String walletAddress) {
+	public ResponseEntity<? extends BaseResponseBody> getTestResult(
+			@RequestParam(value = "walletAddress") String walletAddress) {
 		List<String> testResult = userService.getTestResultByUserId(walletAddress);
 
 		if (testResult == null) {

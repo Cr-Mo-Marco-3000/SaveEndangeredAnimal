@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
 	User getUserByAddress(String address);
 
-    void updateTestResult(UserUpdateTestResultPutReq updateInfo);
+    User updateTestResult(UserUpdateTestResultPutReq updateInfo);
 
     List<String> getTestResultByUserId(String walletAddress);
 }
