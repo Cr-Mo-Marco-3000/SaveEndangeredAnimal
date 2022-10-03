@@ -149,8 +149,8 @@ export default function NFTsale() {
 
     // console.log(selectNFTdata)
     // console.log(salePrice)
-    // console.log(startDate)
-    // console.log(endDate)
+    console.log(startDate)
+    console.log(endDate)
   }, [])
 
   useEffect(() => {
@@ -223,7 +223,7 @@ export default function NFTsale() {
               selected={endDate}
               onChange={(date) => setEndDate(date)}
               selectsEnd
-              endDate={endDate}
+              endDate={endDate.setHours(23,59,59,59)}
               minDate={startDate}
               locale={ko}
             />

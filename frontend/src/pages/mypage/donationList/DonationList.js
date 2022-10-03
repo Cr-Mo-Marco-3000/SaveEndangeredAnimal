@@ -38,7 +38,7 @@ export default function DonationList() {
       //console.log(cookies.get("accessToken"))
       const res = await api.donation.viewDonationLog()
       //console.log(res.list)
-      setDonationList(res.list)
+      setDonationList(res.list.reverse())
     }
     getDonationList()
   }, [])
