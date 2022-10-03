@@ -73,7 +73,7 @@ public class Sale {
 
 	public void updateBuyerAddress(String saleBuyerAddress) {
 		this.saleBuyerAddress = saleBuyerAddress;
-		saleYn = 0;
+		saleYn = 1;
 	}
 	
 }

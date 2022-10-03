@@ -69,7 +69,7 @@ public class SaleServiceImpl implements SaleService {
 		Sale sale = saleRepository.findById(completeInfo.getSaleId()).get();
 
 		sale.updateBuyerAddress(completeInfo.getSaleBuyerAddress());
-
+		
 		return saleRepository.save(sale);
 	}
 
@@ -84,7 +84,7 @@ public class SaleServiceImpl implements SaleService {
 	public List<SaleDto> getMySaleList(String userWalletAddress) {
 		long now = Date.valueOf(LocalDate.now()).getTime();
 		
-		List<Sale> sales = saleRepository.findBySaleSellerAddressAndSaleYnAndSaleEndTimeGreaterThan(userWalletAddress, 1, now).orElse(null);
+		List<Sale> sales = saleRepository.findBySaleSellerAddressAndSaleYnAndSaleEndTimeGreaterThan(userWalletAddress, 0, now).orElse(null);
 		List<SaleDto> list = new ArrayList<SaleDto>();
 
 		for (Sale sale : sales) {
