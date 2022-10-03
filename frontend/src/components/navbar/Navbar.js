@@ -1,6 +1,7 @@
 import { alpha, styled } from "@mui/material/styles"
 import { Box,  Typography, Button, AppBar, Toolbar } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
+import { useCookies } from 'react-cookie'; 
 import style from "./Navbar.module.css"
 import React, {useEffect, useState} from 'react';
 import { ethers } from "ethers";
@@ -9,7 +10,7 @@ import Web3 from "web3"
 
 const Navbar = () => {
   const APPBAR_MOBILE = 64
-  const APPBAR_DESKTOP = 92
+  const APPBAR_DESKTOP = 92 
 
   const RootStyle = styled(AppBar)(({ theme }) => ({
     boxShadow: "none",
@@ -31,7 +32,9 @@ const Navbar = () => {
 
   const web3 = new Web3(window.ethereum);
   const [balance, setBalance] = useState(null);
+  const [account, setAccount] = useState(null);
   const [isAccount, setIsAccount] = useState(false);
+  const [cookies, setCookie] = useCookies();
 
   const getCurrentAccount = async() => {
     try {
@@ -47,9 +50,32 @@ const Navbar = () => {
 
   useEffect(()=> {
     if (window.ethereum) {
+      window.ethereum.on("accountsChanged", accountsChanged);
+      window.ethereum.on("chainChanged", chainChanged);
       getCurrentAccount();
     };
   },[]);
+
+  const accountsChanged = async (newAccount) => {
+    setAccount(newAccount);
+    setCookie('id', newAccount);
+    navigate("/main");
+    try {
+      const balance = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [newAccount.toString(), "latest"],
+      });
+      setBalance(ethers.utils.formatEther(balance));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const chainChanged = () => {
+    setAccount(null);
+    setBalance(null);
+  };
+  
 
   const main = async() => {
     if(isAccount) {
@@ -60,6 +86,7 @@ const Navbar = () => {
             const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
+          await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main")
         } catch (err) {
@@ -81,6 +108,7 @@ const Navbar = () => {
             const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
+          await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/express")
         } catch (err) {
@@ -102,6 +130,7 @@ const Navbar = () => {
             const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
+          await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/animalList")
         } catch (err) {
@@ -123,6 +152,7 @@ const Navbar = () => {
             const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
+          await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/sale")
         } catch (err) {
@@ -144,6 +174,7 @@ const Navbar = () => {
             const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
+          await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/mypage")
         } catch (err) {
