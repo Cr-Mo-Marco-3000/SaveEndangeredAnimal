@@ -149,7 +149,7 @@ const api = {
         const data = res.data
         return data
       } catch (error) {
-        const res = error.res.data
+        const res = error.response.data
         return res
       }
     },
@@ -175,9 +175,9 @@ const api = {
     // 판매 등록하기
     openSale: async (
       saleContractAddress,
-      saleCashContractAddress,
       saleStartTime,
       saleEndTime,
+      salePrice,
       itemId
     ) => {
       try {
@@ -188,9 +188,9 @@ const api = {
           data: {
             walletAddress: cookies.get("id"),
             saleContractAddress: saleContractAddress,
-            saleCashContractAddress: saleCashContractAddress,
             saleStartTime: saleStartTime,
             saleEndTime: saleEndTime,
+            salePrice: salePrice,
             itemId: itemId,
           },
         })
@@ -390,12 +390,17 @@ const api = {
       }
     },
     // NFT 판매 완료시 NFT 정보 수정 => 추가 정보 어떤 게 필요?
-    changeItem: async () => {
+    changeItem: async (itemId, itemPrice, itemOwnerAddress) => {
       try {
         const res = await axios({
           url: HOST + ITEM,
           withCredentials: true,
           method: "PUT",
+          data: {
+            itemId: itemId,
+            itemPrice: itemPrice,
+            itemOwnerAddress: itemOwnerAddress,
+          },
         })
         const response = res.data
         return response

@@ -2,10 +2,7 @@ import * as React from "react"
 import { useState, useEffect } from "react"
 import { styled } from "@mui/material/styles"
 import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
-import ButtonBase from "@mui/material/ButtonBase"
-import { Button } from "@mui/material"
 // import CarouselImages from "../carousel/CarouselImages"
 import CarouselImages from "./CarouselImages"
 import api from "api/api.js"
@@ -63,32 +60,32 @@ export default function Donation(props) {
         if (donation == null) {
           Swal.fire(
             "미입력",
-            "토큰을 입력해주세요.<br />0.01 RopstenETH 이상 기부 가능합니다.",
-            "error"
+            "토큰을 입력해주세요.<br />0.01 ETH 이상 기부 가능합니다.",
+            "error",
           )
         } else if (balance < 0.01) {
           Swal.fire(
             "잔액 미달",
             "토큰잔액이 최소 기부금 미달입니다.<br />충전 후 기부해주세요.",
-            "error"
+            "error",
           )
         } else if (donation < 0.01) {
           Swal.fire(
             "최소 기부금 미달",
-            "기부금은 0.01 RopstenETH 이상 가능합니다.<br />충전 후 기부해주세요.",
-            "error"
+            "기부금은 0.01 ETH 이상 가능합니다.<br />충전 후 기부해주세요.",
+            "error",
           )
         } else if (donation > balance) {
           Swal.fire(
             "잔액 부족",
             "잔액이 부족합니다. <br />충전 후 기부해주세요",
-            "error"
+            "error",
           )
         } else if (animalInfo.animalMaxItem - animalInfo.animalNowItem === 0) {
           Swal.fire(
             "남아있는 NFT 기부 증서가 없습니다.",
             "기부 증서 없이 기부만 하시겠습니까?.",
-            "question"
+            "question",
           )
           MySwal.fire({
             title: (
@@ -105,6 +102,7 @@ export default function Donation(props) {
             if (result.isConfirmed) {
               const send = async () => {
                 try {
+                  setLoading(true)
                   // const myaccount = await web3.eth.getAccounts()
                   // 0.01 자리에 기부금이 들어갑니다
                   const sendEther = parseInt(donation * 10 ** 18)
@@ -118,14 +116,14 @@ export default function Donation(props) {
                     myAccount,
                     donation,
                     response.transactionHash,
-                    animalId
+                    animalId,
                   )
                   const donationId = response2.donationId
-
+                  setLoading(false)
                   Swal.fire(
                     "기부가 완료되었습니다.",
                     "감사합니다. </br>많은 기부 부탁드립니다.</br>Minting 페이지로 넘어갑니다.",
-                    "success"
+                    "success",
                   ).then(() =>
                     navigate("/main/mypage", {
                       state: {
@@ -135,12 +133,13 @@ export default function Donation(props) {
                         animalDesc: animalInfo.animalDesc,
                         donationId: donationId,
                       },
-                    })
+                    }),
                   )
                 } catch (err) {
                   console.log(err)
                 }
               }
+
               send()
             } else Swal.fire("기부 취소", "기부가 취소되었습니다.", "error")
           })
@@ -149,6 +148,7 @@ export default function Donation(props) {
             try {
               // const myaccount = await web3.eth.getAccounts()
               // 0.01 자리에 기부금이 들어갑니다
+              setLoading(true)
               const sendEther = parseInt(donation * 10 ** 18)
               const response = await web3.eth.sendTransaction({
                 from: myAccount,
@@ -156,19 +156,20 @@ export default function Donation(props) {
                 value: sendEther,
               })
               // response가 뜨기 전까지 로딩 돌리기 => response가 도착하면 로딩 끄고 민팅 페이지로 연결
-              console.log(response.transactionHash)
+              //console.log(response.transactionHash)
               // response가 뜨기 전까지 로딩 돌리기 => response가 도착하면 로딩 끄고 민팅 페이지로 연결
               const response2 = await api.donation.donate(
                 myAccount,
                 donation,
                 response.transactionHash,
-                animalId
+                animalId,
               )
               const donationId = response2.donationId
+              setLoading(false)
               Swal.fire(
                 "기부가 완료되었습니다.",
                 "감사합니다. </br>많은 기부 부탁드립니다.</br>Minting 페이지로 넘어갑니다.",
-                "success"
+                "success",
               ).then(() =>
                 navigate("/main/minting", {
                   state: {
@@ -178,7 +179,7 @@ export default function Donation(props) {
                     animalDesc: animalInfo.animalDesc,
                     donationId: donationId,
                   },
-                })
+                }),
               )
             } catch (err) {
               console.log(err)
@@ -194,7 +195,7 @@ export default function Donation(props) {
 
   const onChangeAccount = (e) => {
     setDonation(e.target.value)
-    console.log(donation)
+    //console.log(donation)
   }
 
   const navigate = useNavigate()
@@ -209,7 +210,9 @@ export default function Donation(props) {
 
   return (
     <Grid container spacing={2} colums={12}>
-      {loading && <LoadingSpinner></LoadingSpinner>}
+      {loading && (
+        <LoadingSpinner text="the donation delivering..."></LoadingSpinner>
+      )}
       <Grid item xs={6}>
         <CarouselImages animalImgs={animalInfo.animalImg}></CarouselImages>
       </Grid>
@@ -225,12 +228,12 @@ export default function Donation(props) {
               NFT가 남아 있습니다.
               <br />
               <br />
-              NFT를 얻을 수 있는 최소 금액은 <br /> 0.01 RopstenETH입니다.
+              NFT를 얻을 수 있는 최소 금액은 <br /> 0.01 ETH입니다.
               <br />
             </Typography>
             <br />
             <Typography variant="body2" gutterBottom color="text.secondary">
-              현재 잔고 : {balance} RopstenETH
+              현재 잔고 : {Math.round(balance * 10000000) / 10000000} ETH
             </Typography>
             <br />
             <Grid item>

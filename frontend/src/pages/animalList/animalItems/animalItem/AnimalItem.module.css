@@ -2,7 +2,6 @@
   color: #286778;
   width: 80rem;
   height: 30rem;
-  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -11,13 +10,13 @@
 }
 
 .animalItem_block {
-  background-color: #f9f6f6;
+  background-color: rgba(196, 208, 218, 0.9);
   display: flex;
   justify-content: center;
   width: 90%;
   height: 90%;
   border-radius: 20px;
-  box-shadow: 10px 10px 20px #eeeeee;
+  box-shadow: 5px 5px 10px rgba(211, 224, 234, 0.3);
 }
 
 .imageArea {
@@ -82,7 +81,7 @@
   left: 2rem;
   padding-top: 3px;
   font-weight: 500;
-  color: #d3e0ea;
+  color: #1787a7;
   bottom: 0.5rem;
 }
 .scriptArea > .scriptAreaHorizon:nth-child(2) {

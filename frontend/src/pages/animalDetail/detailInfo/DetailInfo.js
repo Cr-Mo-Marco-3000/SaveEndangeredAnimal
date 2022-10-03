@@ -79,14 +79,15 @@ function DetailInfo(props) {
             {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
             남아있습니다.
           </div>
-          <Button
+          <button
+          className={styles.button}
             variant="contained"
             size="large"
             endIcon={<SendIcon />}
             onClick={openModal}
           >
             Donation
-          </Button>
+          </button>
           <Modal open={modalOpen} close={closeModal} header="기부하기"><Donation /></Modal>
         </div>
       </div>

@@ -55,11 +55,22 @@ export default function DonationList() {
           aria-label="simple table"
         >
           <TableHead>
-            <TableRow sx={{ fontWeight: "bold" }}>
-              <TableCell>기부 동물 이름</TableCell>
-              <TableCell align="right">상태 코드</TableCell>
-              <TableCell align="right">기부 금액</TableCell>
-              <TableCell align="right">기부 시간</TableCell>
+            <TableRow sx={{}}>
+              <TableCell style={{ fontSize: "20px", fontWeight: "bold" }}>
+                기부 동물 이름
+              </TableCell>
+              <TableCell
+                style={{ width: 250, fontSize: "20px", fontWeight: "bold" }}
+                align="right"
+              >
+                기부 금액
+              </TableCell>
+              <TableCell
+                style={{ width: 250, fontSize: "20px", fontWeight: "bold" }}
+                align="right"
+              >
+                기부 시간
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -68,12 +79,23 @@ export default function DonationList() {
                 key={idx}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell
+                  style={{ fontSize: "15px", fontWeight: "bold" }}
+                  component="th"
+                  scope="row"
+                >
                   {row.animalKoreanName}
                 </TableCell>
-                <TableCell align="right">{row.donationStatusCode}</TableCell>
-                <TableCell align="right">{row.donationAmount} eth</TableCell>
-                <TableCell align="right">
+                <TableCell
+                  style={{ fontSize: "15px", fontWeight: "bold" }}
+                  align="right"
+                >
+                  {row.donationAmount} eth
+                </TableCell>
+                <TableCell
+                  style={{ fontSize: "15px", fontWeight: "bold" }}
+                  align="right"
+                >
                   {row.donationCreatedAt[0]}년 {row.donationCreatedAt[1]}월{" "}
                   {row.donationCreatedAt[2]}일 {row.donationCreatedAt[3]}:
                   {row.donationCreatedAt[4]}.{row.donationCreatedAt[5]}

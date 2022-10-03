@@ -18,6 +18,7 @@ import bytecode from "../../abis/createNFT/bytecode.json"
 import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const Minting = () => {
   // 내비게이트용
@@ -98,6 +99,15 @@ const Minting = () => {
   }, [account])
   const [flag, setFlag] = useState(true)
   const minting = async function () {
+    if (selectImg === "") {
+      Swal.fire({
+        icon: "question",
+        title: "이미지가 없어요!",
+        text: "그림 네개 중에 맘에 드는 그림 하나를 선택해주세요!",
+      })
+
+      return
+    }
     Swal.fire({
       icon: "info",
       title: "민팅을 시작합니다",
@@ -108,7 +118,7 @@ const Minting = () => {
     const result = await IPFS.createToken(
       animalKorName + "#" + animalNowItem,
       animalDesc,
-      selectImg
+      selectImg,
     )
 
     // 이 이후에 result값을 web3로 토큰 값으로 넘기면 됩니다.
@@ -128,6 +138,12 @@ const Minting = () => {
       })
       .then(async (response) => {
         // 민팅
+        let imageUrl = ""
+        const getIpfsImage = await axios.get(result).then((res) => {
+          const ipfsImage = res.data.image.slice(7)
+          imageUrl = "https://ipfs.io/ipfs/" + ipfsImage
+        })
+        console.log(imageUrl)
         const address = response["_address"]
         const resFromEth = await response.methods
           .mintToken()
@@ -135,8 +151,8 @@ const Minting = () => {
         const resFromServer = await api.item.registerItem(
           account,
           donationId,
-          result,
-          address
+          imageUrl,
+          address,
         )
         setLoading(false)
         Swal.fire({
@@ -162,7 +178,10 @@ const Minting = () => {
   return (
     <div className={styles.outDiv}>
       {loading && <LoadingSpinner></LoadingSpinner>}
-      <Grid container spacing={6}>
+      <div className={styles.info}>
+        아래 그림 중 마음에 드는 그림 하나를 골라주세요!
+      </div>
+      <Grid className={styles.imgDiv} container spacing={6}>
         {imgs.map((link, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={6}>
             <ImageCard
@@ -183,7 +202,6 @@ const Minting = () => {
           variant="contained"
           onClick={minting}
           loading={loading}
-          loadingPosition="end"
         >
           Minting
         </LoadingButton>

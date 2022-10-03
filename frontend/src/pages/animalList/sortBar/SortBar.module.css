@@ -4,14 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   margin-top: 1rem;
 }
 
 .sortBar_setting {
   width: 90%;
   height: 4rem;
-  background-color: #d3e0ea;
+  background-color: rgba(211, 224, 234, 0.9);
   color: black;
   display: flex;
   justify-content: space-around;
