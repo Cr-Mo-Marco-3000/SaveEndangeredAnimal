@@ -126,6 +126,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "erc20Contract",
+				"outputs": [
+					{
+						"internalType": "contract IERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getSaleTokenList",
 				"outputs": [
 					{
@@ -248,11 +261,11 @@
 			]
 		},
 		"contracts/SaleTest.sol": {
-			"keccak256": "0xaffb9d77e3e6f121d63966dc6c622763f4d78c524b333d040ad922fb9ae28211",
+			"keccak256": "0x29618af21b925da90ef21e10acba7d58d583333b665a2521254d36e64f5e2ce5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4b31493ef4e2e005c356c3de954b88f544da453f83d84629de0ef96eeda6d839",
-				"dweb:/ipfs/QmVZVmCjfMQUsvShNSNgTYj33ep553zKemfTfqvZnN3fFm"
+				"bzz-raw://e5306558490ca05ad9dc14774102de3399f980d70c8ac63d54619f53688d3c1f",
+				"dweb:/ipfs/QmWbCDTUxhLnqMhqGzWFqqh9qpysDpVCUQ12EzhpmQXS7J"
 			]
 		},
 		"contracts/access/Ownable.sol": {
@@ -373,6 +386,14 @@
 			"urls": [
 				"bzz-raw://d262e8e7efe5037ade4db603f32b45e320609777241d01498b988acbad81c8e4",
 				"dweb:/ipfs/Qme5ngXzkphT96C1qKWz7XP7yFhYboiP9tVt8AMQHBEkYZ"
+			]
+		},
+		"contracts/utils/math/SafeMath.sol": {
+			"keccak256": "0x1d79a0870ecd410d6366c8ba16135d0f43350cef6d93917fcda95bc6e03f164a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d930e28adadb9e21f4aa5147d6a20f72a73810b70653bd069e9934aca147bbdd",
+				"dweb:/ipfs/QmNR1XyigEaaqLZMqHSqDm55n6wpseKHZhwiNe8V7MJ24n"
 			]
 		}
 	},
