@@ -1,11 +1,11 @@
 import { alpha, styled } from "@mui/material/styles"
-import { Box,  Typography, Button, AppBar, Toolbar } from "@mui/material"
+import { Box, Typography, Button, AppBar, Toolbar } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
 import { useCookies } from 'react-cookie'; 
 import style from "./Navbar.module.css"
-import React, {useEffect, useState} from 'react';
-import { ethers } from "ethers";
-import api from "api/api";
+import React, { useEffect, useState } from "react"
+import { ethers } from "ethers"
+import api from "api/api"
 import Web3 from "web3"
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
     zIndex: "500",
     backdropFilter: "blur(6px)",
     WebkitBackdropFilter: "blur(6px)",
-    backgroundColor: alpha("#000000", 0.8),
+    backgroundColor: alpha("#0C2032", 0),
   }))
 
   const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
@@ -36,19 +36,19 @@ const Navbar = () => {
   const [isAccount, setIsAccount] = useState(false);
   const [cookies, setCookie] = useCookies();
 
-  const getCurrentAccount = async() => {
+  const getCurrentAccount = async () => {
     try {
-      const currentAccounts = await web3.eth.getAccounts();
-      const bal = await web3.eth.getBalance(currentAccounts[0]);
-      setBalance(bal);
-      setIsAccount(true);
-      return currentAccounts[0];
+      const currentAccounts = await web3.eth.getAccounts()
+      const bal = await web3.eth.getBalance(currentAccounts[0])
+      setBalance(bal)
+      setIsAccount(true)
+      return currentAccounts[0]
     } catch {
-      console.log("err");
+      console.log("err")
     }
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", accountsChanged);
       window.ethereum.on("chainChanged", chainChanged);
@@ -83,122 +83,117 @@ const Navbar = () => {
     } else {
       if (window.ethereum) {
         try {
-            const res = await window.ethereum.request({
+          const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main")
         } catch (err) {
-          console.error(err);
+          console.error(err)
         }
       } else {
-        alert("MetaMask를 설치하세요.")   
-        window.open('https://metamask.io/download.html');
+        alert("MetaMask를 설치하세요.")
+        window.open("https://metamask.io/download.html")
       }
     }
   }
 
-  const connect1 = async() => {
-    if(isAccount) {
+  const connect1 = async () => {
+    if (isAccount) {
       navigate("/main/express")
     } else {
       if (window.ethereum) {
         try {
-            const res = await window.ethereum.request({
+          const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/express")
         } catch (err) {
-          console.error(err);
+          console.error(err)
         }
       } else {
-        alert("MetaMask를 설치하세요.")   
-        window.open('https://metamask.io/download.html');
+        alert("MetaMask를 설치하세요.")
+        window.open("https://metamask.io/download.html")
       }
     }
   }
 
   const connect2 = async () => {
-    if(isAccount) {
+    if (isAccount) {
       navigate("/main/animalList")
     } else {
       if (window.ethereum) {
         try {
-            const res = await window.ethereum.request({
+          const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/animalList")
         } catch (err) {
-          console.error(err);
+          console.error(err)
         }
       } else {
-        alert("MetaMask를 설치하세요.")   
-        window.open('https://metamask.io/download.html');
+        alert("MetaMask를 설치하세요.")
+        window.open("https://metamask.io/download.html")
       }
     }
-  };
+  }
 
   const connect3 = async () => {
-    if(isAccount) {
+    if (isAccount) {
       navigate("/main/sale")
     } else {
       if (window.ethereum) {
         try {
-            const res = await window.ethereum.request({
+          const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/sale")
         } catch (err) {
-          console.error(err);
+          console.error(err)
         }
       } else {
-        alert("MetaMask를 설치하세요.")   
-        window.open('https://metamask.io/download.html');
+        alert("MetaMask를 설치하세요.")
+        window.open("https://metamask.io/download.html")
       }
     }
-  };
+  }
 
   const connect4 = async () => {
-    if(isAccount) {
+    if (isAccount) {
       navigate("/main/mypage")
     } else {
       if (window.ethereum) {
         try {
-            const res = await window.ethereum.request({
+          const res = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           await accountsChanged(res[0]);
           api.user.login(res[0]);
           navigate("/main/mypage")
         } catch (err) {
-          console.error(err);
+          console.error(err)
         }
       } else {
-        alert("MetaMask를 설치하세요.")   
-        window.open('https://metamask.io/download.html');
+        alert("MetaMask를 설치하세요.")
+        window.open("https://metamask.io/download.html")
       }
     }
-  };
-
+  }
 
   return (
     <RootStyle>
       <ToolbarStyle>
-        <div 
-          onClick={main} className={style.logoDiv}>
+        <div onClick={main} className={style.logoDiv}>
           <img className={style.logo} src="/images/logo/sea.png" alt="logo" />
         </div>
-        <Button
-          className={style.logoCharacterButton}
-          onClick={main}
-        >
+        <Button className={style.logoCharacterButton} onClick={main}>
           <span className={style.logoCharacter}>S</span>
           <span className={style.logoCharacter}>E</span>
           <span className={style.logoCharacter}>A</span>
@@ -210,7 +205,6 @@ const Navbar = () => {
             // onClick={() => navigate("/main/express")}
             onClick={connect1}
           >
-           
             나 표현하기
           </button>
           <hr className={style.navButtonUnderLine} />

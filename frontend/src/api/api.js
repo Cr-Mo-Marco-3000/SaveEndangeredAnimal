@@ -80,10 +80,9 @@ const api = {
           method: "GET",
           withCredentials: true,
         })
-        console.log(res.data.testResult)
         return res.data.testResult
       } catch (error) {
-        const response = error.res.data
+        const response = error.response.data
         return response
       }
     },
