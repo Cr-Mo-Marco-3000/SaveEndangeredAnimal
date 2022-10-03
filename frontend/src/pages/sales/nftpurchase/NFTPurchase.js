@@ -1,18 +1,15 @@
-// export default function NFTsale() {
-//     return (
-//         <></>
-//     )
-// }
-
 import { useState, useEffect } from "react"
 import { styled } from "@mui/material/styles"
+import { useLocation , useNavigate } from "react-router-dom"
 import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import ButtonBase from "@mui/material/ButtonBase"
-import { Button } from "@mui/material"
+import styles from "./NFTPurchase.module.css"
+import withReactContent from "sweetalert2-react-content"
 import api from "api/api"
 import Swal from "sweetalert2"
+import Web3 from "web3"
 
 const Img = styled("img")({
   margin: "auto",
@@ -23,6 +20,47 @@ const Img = styled("img")({
 
 export default function ComplexGrid(props) {
   const [saleData, setSaleData] = useState({})
+  const [balance, setBalance] = useState()
+  const [myAccount, setMyAccount] = useState()
+  const web3 = new Web3(window.ethereum)
+  const MySwal = withReactContent(Swal)
+  const navigate = useNavigate()
+
+  const getCurrentAccount = async () => {
+    try {
+      const currentAccounts = await web3.eth.getAccounts()
+      setMyAccount(currentAccounts[0])
+      const bal = await web3.eth.getBalance(currentAccounts[0])
+      setBalance(bal / Math.pow(10, 18))
+      return currentAccounts[0]
+    } catch {
+      console.log("err")
+    }
+  }
+
+  const infoClick = () => {
+    MySwal.fire({
+      title: <p>{saleData.animalKoreanName} NFT를 구매하시겠습니까?</p>,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+      icon: "warning",
+    }).then((result) => {
+      if (result.isConfirmed) {
+          Swal.fire(
+            "OK",
+            "구매 완료",
+            "success",
+          )
+          navigate('/main/mypage')
+        } 
+      else 
+        Swal.fire("구매 취소", "구매가 취소되었습니다.", "error")
+      })
+    }
+
+
 
   const NFTClick = () => {
     Swal.fire({
@@ -47,6 +85,7 @@ export default function ComplexGrid(props) {
     }
 
     getSaleData()
+    getCurrentAccount()
   }, [])
   return (
     <Grid container spacing={2}>
@@ -81,13 +120,19 @@ export default function ComplexGrid(props) {
             </Grid>
             <Grid sx={{ marginTop: "7rem" }}>
               <Typography variant="body1" color="text.secondary">
-                금액 : {saleData.salePrice} eth
+                NFT 구매 금액 : {saleData.salePrice} eth
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                현재 잔고 : 55 eth (변수 처리해주세요)
+              현재 잔고 : {Math.round(balance * 10000000) / 10000000} ETH
               </Typography>
               <Grid sx={{ marginTop: "3rem" }} item>
-                <Button variant="contained">구매하기</Button>
+              <button
+                  className={styles.button}
+                  onClick={infoClick}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                >구매하기</button>
               </Grid>
             </Grid>
           </Grid>

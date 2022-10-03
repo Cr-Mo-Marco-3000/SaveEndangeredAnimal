@@ -1,30 +1,28 @@
 import * as React from "react"
-import { Card, CardContent, CardMedia, Typography } from "@mui/material"
+import { Card, CardContent, CardMedia, Typography, CardActionArea } from "@mui/material"
+import { useState, useEffect } from "react"
 import styles from "./NFTCard.module.css"
 import Swal from "sweetalert2"
 
 export default function NFTCard(props) {
+  const [cardStyle, setCardStyle] = useState(styles.Card)
+
   const NFTdata = {
     img: props.NFTData.itemImgUrl,
     endangered: props.NFTData.animalEndangeredLevel,
     animalName: props.NFTData.animalKoreanName,
   }
-  //console.log(NFTdata.img) 
 
-  const NFTClick = () => {
-    Swal.fire({
-      background: "rgba(211, 224, 234, 0.6)",
-      width: "60rem",
-      padding: "0rem 0rem 1rem 0rem",
-      heightAuto: true,
-      imageUrl: NFTdata.img,
-      imageHeight: 900,
-      // imageWidth: 1920,
-      imageAlt: "NFT Image",
-      //confirmButtonText: "닫기",
-      showConfirmButton: false,
-    })
+  function clicked() {
+    // props.setSelectImg(NFTdata.img)
+    props.getNFTdata(NFTdata)
   }
+
+  useEffect(() => {
+    if (props.selectImg === NFTdata.img) setCardStyle(styles.selectedCard)
+    else setCardStyle(styles.Card)
+  }, [props.selectImg])
+
 
   return (
     <Card
@@ -34,16 +32,13 @@ export default function NFTCard(props) {
         flexDirection: "column",
         boxShadow: 3,
       }}
-      onClick={NFTClick}
+      className={cardStyle}
+      onClick={clicked}
     >
+       <CardActionArea sx={{ height: "100%" }}>
       <CardMedia
         sx={{ boxShadow: 3 }}
         component="img"
-        // sx={{
-        //   // 16:9
-        //   pt: '56.25%',
-        // }}
-        //image="https://source.unsplash.com/random"
         image={NFTdata.img}
         alt="animalImg"
       />
@@ -67,7 +62,7 @@ export default function NFTCard(props) {
           {NFTdata.animalName}
         </Typography>
         <Typography
-          sx={{ fontSize: 20, fontWeight: "bold", lineHeight: "1.1rem" }}
+          sx={{ fontSize: 20, fontWeight: "bold", lineHeight: "1.1rem"}}
           component="div"
           style={
             NFTdata.endangered === "1"
@@ -84,6 +79,7 @@ export default function NFTCard(props) {
             : "취약"}
         </Typography>
       </CardContent>
+      </CardActionArea>
     </Card>
   )
 }

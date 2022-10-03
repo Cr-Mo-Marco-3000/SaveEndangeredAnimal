@@ -2,10 +2,7 @@ import * as React from "react"
 import { useState, useEffect } from "react"
 import { styled } from "@mui/material/styles"
 import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
-import ButtonBase from "@mui/material/ButtonBase"
-import { Button } from "@mui/material"
 // import CarouselImages from "../carousel/CarouselImages"
 import CarouselImages from "./CarouselImages"
 import api from "api/api.js"
@@ -63,7 +60,7 @@ export default function Donation(props) {
         if (donation == null) {
           Swal.fire(
             "미입력",
-            "토큰을 입력해주세요.<br />0.01 RopstenETH 이상 기부 가능합니다.",
+            "토큰을 입력해주세요.<br />0.01 ETH 이상 기부 가능합니다.",
             "error",
           )
         } else if (balance < 0.01) {
@@ -75,7 +72,7 @@ export default function Donation(props) {
         } else if (donation < 0.01) {
           Swal.fire(
             "최소 기부금 미달",
-            "기부금은 0.01 RopstenETH 이상 가능합니다.<br />충전 후 기부해주세요.",
+            "기부금은 0.01 ETH 이상 가능합니다.<br />충전 후 기부해주세요.",
             "error",
           )
         } else if (donation > balance) {
@@ -231,12 +228,12 @@ export default function Donation(props) {
               NFT가 남아 있습니다.
               <br />
               <br />
-              NFT를 얻을 수 있는 최소 금액은 <br /> 0.01 RopstenETH입니다.
+              NFT를 얻을 수 있는 최소 금액은 <br /> 0.01 ETH입니다.
               <br />
             </Typography>
             <br />
             <Typography variant="body2" gutterBottom color="text.secondary">
-              현재 잔고 : {balance} RopstenETH
+              현재 잔고 : {Math.round(balance * 10000000) / 10000000} ETH
             </Typography>
             <br />
             <Grid item>
