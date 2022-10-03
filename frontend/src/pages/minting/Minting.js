@@ -168,6 +168,7 @@ const Minting = () => {
         }
       }
     } catch (error) {
+      console.log(error)
       Swal.fire({
         icon: "error",
         title: "오류 발생!",
