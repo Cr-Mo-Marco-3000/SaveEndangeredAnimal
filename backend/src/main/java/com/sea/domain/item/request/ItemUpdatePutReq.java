@@ -5,6 +5,6 @@ import lombok.Getter;
 @Getter
 public class ItemUpdatePutReq {
 	int itemId;
-	double itePrice;
+	double itemPrice;
 	String itemOwnerAddress;
 }

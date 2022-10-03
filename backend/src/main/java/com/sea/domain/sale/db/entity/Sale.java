@@ -42,14 +42,14 @@ public class Sale {
 	@Column(name = "sale_yn", columnDefinition = "TINYINT(1)")
 	int saleYn;
 	
-	@Column(name = "sale_cash_contract_address", length = 200)
-	String saleCashContractAddress; 
-	
 	@Column(name = "sale_seller_address", length = 200)
 	String saleSellerAddress;
 	
 	@Column(name = "sale_buyer_address", length = 200, nullable = true)
 	String saleBuyerAddress;
+
+	@Column(name = "sale_price")
+	double salePrice;
 	
 	@CreationTimestamp
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
@@ -65,15 +65,15 @@ public class Sale {
 	@JoinColumn(name = "fk_item_id")
 	Item fkItemId;
 	
-	@Column(name = "sale_start_time")
-	int saleStartTime;
+	@Column(name = "sale_start_time", columnDefinition = "BIGINT(20)")
+	long saleStartTime;
 	
-	@Column(name = "sale_end_time")
-	int saleEndTime;
+	@Column(name = "sale_end_time", columnDefinition = "BIGINT(20)")
+	long saleEndTime;
 
 	public void updateBuyerAddress(String saleBuyerAddress) {
 		this.saleBuyerAddress = saleBuyerAddress;
-		saleYn = 0;
+		saleYn = 1;
 	}
 	
 }

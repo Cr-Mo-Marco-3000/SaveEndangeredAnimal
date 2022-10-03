@@ -3,6 +3,8 @@ package com.sea.domain.item.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sea.domain.animal.db.entity.Animal;
+import com.sea.domain.animal.db.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,9 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
 	DonationRepository donationRepository;
+
+	@Autowired
+	AnimalRepository animalRepository;
 
 	@Override
 	public List<ItemDto> getMyItemList(String userWalletAddress) {
@@ -58,14 +63,20 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Item registerItem(ItemRegisterPostReq registerInfo, String userWalletAddress) {
+	public Item registerItem(ItemRegisterPostReq registerInfo) {
 		
 		Donation donation = donationRepository.findById(registerInfo.getDonationId()).get();
+
+		Animal animal = donation.getFkAnimalId();
+
+		String title = animal.getAnimalKoreanName() + "#" + (animal.getAnimalNowItem() + 1);
 				
 		Item item = Item.builder().itemImgUrl(registerInfo.getItemImgUrl()).itemTokenId(registerInfo.getItemTokenId())
-				.itemOwnerAddress(userWalletAddress).itemTitle(registerInfo.getItemTitle())
-				.itemPrice(registerInfo.getItemPrice()).fkDonationId(donation)
+				.itemOwnerAddress(registerInfo.getWalletAddress()).itemTitle(title)
+				.itemPrice(donation.getDonationAmount()).fkDonationId(donation)
 				.build();
+
+		donation.getFkAnimalId().addNowItem();
 
 		return itemRepository.save(item);
 	}

@@ -1,6 +1,7 @@
 package com.sea.common.config;
 
-import com.sea.common.util.JwtTokenUtil;
+import javax.servlet.Filter;
+
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +16,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.servlet.Filter;
-
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -27,7 +26,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         configuration.addAllowedOriginPattern("*");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
-        configuration.addExposedHeader(JwtTokenUtil.HEADER_STRING);
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -48,9 +46,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
-                .exposedHeaders("X-AUTH-TOKEN")
+                .exposedHeaders("*")
+                .allowedHeaders("*")
+                .allowedMethods("*")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:3000");
+//                .allowedOrigins("http://localhost:3000")
+                .allowedOriginPatterns("*");
     }
 
     @Override

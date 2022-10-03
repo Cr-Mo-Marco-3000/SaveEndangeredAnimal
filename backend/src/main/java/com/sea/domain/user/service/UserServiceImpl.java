@@ -12,39 +12,48 @@ import java.util.Optional;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserRepository userRepository;
+	@Autowired
+	UserRepository userRepository;
 
-    @Value("${default.profileImg}")
-    String defaultProfileImg;
+	@Value("${default.profileImg}")
+	String defaultProfileImg;
 
-    @Override
-    public User getUserByAddress(String userWalletAddress) {
-        Optional<User> user = userRepository.findUserByUserWalletAddress(userWalletAddress);
+	@Override
+	public User getUserByAddress(String userWalletAddress) {
+		Optional<User> user = userRepository.findUserByUserWalletAddress(userWalletAddress);
 
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            User newUser = User.builder().userNickname("noname").userRole("ROLE_USER").userWalletAddress(userWalletAddress).userProfileImg(defaultProfileImg).build();
-            return userRepository.save(newUser);
-        }
-    }
+		if (user.isPresent()) {
+			return user.get();
+		} else {
+			User newUser = User.builder().userNickname("noname").userRole("ROLE_USER")
+					.userWalletAddress(userWalletAddress).userProfileImg(defaultProfileImg).build();
+			return userRepository.save(newUser);
+		}
+	}
 
-    @Override
-    public User updateTestResult(User user, List<String> list) {
-        user.updateTestResult(list);
+	@Override
+	public User updateTestResult(UserUpdateTestResultPutReq updateInfo) {
+		Optional<User> optional = userRepository.findUserByUserWalletAddress(updateInfo.getWalletAddress());
 
-        return userRepository.save(user);
-    }
+		if (optional.isPresent()) {
+			User user = optional.get();
 
-    @Override
-    public User getTestResultByUserId(int userId) {
-        Optional<User> user = userRepository.findById(userId);
+			user.updateTestResult(updateInfo.getList());
 
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            return null;
-        }
-    }
+			return userRepository.save(user);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<String> getTestResultByUserId(String walletAddress) {
+		Optional<User> user = userRepository.findUserByUserWalletAddress(walletAddress);
+
+		if (user.isPresent()) {
+			return user.get().getUserTestResult();
+		} else {
+			return null;
+		}
+	}
 }
