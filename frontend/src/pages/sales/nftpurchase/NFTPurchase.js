@@ -11,6 +11,7 @@ import api from "api/api"
 import Swal from "sweetalert2"
 import Web3 from "web3"
 import abi from "../../../abis/transaction/abi.json"
+import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -24,6 +25,7 @@ export default function ComplexGrid(props) {
   const [myAccount, setMyAccount] = useState()
   const web3 = new Web3(window.ethereum)
   const MySwal = withReactContent(Swal)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const getCurrentAccount = async () => {
@@ -59,6 +61,7 @@ export default function ComplexGrid(props) {
           .encodeABI()
         console.log(functionABI)
 
+        setLoading(true)
         const contract = await web3.eth.sendTransaction({
           from: myAccount,
           to: traderAddress,
@@ -78,14 +81,23 @@ export default function ComplexGrid(props) {
         const responseChangeInfo = await api.item.changeItem(
           itemId,
           itemPrice,
-          itemOwnerAddress
+          itemOwnerAddress,
         )
         console.log(responseChangeInfo)
         console.log("끝?")
+        setLoading(false)
+        Swal.fire({
+          icon: "success",
+          title: "구매 완료!",
+          text: "구매가 완료되었습니다!",
+          confirmButtonText: "확인",
+        })
       } else if (swalResponse.isDismissed) {
         console.log("옴뇸뇸")
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false)
+    }
   }
 
   const NFTClick = () => {
@@ -115,6 +127,7 @@ export default function ComplexGrid(props) {
   }, [])
   return (
     <Grid container spacing={2}>
+      {loading && <LoadingSpinner text="Purchasing NFT..."></LoadingSpinner>}
       <Grid item>
         <ButtonBase sx={{ width: 500, height: 500 }} onClick={NFTClick}>
           <Img alt="complex" src={saleData.itemImgUrl} />
