@@ -1,5 +1,5 @@
 .expressionText {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   width: 60rem;
   text-align: center;
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: space-around;
   border-radius: 3rem;
   align-items: center;
-  box-shadow: 1px 1px 3px 1px rgb(197, 197, 197);
+  box-shadow: 1px 1px 7px 2px rgb(197, 197, 197);
   margin: 0 0 3rem 0;
 }
 
@@ -17,16 +17,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 1px 3px 1px rgb(197, 197, 197) inset;
+  box-shadow: 0px 0px 5px 0px rgb(197, 197, 197) inset;
   border-radius: 3rem;
-  background-color: rgb(251, 251, 251);
+  background-color: rgba(251, 251, 251, 0.2);
 }
 
 .image {
   height: 97%;
   width: auto;
   border-radius: 3rem;
-  box-shadow: 2px 2px 3px 1px rgb(197, 197, 197);
+  /* box-shadow: 2px 2px 3px 1px rgb(197, 197, 197); */
 }
 
 .textDiv {
@@ -34,13 +34,15 @@
   margin: 3rem 0 3rem 0;
   min-height: 15rem;
   border-radius: 0.3rem;
-  box-shadow: 2px 2px 3px 1px rgb(197, 197, 197);
-  box-shadow: 1px 1px 2px 1px rgb(197, 197, 197) inset;
-  background-color: rgb(251, 251, 251);
+  /* box-shadow: 2px 2px 3px 1px rgb(197, 197, 197); */
+  box-shadow: 0px 0px 5px 0px rgb(197, 197, 197) inset;
+  background-color: rgba(251, 251, 251, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  color: white;
+  text-shadow: 0 0 5px white;
 }
 
 .text {
@@ -56,11 +58,19 @@
   font-size: 2.5rem;
   border: none;
   background-color: transparent;
-  color: rgba(0, 0, 0, 0.488);
   cursor: pointer;
+  color: white;
+  text-shadow: 0 0 5px white;
+  transition: color 1s;
 }
 
 .nextButton:hover {
   color: black;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.123);
+}
+
+.expressionHeader {
+  margin: 1rem 0;
+  color: white;
+  text-shadow: 0 0 5px white;
 }
