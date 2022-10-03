@@ -14,8 +14,8 @@
   border-radius: 0.1rem;
   display: block;
   margin: auto;
-
-  opacity: 0.5;
+  filter: grayscale(100%);
+  opacity: 0.4;
   border-color: red;
   border: 0.1rem;
 }
@@ -33,7 +33,7 @@
 
 .cardContentNotNFT {
   background-color: #b0b0b0;
-  opacity: 50%;
+  opacity: 30%;
   display: flex;
   justify-content: center;
   margin-top: 0.3rem;
