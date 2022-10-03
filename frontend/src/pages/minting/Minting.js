@@ -114,11 +114,16 @@ const Minting = () => {
         })
         if (swalResponse.isConfirmed) {
           setLoading(true)
+          console.log(animalKorName)
+          console.log(animalNowItem)
+          console.log(animalDesc)
+          console.log(selectImg)
           const result = await IPFS.createToken(
             animalKorName + "#" + animalNowItem,
             animalDesc,
             selectImg
           )
+          console.log(result)
           const web3 = window.web3
           const myBytecode = "0x" + bytecode.object
           const myAbi = JSON.stringify(abi.abi)
