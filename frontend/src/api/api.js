@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Cookies } from "react-cookie"
 
-const HOST = "http://j7a506.p.ssafy.io:8080/api/v1"
+const HOST = "https://j7a506.p.ssafy.io:8080/api/v1"
 // const HOST = "http://localhost:8080/api/v1"
 
 const USER = "/user"
