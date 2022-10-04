@@ -34,7 +34,7 @@ public class User {
 	@ElementCollection(fetch = FetchType.LAZY)
 	List<String> userTestResult = new ArrayList<String>();
 
-	public void updateTestResult(List<String> userTestResult) {
-		this.userTestResult = userTestResult;
+	public void updateTestResult(List<String> list) {
+		this.userTestResult = new ArrayList<>(list);
 	}
 }

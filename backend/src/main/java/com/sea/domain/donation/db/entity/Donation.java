@@ -56,4 +56,8 @@ public class Donation {
 	@ManyToOne
 	@JoinColumn(name = "fk_animal_id")
 	Animal fkAnimalId;
+	
+	public void update() {
+		this.donationStatusCode = "NFT 생성 완료";
+	}
 }

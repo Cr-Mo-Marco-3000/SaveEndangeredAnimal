@@ -8,6 +8,7 @@
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.6);
   }
+  
   .modal button {
     outline: none;
     cursor: pointer;
@@ -15,10 +16,10 @@
   }
   .modal > section {
     width: 90%;
-    max-width: 600px;
+    max-width: 1000px;
     margin: 0 auto;
     border-radius: 10px;
-    background-color: #FFF;
+    background: linear-gradient(45deg, rgba(181, 174, 211, 0.9), rgba(218, 238, 247, 0.9));
     animation: modal-show 0.3s;
     overflow: hidden;
   }
@@ -26,10 +27,10 @@
     position: relative;
     padding: 10px;
     padding-left: 15px;
-    background-color:  #D3E0EA;
+    background: linear-gradient(45deg, rgba(181, 174, 211, 0.9), rgba(218, 238, 247, 0.9));
     font-weight: 600;
-    font-size: 20px;
-    color: #286778;
+    font-size: 35px;
+    color: #413080;
   }
   .modal > section > header button {
     position: absolute;

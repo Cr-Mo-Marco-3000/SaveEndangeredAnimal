@@ -1,9 +1,8 @@
 .Title {
-  background-color: #f6f5f5;
+  background-color: rgba(251, 251, 251, 0.1);
+  box-shadow: 0px 0px 5px 2px rgb(197, 197, 197) inset;
   border-radius: 1rem;
   margin-bottom: 0.5rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
   display: flex;
   justify-content: space-between;
   padding: 2rem 4rem;
@@ -16,8 +15,7 @@
   font-size: 20px;
   line-height: 40px;
   text-align: center;
-
-  color: #286778;
+  color: #e7e7e7;
 }
 
 .animalName {
@@ -27,15 +25,14 @@
   font-size: 50px;
   line-height: 42px;
   text-align: center;
-
-  color: #286778;
+  color: #e7e7e7;
 }
 
 .Info {
   padding: 0.5rem 3rem;
-  background-color: #d3e0ea;
+  background-color: rgba(251, 251, 251, 0.1);
+  box-shadow: 0px 0px 5px 2px rgb(197, 197, 197) inset;
   border-radius: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .InfoTitle {
@@ -43,28 +40,26 @@
   font-style: normal;
   font-weight: 800;
   font-size: 30px;
-  line-height: 0.3rem;
+  line-height: 2rem;
   display: flex;
   align-items: center;
   text-align: center;
-
-  color: #286778;
+  margin-top: 1rem;
+  color: #eeeef0;
 }
 
 .InfoText {
-  padding: 1rem;
-  background-color: #f6f5f5;
+  padding: 2rem;
+  background-color: rgb(194, 191, 198);
   margin-bottom: 2rem;
   border-radius: 1rem;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 23px;
   line-height: 31px;
   display: flex;
   align-items: center;
   text-align: center;
-
   color: #000000;
 }
 
@@ -79,10 +74,30 @@
   display: flex;
   align-items: center;
   text-align: center;
-
-  color: #1787a7;
+  color: #d5c7e7;
 }
 
 .donationSide {
   text-align: center;
+}
+
+
+.button {
+  font-size: medium;
+  background-color: rgb(43, 43, 68);
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 30px;
+  width: 150px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
 }

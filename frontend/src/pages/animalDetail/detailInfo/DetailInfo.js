@@ -6,6 +6,8 @@ import Button from "@mui/material/Button"
 import SendIcon from "@mui/icons-material/Send"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import Modal from "../../../components/modal/Modal"
+import Donation from "../donation/Donation"
 
 function DetailInfo(props) {
   const MySwal = withReactContent(Swal)
@@ -17,8 +19,13 @@ function DetailInfo(props) {
     "취약 : 멸종위기 가능성이 높음"
   info1.replace(/\n/g, "<br/>")
   const [animalInfo, setAnimalInfo] = useState(props.animalInfo)
-  const donationClick = () => {
-    alert("도네이션!")
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const openModal = () => {
+    setModalOpen(true)
+  }
+  const closeModal = () => {
+    setModalOpen(false)
   }
 
   const infoClick = () => {
@@ -37,17 +44,27 @@ function DetailInfo(props) {
         html: `
         <b>
         위급 : 100개<br>
-        위기 : 200개<br>
-        취약 : 300개</b>`,
+        위기 : 300개<br>
+        취약 : 1000개</b>`,
       })
     })
   }
+  React.useEffect(() => {
+    //console.log(animalInfo)
+    setAnimalInfo(props.animalInfo)
+  }, [props.animalInfo])
   return (
     <>
       <div className={styles.Title}>
         <div>
           <div className={styles.animalClass}>
-            {animalInfo.species}/{animalInfo.iucn}({animalInfo.maxNFT}NFT)
+            {animalInfo.animalType}/
+            {animalInfo.animalEndangeredLevel === 1
+              ? "위급"
+              : animalInfo.animalEndangeredLevel === 2
+              ? "위기"
+              : "취약"}
+            ({animalInfo.animalMaxItem}NFT)
             <InfoIcon
               onClick={infoClick}
               style={{
@@ -55,25 +72,28 @@ function DetailInfo(props) {
               }}
             />
           </div>
-          <div className={styles.animalName}>{animalInfo.korName}</div>
+          <div className={styles.animalName}>{animalInfo.animalKoreanName}</div>
         </div>
         <div className={styles.donationSide}>
           <div className={styles.NFTcount}>
-            {animalInfo.nowNFT}개의 NFT가 남아있습니다.
+            {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
+            남아있습니다.
           </div>
-          <Button
+          <button
+          className={styles.button}
             variant="contained"
             size="large"
             endIcon={<SendIcon />}
-            onClick={donationClick}
+            onClick={openModal}
           >
             Donation
-          </Button>
+          </button>
+          <Modal open={modalOpen} close={closeModal} header="기부하기"><Donation /></Modal>
         </div>
       </div>
       <div className={styles.Info}>
         <p className={styles.InfoTitle}>Information</p>
-        <div className={styles.InfoText}>{animalInfo.description}</div>
+        <div className={styles.InfoText}>{animalInfo.animalDesc}</div>
       </div>
     </>
   )

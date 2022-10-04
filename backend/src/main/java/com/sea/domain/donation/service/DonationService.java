@@ -9,7 +9,8 @@ import com.sea.domain.user.db.entity.User;
 
 public interface DonationService {
 
-	List<MyDonationDto> getDonationList(User user);
-	Donation createDonation(DonationRegisterPostReq registerInfo, User user);
-	
+	List<MyDonationDto> getDonationList(String walletAddress);
+	Donation createDonation(DonationRegisterPostReq registerInfo);
+
+    Donation updateDonation(int donationId);
 }

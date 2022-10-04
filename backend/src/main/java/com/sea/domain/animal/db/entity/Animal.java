@@ -69,4 +69,8 @@ public class Animal {
 	public void addImg(String imgUrl) {
 		this.animalImg.add(imgUrl);
 	}
+
+	public void addNowItem() {
+		animalNowItem++;
+	}
 }

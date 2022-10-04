@@ -40,10 +40,11 @@ async def root(item_id):
     return response
 
 if __name__ == '__main__':
-    uvicorn.run("app.main:app",
+    uvicorn.run("main:app",
                 host="0.0.0.0",
-                port=8432,
+                port=8000,
                 reload=True,
-                ssl_keyfile="./privatekey1.pem", 
-                ssl_certfile="./cert1.pem"
+                ssl_keyfile="/etc/letsencrypt/privkey.pem",
+                ssl_keyfile_password="ssafy506", 
+                ssl_certfile="/etc/letsencrypt/cert.pem"
                 )

@@ -4,10 +4,12 @@ const Pagination = (props) => {
   const changePage = (event, index) => {
     props.changePage(index)
   }
+
   const number = !(props.number % 4)
     ? parseInt(props.number / 4)
     : parseInt(props.number / 4) + 1
 
+  
   return (
     <div className={styles.Pagination}>
       {props.number ? (
@@ -15,6 +17,7 @@ const Pagination = (props) => {
           onChange={changePage}
           count={number}
           color="info"
+          page={props.pageNumber}
         ></AnimalListPagination>
       ) : null}
     </div>

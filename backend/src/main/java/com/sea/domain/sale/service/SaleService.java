@@ -11,9 +11,9 @@ import com.sea.domain.user.db.entity.User;
 
 public interface SaleService {
 
-	Sale createSale(SaleRegisterPostReq registerInfo, User user);
+	Sale createSale(SaleRegisterPostReq registerInfo);
 
-	boolean deleteSale(SaleCancleDeleteReq cancleInfo, User user);
+	boolean deleteSale(SaleCancleDeleteReq cancleInfo);
 
 	List<SaleDto> getSaleList();
 

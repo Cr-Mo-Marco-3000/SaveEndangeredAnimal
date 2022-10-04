@@ -4,7 +4,7 @@ import ExpressionStart from "./expressionStart/ExpressionStart"
 import ExpressionText from "./expressionLevels/ExpressionText"
 import ExpressionSelections from "./expressionLevels/ExpressionsSelections"
 import ExpressionResult from "./expressionResult/ExpressionResult"
-
+import api from "../../api/api"
 const ExpressionPage = () => {
   const [level, setLevel] = useState(1)
   const [selectedWordList, setSelectedWordList] = useState([])
@@ -12,7 +12,7 @@ const ExpressionPage = () => {
   const addWord = (word) => {
     setLevel(level + 1)
     setSelectedWordList((prevState) => {
-      console.log(prevState)
+      //console.log(prevState)
       return [...prevState, word]
     })
   }
@@ -325,7 +325,7 @@ const ExpressionPage = () => {
     setLevel(level + 1)
   }
 
-  const uploadResult = () => {
+  const uploadResult = async () => {
     const result = []
     const place = selectedWordList[0]
     const doing = selectedWordList[1]
@@ -335,7 +335,9 @@ const ExpressionPage = () => {
     result.push(expressionSelectPage[5]["selections"][doing])
     result.push(expressionSelectPage[3]["selections"][place])
     result.push(expressionSelectPage[9]["selections"][paint])
-    console.log(result)
+    const response = await api.user.expression(result)
+    //await api.expression(result)
+    console.log(response)
   }
 
   return (

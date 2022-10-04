@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @ApiModel("ItemDto")
-public class ItemDto implements Comparable<ItemDto> {
+public class ItemDto implements Comparable<ItemDto>{
 	int itemId;
 	
 	String itemImgUrl;
@@ -21,8 +21,11 @@ public class ItemDto implements Comparable<ItemDto> {
 	String itemTitle;
 	
 	double itemPrice;
-	
+	int animalEndangeredLevel;
+
 	int animalId;
+
+	String animalKoreanName;
 	
 	public ItemDto(Item item) {
 		this.itemId = item.getItemId();
@@ -33,11 +36,12 @@ public class ItemDto implements Comparable<ItemDto> {
 		this.itemTitle = item.getItemTitle();
 		this.itemPrice = item.getItemPrice();
 		this.animalId = item.getFkDonationId().getFkAnimalId().getAnimalId();
+		this.animalKoreanName = item.getFkDonationId().getFkAnimalId().getAnimalKoreanName();
+		this.animalEndangeredLevel = item.getFkDonationId().getFkAnimalId().getAnimalEndangeredLevel();
 	}
 
 	@Override
 	public int compareTo(ItemDto o) {
-		return animalId - o.animalId;
+		return this.animalId - o.animalId;
 	}
-	
 }
