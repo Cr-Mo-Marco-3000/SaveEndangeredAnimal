@@ -76,7 +76,7 @@ article::after {
   width: 100%;
   height: 100%;
   display: block;
-  background: url(http://www.script-tutorials.com/demos/360/images/stars.png)
-    repeat top center;
+  background: url("../../frontend/public/images/logo/stars.png") repeat top
+    center;
   z-index: 0;
 }
