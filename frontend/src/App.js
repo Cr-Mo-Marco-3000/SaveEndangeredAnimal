@@ -13,7 +13,8 @@ import AnimalDetail from "./pages/animalDetail/AnimalDetailPage"
 import { CookiesProvider } from "react-cookie"
 import SalePage from "pages/sales/SalePage"
 import Minting from "pages/minting/Minting"
-
+import api from "../src/api/api"
+import { useCookies } from "react-cookie"
 function App() {
   let header = (
     <div>
@@ -23,6 +24,15 @@ function App() {
       <LoginPage />
     </div>
   )
+  const [cookies, setCookie] = useCookies()
+
+  window.ethereum.on("accountsChanged", async function (accounts) {
+    console.log("계정변경!")
+    const newAccount = accounts[0]
+    await api.user.login(newAccount)
+    setCookie("id", newAccount)
+    window.location.reload()
+  })
 
   return (
     <div className="App">

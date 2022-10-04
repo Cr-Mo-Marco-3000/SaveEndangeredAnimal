@@ -1,9 +1,8 @@
 .Title {
-  background-color: rgba(196, 199, 212, 0.9);
+  background-color: rgba(251, 251, 251, 0.1);
+  box-shadow: 0px 0px 5px 2px rgb(197, 197, 197) inset;
   border-radius: 1rem;
   margin-bottom: 0.5rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
   display: flex;
   justify-content: space-between;
   padding: 2rem 4rem;
@@ -16,8 +15,7 @@
   font-size: 20px;
   line-height: 40px;
   text-align: center;
-
-  color: #3f334f;
+  color: #e7e7e7;
 }
 
 .animalName {
@@ -27,15 +25,14 @@
   font-size: 50px;
   line-height: 42px;
   text-align: center;
-
-  color: #3f334f;
+  color: #e7e7e7;
 }
 
 .Info {
   padding: 0.5rem 3rem;
-  background-color: rgba(132, 123, 155, 0.8);
+  background-color: rgba(251, 251, 251, 0.1);
+  box-shadow: 0px 0px 5px 2px rgb(197, 197, 197) inset;
   border-radius: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .InfoTitle {
@@ -63,7 +60,6 @@
   display: flex;
   align-items: center;
   text-align: center;
-
   color: #000000;
 }
 
@@ -78,8 +74,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-
-  color: #857890;
+  color: #d5c7e7;
 }
 
 .donationSide {
