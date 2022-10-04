@@ -1,5 +1,4 @@
 import styles from "./ExpressionText.module.css"
-import picture from "resources/img/expression/start.jpg"
 import { useState, useEffect } from "react"
 const ExpressionText = (props) => {
   // const selectedWordList = props.selectedWordList
@@ -10,7 +9,6 @@ const ExpressionText = (props) => {
   )
   const [level, setLevel] = useState(props.data.level)
   const [text, setText] = useState(props.data.text)
-
   useEffect(() => {
     if (level === 4) {
       let replacedText = text.replace("~", selectedWordList.at(-1))
@@ -30,7 +28,11 @@ const ExpressionText = (props) => {
         <h1>{title}</h1>
       </div>
       <div className={styles.imageDiv}>
-        <img className={styles.image} src={picture} alt="사진" />
+        <img
+          className={styles.image}
+          src={`/images/expression/${level}.png`}
+          alt="사진"
+        />
       </div>
       <div className={styles.textDiv}>
         <div className={styles.text}>{text}</div>

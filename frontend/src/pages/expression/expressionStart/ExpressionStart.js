@@ -9,7 +9,7 @@ const ExpressionStart = (props) => {
       <div className={styles.imageDiv}>
         <img
           className={styles.image}
-          src={require("resources/img/expression/start.jpg")}
+          src="/images/expression/start.jpg"
           alt="사진"
         />
       </div>
