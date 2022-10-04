@@ -41,9 +41,9 @@ public class SaleController {
 	@PostMapping()
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), })
 	public ResponseEntity<? extends BaseResponseBody> registerSale(@RequestBody SaleRegisterPostReq registerInfo) {
-
+		
 		Sale sale = saleService.createSale(registerInfo);
-
+		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 
