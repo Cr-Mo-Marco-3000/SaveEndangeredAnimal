@@ -112,7 +112,7 @@ const api = {
           " " +
           wordList[3]
         const pictureRes = await axios({
-          url: "http://j7a506.p.ssafy.io:8000/donation/get-image/" + centence,
+          url: "https://j7a506.p.ssafy.io:8000/donation/get-image/" + centence,
           method: "GET",
         })
         const response = pictureRes.data.picture
