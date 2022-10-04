@@ -14,7 +14,8 @@ function SortBar(props) {
     <div className={style.sortBar}>
       <div className={style.sortBar_setting}>
         <div>
-          <Button
+          <button
+            className={style.button}
             sx={{
               fontSize: "20px",
               width: "8rem",
@@ -24,34 +25,37 @@ function SortBar(props) {
             onClick={changeSort}
           >
             전체
-          </Button>
+          </button>
         </div>
         <div>
-          <Button
+          <button
+            className={style.button}
             sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold" }}
             variant={choice === "위급" ? "contained" : "text"}
             onClick={changeSort}
           >
             위급
-          </Button>
+          </button>
         </div>
         <div>
-          <Button
+          <button
+            className={style.button}
             sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold" }}
             variant={choice === "위기" ? "contained" : "text"}
             onClick={changeSort}
           >
             위기
-          </Button>
+          </button>
         </div>
         <div>
-          <Button
+          <button
+            className={style.button}
             sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold" }}
             variant={choice === "취약" ? "contained" : "text"}
             onClick={changeSort}
           >
             취약
-          </Button>
+          </button>
         </div>
       </div>
     </div>
