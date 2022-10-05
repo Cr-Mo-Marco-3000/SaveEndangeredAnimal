@@ -13,7 +13,7 @@ public interface ItemService {
 
 	List<ItemDto> getItemList();
 
-	Item registerItem(ItemRegisterPostReq registerInfo, String userWalletAddress);
+	Item registerItem(ItemRegisterPostReq registerInfo);
 
 	Item updateItem(ItemUpdatePutReq updateInfo);
 }

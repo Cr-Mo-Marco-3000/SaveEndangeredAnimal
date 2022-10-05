@@ -4,5 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class SaleCancleDeleteReq {
+	String walletAddress;
 	int saleId;
 }

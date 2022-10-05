@@ -52,7 +52,7 @@ public class Item {
 	double itemPrice;
 
 	public void update(ItemUpdatePutReq updateInfo) {
-		this.itemPrice = updateInfo.getItePrice();
+		this.itemPrice = updateInfo.getItemPrice();
 		this.itemOwnerAddress = updateInfo.getItemOwnerAddress();
 	}
 }

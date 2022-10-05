@@ -1,12 +1,19 @@
 package com.sea.domain.user.request;
 
-import com.sea.common.model.response.BaseResponseBody;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class UserUpdateTestResultPutReq  {
+	String walletAddress;
     List<String> list;
 }

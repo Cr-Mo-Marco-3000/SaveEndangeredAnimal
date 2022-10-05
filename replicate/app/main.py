@@ -2,6 +2,7 @@ from turtle import dot
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import replicate
+import uvicorn
 # from dotenv import dotenv_values
 # import os
 
@@ -11,8 +12,7 @@ app = FastAPI()
 # os.environ["REPLICATE_API_TOKEN"] = envDict['REPLICATE_API_TOKEN']
 
 origins = [
-    "http://localhost",
-    "http://localhost:3000",
+    "*"
 ]
 
 app.add_middleware(
@@ -35,3 +35,13 @@ async def root(item_id):
         output_url[3]]
     }
     return response
+
+if __name__ == '__main__':
+    uvicorn.run("main:app",
+                host="0.0.0.0",
+                port=8000,
+                reload=True,
+                ssl_keyfile="/code/letsencrypt/privkey1.pem",
+                ssl_keyfile_password="ssafy506", 
+                ssl_certfile="/code/letsencrypt/cert1.pem"
+                )
