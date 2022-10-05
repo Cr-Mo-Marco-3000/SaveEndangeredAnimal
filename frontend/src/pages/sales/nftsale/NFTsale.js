@@ -71,18 +71,18 @@ export default function NFTsale() {
       }
       else if (swalResponse.isConfirmed) {
         setLoading(true)
-        console.log(selectNFTdata)
+        //console.log(selectNFTdata)
         window.web3 = new Web3(window.ethereum)
         const web3 = window.web3
         const myAddress = window.ethereum.selectedAddress
         const NFTaddress = selectNFTdata.NFTaddress
-        console.log(web3)
-        console.log(myAddress)
-        console.log(NFTaddress)
+        //console.log(web3)
+        //console.log(myAddress)
+        //console.log(NFTaddress)
 
         const myAbi = transactionAbi
-        console.log(salePrice)
-        console.log("거래소 만드는 계약 전")
+        // console.log(salePrice)
+        // console.log("거래소 만드는 계약 전")
         const makeTraderContract = new web3.eth.Contract(myAbi)
 
         const traderResponse = await makeTraderContract
@@ -92,19 +92,19 @@ export default function NFTsale() {
           })
           .send({ from: myAddress })
 
-        console.log(traderResponse)
+        //console.log(traderResponse)
 
         const contractAddress = traderResponse["_address"]
         // 기존의 NFT 계약에 대한 모든 권한을, 위에서 만든 거래소가 가져갈 수 있도록 한다.
         // NFT Contract 어드레스를 넣어준다.
-        console.log(contractAddress)
+        //console.log(contractAddress)
 
         const giveAuthContract = new web3.eth.Contract(nftAbi.abi, NFTaddress)
         const authResponse = await giveAuthContract.methods
           .setApprovalForAll(contractAddress, true)
           .send({ from: myAddress })
-        console.log("NFT 권한 부여 계약 response")
-        console.log(authResponse)
+        //console.log("NFT 권한 부여 계약 response")
+        //console.log(authResponse)
 
         const tokens = web3.utils.toWei(salePrice.toString(), "ether")
         const saleConfigContract = new web3.eth.Contract(myAbi, contractAddress)
@@ -112,8 +112,8 @@ export default function NFTsale() {
           .SalesToken(1, tokens)
           .send({ from: myAddress })
 
-        console.log("sale 등록 response")
-        console.log(saleResponse)
+        //console.log("sale 등록 response")
+        //console.log(saleResponse)
 
         const itemId = selectNFTdata.itemId
         const start = startDate.getTime()
@@ -126,7 +126,7 @@ export default function NFTsale() {
           salePrice,
           itemId,
         )
-        console.log(res)
+        //console.log(res)
         setLoading(false)
         Swal.fire({
           icon: "success",
@@ -148,7 +148,7 @@ export default function NFTsale() {
   // 판매 가격 설정
   const onChangeAccount = (e) => {
     setSalePrice(e.target.value)
-    console.log(salePrice)
+    //console.log(salePrice)
   }
 
   useEffect(() => {
@@ -171,8 +171,8 @@ export default function NFTsale() {
 
     // console.log(selectNFTdata)
     // console.log(salePrice)
-    console.log(startDate)
-    console.log(endDate)
+    //console.log(startDate)
+    //console.log(endDate)
   }, [])
 
   useEffect(() => {

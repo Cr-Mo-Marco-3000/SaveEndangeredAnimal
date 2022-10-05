@@ -101,12 +101,12 @@ const LoginPage = () => {
       <div className="header-content">
         <div>
           <h1>
-            우리나라 멸종위기종 NFT 기부 플랫폼
+            멸종위기 동물 NFT 기부 플랫폼
             <br />
             <br />
             <h4>
-              멸종위기 동물에게 토큰 기부하고 AI가 그려주는 <br />
-              동물 NFT 그림 증서 받아가세요!
+              멸종위기 동물에게 Ethereum 기부하고 <br />
+              자신과 동물이 담긴 그림 NFT 받아가세요!
             </h4>
           </h1>
           <img className="shake-vertical" src={coin} alt="" />
