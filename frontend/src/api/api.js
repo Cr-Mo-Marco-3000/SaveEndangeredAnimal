@@ -131,7 +131,7 @@ const api = {
       walletAddress,
       donationAmount,
       donationTransactionHash,
-      animalId
+      animalId,
     ) => {
       try {
         const res = await axios({
@@ -177,7 +177,7 @@ const api = {
       saleStartTime,
       saleEndTime,
       salePrice,
-      itemId
+      itemId,
     ) => {
       try {
         const res = await axios({
@@ -210,6 +210,28 @@ const api = {
         })
         const data = res.data
         return data
+      } catch (error) {
+        const res = error.response.data
+        return res
+      }
+    },
+    //판매 삭제
+    deleteSale: async (saleId) => {
+      //console.log("여긴 오나1")
+      try {
+        const res = await axios({
+          url: HOST + SALE + "/del",
+          method: "DELETE",
+          withCredentials: true,
+          data: {
+            walletAddress: cookies.get("id"),
+            saleId: saleId,
+          },
+        })
+        //console.log("여긴 오나2")
+        const response = res.data
+
+        return response
       } catch (error) {
         const res = error.response.data
         return res
@@ -274,7 +296,7 @@ const api = {
       ScientificName,
       Description,
       Type,
-      EndangeredLevel
+      EndangeredLevel,
     ) => {
       try {
         const res = await axios({
@@ -367,7 +389,7 @@ const api = {
       walletAddress,
       donationId,
       itemImgUrl,
-      itemTokenId
+      itemTokenId,
     ) => {
       try {
         const res = await axios({
