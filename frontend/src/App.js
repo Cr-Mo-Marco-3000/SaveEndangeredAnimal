@@ -14,6 +14,8 @@ import { CookiesProvider } from "react-cookie"
 import SalePage from "pages/sales/SalePage"
 import Minting from "pages/minting/Minting"
 import api from "../src/api/api"
+import ScrollToTop from "components/scrollToTop/ScrollToTop"
+
 function App() {
   let header = (
     <div>
@@ -28,6 +30,7 @@ function App() {
     <div className="App">
       <CookiesProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Navbar />
           <article>
             <div className="stars">
