@@ -52,7 +52,9 @@ export default function Donation(props) {
       showCancelButton: true,
       confirmButtonText: "OK",
       cancelButtonText: "Cancel",
-      icon: "warning",
+      icon: "question",
+      confirmButtonColor: "#1787A7",
+      background: "#D3E0EA",
     }).then((result) => {
       // donation : 내가 기부할 기부금
       // balance : 잔고
@@ -61,31 +63,31 @@ export default function Donation(props) {
           Swal.fire(
             "미입력",
             "토큰을 입력해주세요.<br />0.01 ETH 이상 기부 가능합니다.",
-            "error",
+            "error"
           )
         } else if (balance < 0.01) {
           Swal.fire(
             "잔액 미달",
             "토큰잔액이 최소 기부금 미달입니다.<br />충전 후 기부해주세요.",
-            "error",
+            "error"
           )
         } else if (donation < 0.01) {
           Swal.fire(
             "최소 기부금 미달",
             "기부금은 0.01 ETH 이상 가능합니다.<br />충전 후 기부해주세요.",
-            "error",
+            "error"
           )
         } else if (donation > balance) {
           Swal.fire(
             "잔액 부족",
             "잔액이 부족합니다. <br />충전 후 기부해주세요",
-            "error",
+            "error"
           )
         } else if (animalInfo.animalMaxItem - animalInfo.animalNowItem === 0) {
           Swal.fire(
             "남아있는 NFT 기부 증서가 없습니다.",
             "기부 증서 없이 기부만 하시겠습니까?.",
-            "question",
+            "question"
           )
           MySwal.fire({
             title: (
@@ -98,6 +100,8 @@ export default function Donation(props) {
             confirmButtonText: "OK",
             cancelButtonText: "Cancel",
             icon: "warning",
+            confirmButtonColor: "#1787A7",
+            background: "#D3E0EA",
           }).then((result) => {
             if (result.isConfirmed) {
               const send = async () => {
@@ -116,15 +120,17 @@ export default function Donation(props) {
                     myAccount,
                     donation,
                     response.transactionHash,
-                    animalId,
+                    animalId
                   )
                   const donationId = response2.donationId
                   setLoading(false)
-                  Swal.fire(
-                    "기부가 완료되었습니다.",
-                    "감사합니다. </br>많은 기부 부탁드립니다.</br>Minting 페이지로 넘어갑니다.",
-                    "success",
-                  ).then(() =>
+                  Swal.fire({
+                    icon: "success",
+                    confirmButtonColor: "#1787A7",
+                    background: "#D3E0EA",
+                    title: "기부 완료",
+                    html: "감사합니다 </br>많은 기부 부탁드립니다</br>Minting 페이지로 넘어갑니다",
+                  }).then(() =>
                     navigate("/main/mypage", {
                       state: {
                         animalKoreanName: animalInfo.animalKoreanName,
@@ -133,7 +139,7 @@ export default function Donation(props) {
                         animalDesc: animalInfo.animalDesc,
                         donationId: donationId,
                       },
-                    }),
+                    })
                   )
                 } catch (err) {
                   console.log(err)
@@ -141,7 +147,14 @@ export default function Donation(props) {
               }
 
               send()
-            } else Swal.fire("기부 취소", "기부가 취소되었습니다.", "error")
+            } else
+              Swal.fire({
+                icon: "error",
+                confirmButtonColor: "#1787A7",
+                background: "#D3E0EA",
+                title: "기부 취소",
+                html: "기부가 취소되었습니다",
+              })
           })
         } else {
           const send = async () => {
@@ -162,15 +175,17 @@ export default function Donation(props) {
                 myAccount,
                 donation,
                 response.transactionHash,
-                animalId,
+                animalId
               )
               const donationId = response2.donationId
               setLoading(false)
-              Swal.fire(
-                "기부가 완료되었습니다.",
-                "감사합니다. </br>많은 기부 부탁드립니다.</br>Minting 페이지로 넘어갑니다.",
-                "success",
-              ).then(() =>
+              Swal.fire({
+                icon: "success",
+                confirmButtonColor: "#1787A7",
+                background: "#D3E0EA",
+                title: "기부 완료",
+                html: "감사합니다 </br>많은 기부 부탁드립니다</br>Minting 페이지로 넘어갑니다",
+              }).then(() =>
                 navigate("/main/minting", {
                   state: {
                     animalKoreanName: animalInfo.animalKoreanName,
@@ -179,15 +194,29 @@ export default function Donation(props) {
                     animalDesc: animalInfo.animalDesc,
                     donationId: donationId,
                   },
-                }),
+                })
               )
             } catch (err) {
-              console.log(err)
+              setLoading(false)
+              Swal.fire({
+                icon: "error",
+                confirmButtonColor: "#1787A7",
+                background: "#D3E0EA",
+                title: "기부 취소",
+                html: "기부가 취소되었습니다",
+              })
             }
           }
           send()
         }
-      } else Swal.fire("진행 중단", "", "error")
+      } else
+        Swal.fire({
+          icon: "error",
+          confirmButtonColor: "#1787A7",
+          background: "#D3E0EA",
+          title: "기부 취소",
+          html: "기부가 취소되었습니다",
+        })
     })
   }
 
@@ -211,7 +240,7 @@ export default function Donation(props) {
   return (
     <Grid container spacing={2} colums={12}>
       {loading && (
-        <LoadingSpinner text="the donation delivering..."></LoadingSpinner>
+        <LoadingSpinner text="The donation's delivering..."></LoadingSpinner>
       )}
       <Grid item xs={6}>
         <CarouselImages animalImgs={animalInfo.animalImg}></CarouselImages>

@@ -19,6 +19,7 @@ import LoadingSpinner from "components/loadingSpinner/loadingSpinner"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import CircularProgress from "@mui/material/CircularProgress"
 
 const Minting = () => {
   // 내비게이트용
@@ -26,12 +27,7 @@ const Minting = () => {
 
   const [loading, setLoading] = useState(false)
   //이미지 //아마 이후는 parameter 등으로 오는 정보 받는 걸로 변경
-  const [imgs, setImgs] = useState([
-    "http://cdn.ggilbo.com/news/photo/201810/554743_412892_159.jpg",
-    "https://image.shutterstock.com/image-photo/fennec-fox-on-white-background-260nw-1737572291.jpg",
-    "http://img.segye.com/content/image/2022/09/06/20220906518232.jpg",
-    "https://uyjoqvxyzgvv9714092.cdn.ntruss.com/data2/content/image/2011/05/25/.cache/512/20110525098468.jpg",
-  ])
+  const [imgs, setImgs] = useState([null, null, null, null])
   //선택한 이미지 변수
   const [selectImg, setSelectImg] = useState("")
   //동물 정보
@@ -105,6 +101,8 @@ const Minting = () => {
           icon: "question",
           title: "이미지가 없어요!",
           text: "그림 네개 중에 맘에 드는 그림 하나를 선택해주세요!",
+          confirmButtonColor: "#1787A7",
+          background: "#D3E0EA",
         })
       } else {
         const swalResponse = await Swal.fire({
@@ -112,6 +110,8 @@ const Minting = () => {
           title: "민팅을 시작합니다",
           text: "민팅 과정 중 거래가 두 번 발생합니다",
           confirmButtonText: "확인",
+          confirmButtonColor: "#1787A7",
+          background: "#D3E0EA",
         })
         if (swalResponse.isConfirmed) {
           setLoading(true)
@@ -177,18 +177,34 @@ const Minting = () => {
 
   return (
     <div className={styles.outDiv}>
-      {loading && <LoadingSpinner></LoadingSpinner>}
+      {loading && (
+        <LoadingSpinner text={"Minting's in Progress..."}></LoadingSpinner>
+      )}
       <div className={styles.info}>
         아래 그림 중 마음에 드는 그림 하나를 골라주세요!
       </div>
       <Grid className={styles.imgDiv} container spacing={6}>
         {imgs.map((link, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={6}>
-            <ImageCard
-              imageLink={link}
-              selectImg={selectImg}
-              setSelectImg={changeSelectImg}
-            />
+            {imgs[idx] ? (
+              <ImageCard
+                imageLink={link}
+                selectImg={selectImg}
+                setSelectImg={changeSelectImg}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "512px",
+                  height: "512px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <CircularProgress color="secondary" size="5rem" />
+              </div>
+            )}
           </Grid>
         ))}
       </Grid>
