@@ -93,7 +93,6 @@ public class SaleController {
 	@GetMapping("/ex")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 400, message = "실패"), })
 	public ResponseEntity<? extends BaseResponseBody> cancleSale(@RequestParam(value = "walletAddress") String walletAddress) {
-		
 		List<SaleDto> list = saleService.getMySaleList(walletAddress);
 		
 		return ResponseEntity.status(200).body(SaleListGetRes.of(200, "Success", list));

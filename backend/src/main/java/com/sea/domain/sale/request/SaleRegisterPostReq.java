@@ -6,7 +6,7 @@ import java.math.BigInteger;
 
 @Getter
 public class SaleRegisterPostReq {
-	String walletAddres;
+	String walletAddress;
 	String saleContractAddress;
 	long saleStartTime;
 	long saleEndTime;
