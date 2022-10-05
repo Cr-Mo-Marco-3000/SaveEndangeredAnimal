@@ -55,7 +55,21 @@ export default function NFTsale() {
         cancelButtonText: "Cancel",
         icon: "warning",
       })
-      if (swalResponse.isConfirmed) {
+      if (salePrice===null) {
+        Swal.fire(
+          "판매가격 미입력",
+          "토큰을 입력해주세요.",
+          "error",
+        )
+      }
+      else if (salePrice <= 0) {
+        Swal.fire(
+          "판매가격 오류",
+          "0 ETH 보다 높게 가격을 책정하세요.",
+          "error",
+        )
+      }
+      else if (swalResponse.isConfirmed) {
         setLoading(true)
         console.log(selectNFTdata)
         window.web3 = new Web3(window.ethereum)
@@ -119,7 +133,9 @@ export default function NFTsale() {
           title: "등록 완료!",
           text: "작품 판매 등록이 완료되었습니다",
           confirmButtonText: "확인",
-        })
+        }).then(() => 
+          window.location.replace("/main/sale")
+        )
       } else if (swalResponse.isDismissed) {
         console.log("취소")
       }
