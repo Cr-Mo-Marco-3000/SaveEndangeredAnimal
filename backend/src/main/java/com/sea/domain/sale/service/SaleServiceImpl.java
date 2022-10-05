@@ -31,14 +31,14 @@ public class SaleServiceImpl implements SaleService {
 
 		Item item = itemRepository.findById(registerInfo.getItemId()).get();
 
-		Optional<Sale> optional = saleRepository.findByFkItemIdAndSaleSellerAddress(item, registerInfo.getWalletAddres());
+		Optional<Sale> optional = saleRepository.findByFkItemIdAndSaleSellerAddress(item, registerInfo.getWalletAddress());
 
 		if (optional.isPresent()) {
 			saleRepository.delete(optional.get());
 		}
-
+		
 		Sale sale = Sale.builder().saleContractAddress(registerInfo.getSaleContractAddress())
-				.saleSellerAddress(registerInfo.getWalletAddres()).saleStartTime(registerInfo.getSaleStartTime())
+				.saleSellerAddress(registerInfo.getWalletAddress()).saleStartTime(registerInfo.getSaleStartTime())
 				.saleEndTime(registerInfo.getSaleEndTime()).fkItemId(item).salePrice(registerInfo.getSalePrice())
 				.build();
 
