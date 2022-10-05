@@ -108,7 +108,7 @@ public class AnimalServiceImpl implements AnimalService {
 				return null;
 			}
 
-			String filePath = "/var/images/" + fileName;
+			String filePath = "/images/" + fileName;
 
 			animal.addImg(filePath);
 			log.info("이미지가 등록되었습니다. {}", filePath);
