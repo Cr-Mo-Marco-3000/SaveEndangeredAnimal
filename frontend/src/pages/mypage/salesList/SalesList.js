@@ -1,7 +1,9 @@
+import SaleList from "./SaleList/SaleList"
+
 export default function SalesList() {
   return (
-    <>
-      <h1>this is SalesList</h1>
-    </>
+    <div>
+      <SaleList />
+    </div>
   )
 }
