@@ -76,7 +76,7 @@ function DetailInfo(props) {
         </div>
         <div className={styles.donationSide}>
           <div className={styles.NFTcount}>
-          {animalInfo.animalMaxItem}중 {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
+          {animalInfo.animalMaxItem}개 중 {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
             남아있습니다.
           </div>
           <button
