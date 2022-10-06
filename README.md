@@ -2,7 +2,7 @@
 
 <div align="center">
   <br />
-  <img src="/uploads/db0e281172599cf15f744dff6ec7031d/sea.png" alt="Save Endangered Animal" />
+  <img src="./assets/sea.png" alt="Save Endangered Animal" />
   <br />
   <h1>서비스 개요</h1>
   <br />
@@ -56,13 +56,18 @@
 <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 <br>
 
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 <img src="https://img.shields.io/badge/Node.js-339939?style=for-the-badge&logo=Node.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 <img src="https://img.shields.io/badge/Web3.js-F16822?style=for-the-badge&logo=Web3.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 
 <br>
 <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
-<img src="https://img.shields.io/badge/GitLab-FCA121?style=for-the-badge&logo=GitLab&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br/>
+<img src="https://img.shields.io/badge/GitLab-FCA121?style=for-the-badge&logo=GitLab&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> 
+<img src="https://img.shields.io/badge/Mattermost-0058CC?style=for-the-badge&logo=Mattermost&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<br/>
 
 <details><summary> <b> 상세 기술스택 및 버전</b> </summary>
 
@@ -86,9 +91,11 @@
 |               | CSS3            |                    | \-          |
 |               | JavaScript(ES6) |                    | \-          |
 |               | React           | React              | 17.0.0      |
+|               | Node.js         |                    | 16.17.0     |
+|               | Web3.js         |                    | ^1.8.0      |
 |               | IDE             | Visual Studio Code | 1.70.0      |
-| Server        | 서버              | AWS EC2            | \-          |
-|               | 플랫폼             | Ubuntu             | 20.04.3 LTS |
+| Server        | 서버            | AWS EC2            | \-          |
+|               | 플랫폼          | Ubuntu             | 20.04.3 LTS |
 |               | CI/CD           | Docker             | 20.10.17    |
 |               |                 | Jenkins            | 2.361.1     |
 
@@ -102,44 +109,107 @@
 
 | 시스템 구성                                                       |
 |:------------------------------------------------------------:|
-| ![image](/uploads/e1c169d90d2a64ea1ca0db3ab873b999/아키텍쳐.png) |
+| ![image](./assets/아키텍쳐.png) |
 
 <br />
 
 <div id="4"></div>
 
+## 준비사항
+
+### 메타마스크 설치
+
+- 메타마스크를 설치하기 위해 크롬 웹스토어에 접속합니다.
+- 왼쪽 상단의 스토어 검색에서 Metamask를 검색합니다.
+- 메타마스크 페이지에서 'Chrome에 추가' 버튼을 눌러주면 설치가 완료됩니다.
+
+### 지갑 생성
+
+- 첫 화면에서 시작하기를 누릅니다.
+- 다음 화면에서 지갑 생성 버튼을 누릅니다.
+- 가입 진행 중에 생성되는 비밀 복구 구문을 안전한 장소 및 경로에 보관합니다.
+- 가입 진행을 마치면 지갑이 생성됩니다.
+
+### GoerilETH 받기 - 로그인 필요
+
+- https://goerlifaucet.com/
+- 메타마스크에서는 GeorilETH과 연결할 수 있습니다.
+- 네트워크를 Georil 테스트 네트워크로 전환합니다.
+- 해당 항목이 보이지 않을 시 설정-고급-테스트네트워크 보기 항목을 활성화하여 확인이 가능합니다.
+- 잔고가 GoerilETH과 연결된 것을 확인한 뒤 위의 링크로 들어갑니다.
+- 본인의 지갑주소('0x......')를 입력하여 0.1GoerilETH를 지급받을 수 있습니다.
+
+### GoerilETH 받기 - 로그인 불필요
+
+- https://goerli-faucet.pk910.de/
+- 해당 링크에 본인의 지갑주소를 입력한 뒤 채굴을 시작할 수 있습니다.
+- 원하는 시간 동안 채굴하고 보상으로 GoerilETH를 제공받을 수 있습니다.
+
+
 ## 🖥️ 주요기능
 
-### 주요 기능 1
+### 메타마스크 로그인
 
-- 기능 설명 1
-- 기능 설명 2
-- 기능 설명 3
+- 메타마스크 로그인을 통해서 사용자가 사용하는 암호화폐(GoerilETH)와 NFT의 소유 및 거래를 관리합니다.
 
-| 주요기능 1                             |
+| 메타마스크 로그인                             |
 |:----------------------------------:|
-| <img src="이미지 url" alt="주요기능 1" /> |
+| <img src="/uploads/4ed045e37f09164975d7f1f716638ba6/로그인.gif" alt="메타마스크 로그인" width="700px" /> |
 
-### 주요 기능 2
+### 나 표현하기
 
-- 기능 설명 1
-- 기능 설명 2
-- 기능 설명 3
+- 4가지 질문을 통해 사용자가 생각하는 이미지를 유추해냅니다.
+- 사용자가 선택한 단어에 색을 넣어 어떤 선택을 했는지 쉽게 확인할 수 있습니다.
+- '동물들을 찾으러 가기' 버튼을 클릭하여 기부하기로 넘어갈 수 있습니다.
 
-| 주요기능 2                             |
+| 나 표현하기                             |
 |:----------------------------------:|
-| <img src="이미지 url" alt="주요기능 2" /> |
+| <img src="/uploads/d832216b5fec70e5bdd7f6cfa71f42f8/나표현하기.gif" alt="나 표현하기" width="700px"/> |
 
-### 주요 기능 3
+### 마이페이지
 
-- 기능 설명 1
-- 기능 설명 2
-- 기능 설명 3
+- 보유하고 있는 NFT 작품들을 한눈에 볼 수 있습니다.
+- 내가 기부한 내역이 정리되어 있습니다.
+- 현재 거래소에 내가 판매 중인 NFT 작품을 볼 수 있습니다.
+- 전체 동물 목록중 내가 NFT 작품을 가지고 있는 동물들을 볼 수 있습니다.
 
-| 주요기능 3                             |
+| 마이페이지                             |
 |:----------------------------------:|
-| <img src="이미지 url" alt="주요기능 3" /> |
+| <img src="/uploads/df313939ac4a3d1ef413336deac33d74/마이페이지.gif" alt="마이페이지" width="700px" /> |
 
+### 기부하기
+
+- 멸종위기 동물 리스트에서 동물을 선택해서 기부를 할 수 있습니다.
+- 최소 기부 금액은 0.001ETH입니다.
+- 기부를 한 후에 NFT를 받을 수 있습니다.
+- Replicate API를 사용하여 나 표현하기에서 선택한 단어로 AI가 그림을 그려줍니다.
+- 제공된 4가지 그림중 마음에 드는 그림을 선택한 후 NFT로 민팅하여 가질 수 있습니다.
+
+| 기부하기                             |
+|:----------------------------------:|
+| <img src="/uploads/7f04037f44bcae25ffe0eea4cc902e21/동물기금에서_도네버튼까지.gif" alt="기부하기" width="700px"/> |
+| <img src="/uploads/2f431231a108c1a5971da32cdd373cc0/민팅까지.gif" alt="NFT 민팅" width="700px" /> |
+
+### NFT 판매
+
+- 사용자가 소유 중인 NFT를 판매할 수 있습니다.
+- NFT의 이미지, 판매 가격, 판매 종료일을 설정할 수 있습니다.
+- 이미 등록된 본인의 NFT를 선택하여 판매 취소를 할 수 있습니다.
+
+| NFT 판매                             |
+|:----------------------------------:|
+| <img src="/uploads/4c778adc8735b2bde2d6846bd9f22402/판매.gif" alt="NFT 판매" width="700px" /> |
+| <img src="/uploads/8ae3ab27ee83cff6c92c3814af2c189f/판매취소하기.gif" alt="판매 취소" width="700px" /> |
+
+### NFT 구매
+
+- 다른 사용자가 판매 중인 NFT를 구매할 수 있습니다.
+- 현재 잔고와 NFT 구매 금액을 비교한 뒤 구매가 가능합니다.
+- NFT 구매 금액과 거래 수수료를 더한 값이 결제된 뒤 NFT의 소유자가 사용자로 옮겨집니다. 
+
+| NFT 구매                             |
+|:----------------------------------:|
+| <img src="/uploads/bb9c8c4281fccd58880e40967a6af7e0/구매.gif" alt="NFT 구매" width="700px" /> |
 <br/>
 
 <div id="5"></div>
@@ -152,11 +222,11 @@
 
 | Jira BurnDown Chart                                               |
 |:-----------------------------------------------------------------:|
-| <img src="/uploads/de0207b34e34600505f418c938df5e9b/번다운차트.PNG" /> |
+| ![image](./assets/번다운차트.png) |
 
 | Notion                                                                                                                            |
 |:---------------------------------------------------------------------------------------------------------------------------------:|
-| <img src="/uploads/b4440910464b9dd6946775f0a57c9c1d/API명세서.PNG" /><img src="/uploads/0b30656d36d9a334f9d4b8c315b4cfc5/회의록.PNG" /> |
+| ![image](./assets/API명세서.png)![image](./assets/회의록.png) |
 
 <br />
 
@@ -165,20 +235,20 @@
 <table>
     <tr>
         <td height="140px" align="center"> <a href="https://github.com/Cr-Mo-Marco-3000">
-            <img src="./assets/김현영.jpg" width="140px" /> <br><br> 👑 김현영 <br>(Front-End) </a> <br></td>
+            <img src="/uploads/3bb7f969061ac73f94242079b18d702c/김현영.png" width="140px" /> <br><br> 👑 김현영 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/깃허브 링크">
-            <img src="./assets/성성민.jpg" width="140px" /> <br><br> 🙂 성성민 <br>(Front-End) </a> <br></td>
+            <img src="/uploads/cf3ca71671a314b0bfe46d119320374b/성성민.png" width="140px" /> <br><br> 🙂 성성민 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/깃허브 링크">
-            <img src="./assets/이종인.jpg" width="140px" /> <br><br> 😆 이종인 <br>(Front-End) </a> <br></td>
+            <img src="/uploads/dc44d06923ec74abcf57716617ccde29/이종인.png" width="140px" /> <br><br> 😆 이종인 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/SilverLight96">
-            <img src="./assets/강경은.jpg" width="140px" /> <br><br> 😁 강경은 <br>(Back-End) </a> <br></td>
+            <img src="/uploads/6bfddce2423347150f7c14a1a5cb88e4/강경은.png" width="140px" /> <br><br> 😁 강경은 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/kkh9700">
-            <img src="./assets/김경환.jpg" width="140px" /> <br><br> 😶 김경환 <br>(Back-End) </a> <br></td>
+            <img src="/uploads/a3e25090c23c40dc3d191ad47a5b4b51/김경환.png" width="140px" /> <br><br> 😶 김경환 <br>(Back-End) </a> <br></td>
     </tr>
     <tr>
         <td align="center">UI/UX<br/>React<br/>Web3.js<br/>FastAPI</td>
-        <td align="center">UI/UX<br/>React<br</td>
-        <td align="center">UI/UX<br/>React</td>
+        <td align="center">UI/UX<br/>React<br/>Web3.js<br/></td>
+        <td align="center">UI/UX<br/>React<br/>Web3.js<br/></td>
         <td align="center">REST API<br/>Smart Contract<br/></td>
         <td align="center">REST API<br/>DB<br/>S3<br/>CI/CD<br/></td>
     </tr>
@@ -204,10 +274,10 @@
 
 ## 📋 프로젝트 관련 문서
 
-| 구분      | 링크                                                                                                                      |
-|:------- |:-----------------------------------------------------------------------------------------------------------------------:|
+| 구분           | 링크                                                                                                           |
+|:-------------- |:--------------------------------------------------------------------------------------------------------------:|
 | 와이어프레임  | [와이어프레임 바로가기](https://www.figma.com/file/6AqH2FhNiE8bfmz9ejHpCT/%ED%8A%B9%ED%99%94-5%EB%B0%98-6%EC%A1%B0?node-id=0%3A1) |
-| ERD     | [ERD 바로가기](https://www.erdcloud.com/d/cwdAmY6DuYgX46o2F)                                                                |
-| 빌드/배포   | [빌드/배포 바로가기](빌드/배포 주소)                                                                                                  |
-| 시연 시나리오 | [시연 시나리오 바로가기](시연시나리오 주소)                                                                                               |
-| 발표자료    | [발표자료 바로가기](발표자료 주소)                                                                                                    |
+| ERD     | [ERD 바로가기](https://www.erdcloud.com/d/cwdAmY6DuYgX46o2F)                                                           |
+| 빌드/배포   | [빌드/배포 바로가기](/exec/특화PJT_A506_포팅매뉴얼.pdf)                                                              |
+| 시연 시나리오 | [시연 시나리오 바로가기](/exec/시연 시나리오.pdf)                                                                  |
+| 발표자료    | [발표자료 바로가기](/exec/발표자료.pptx)                                                                  |
