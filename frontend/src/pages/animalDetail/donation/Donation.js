@@ -62,19 +62,19 @@ export default function Donation(props) {
         if (donation == null) {
           Swal.fire(
             "미입력",
-            "토큰을 입력해주세요.<br />0.01 ETH 이상 기부 가능합니다.",
+            "토큰을 입력해주세요.<br />0.001 ETH 이상 기부 가능합니다.",
             "error"
           )
-        } else if (balance < 0.01) {
+        } else if (balance < 0.001) {
           Swal.fire(
             "잔액 미달",
             "토큰잔액이 최소 기부금 미달입니다.<br />충전 후 기부해주세요.",
             "error"
           )
-        } else if (donation < 0.01) {
+        } else if (donation < 0.001) {
           Swal.fire(
             "최소 기부금 미달",
-            "기부금은 0.01 ETH 이상 가능합니다.<br />충전 후 기부해주세요.",
+            "기부금은 0.001 ETH 이상 가능합니다.<br />충전 후 기부해주세요.",
             "error"
           )
         } else if (donation > balance) {
@@ -257,7 +257,7 @@ export default function Donation(props) {
               NFT가 남아 있습니다.
               <br />
               <br />
-              NFT를 얻을 수 있는 최소 금액은 <br /> 0.01 ETH입니다.
+              NFT를 얻을 수 있는 최소 금액은 <br /> 0.001 ETH입니다.
               <br />
             </Typography>
             <br />
@@ -270,7 +270,7 @@ export default function Donation(props) {
                 <input
                   className={styles.input}
                   type="number"
-                  step="0.01"
+                  step="0.001"
                   placeholder="기부금을 입력하세요"
                   onChange={onChangeAccount}
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"

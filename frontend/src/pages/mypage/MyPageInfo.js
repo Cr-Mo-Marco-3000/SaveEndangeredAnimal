@@ -33,12 +33,12 @@ export default function MyPageInfo() {
     <div className={styles.myPageInfo}>
       <div className={styles.title}>마이 페이지</div>
       <div className={styles.nftToken}>
-        보유 Ether : {Math.round(balance * 100000) / 100000}...
-        <img
+        보유 이더리움 : {Math.round(balance * 100000) / 100000} ETH
+        {/* <img
           className={styles.logoImg}
           src={require("resources/img/logo/ethereumLogo.png")}
           alt="ethreumLogo"
-        ></img>
+        ></img> */}
       </div>
     </div>
   )

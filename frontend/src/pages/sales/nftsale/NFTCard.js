@@ -63,14 +63,14 @@ export default function NFTCard(props) {
               fontSize: 20,
               fontWeight: "bold",
               mr: "2.5rem",
-              lineHeight: "1.1rem",
+             lineHeight: "0rem"
             }}
             component="div"
           >
             {NFTdata.animalName}
           </Typography>
           <Typography
-            sx={{ fontSize: 20, fontWeight: "bold", lineHeight: "1.1rem" }}
+            sx={{ fontSize: 20, fontWeight: "bold", lineHeight: "0rem" }}
             component="div"
             style={
               NFTdata.endangered === "1"

@@ -33,7 +33,7 @@ const AnimalDetail = (props) => {
   }, [])
   return (
     <div className={styles.AnimalDetail}>
-      <DetailHeader></DetailHeader>
+      {/* <DetailHeader></DetailHeader> */}
       <CarouselImages animalImgs={animalInfo.animalImg}></CarouselImages>
       <DetailInfo animalInfo={animalInfo}></DetailInfo>
     </div>

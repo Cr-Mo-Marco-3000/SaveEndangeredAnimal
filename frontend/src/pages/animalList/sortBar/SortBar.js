@@ -14,48 +14,49 @@ function SortBar(props) {
     <div className={style.sortBar}>
       <div className={style.sortBar_setting}>
         <div>
-          <button
-            className={style.button}
+          <Button
+            // className={style.button}
             sx={{
-              fontSize: "20px",
+              fontSize: "18px",
               width: "8rem",
               fontWeight: "bold",
+              color : "white",
             }}
             variant={choice === "전체" ? "contained" : "text"}
             onClick={changeSort}
           >
             전체
-          </button>
+          </Button>
         </div>
         <div>
-          <button
-            className={style.button}
-            sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold" }}
+          <Button
+            // className={style.button}
+            sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold", color : "white" }}
             variant={choice === "위급" ? "contained" : "text"}
             onClick={changeSort}
           >
             위급
-          </button>
+          </Button>
         </div>
         <div>
-          <button
-            className={style.button}
-            sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold" }}
+          <Button
+            // className={style.button}
+            sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold", color : "white" }}
             variant={choice === "위기" ? "contained" : "text"}
             onClick={changeSort}
           >
             위기
-          </button>
+          </Button>
         </div>
         <div>
-          <button
-            className={style.button}
-            sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold" }}
+          <Button
+            // className={style.button}
+            sx={{ fontSize: "20px", width: "8rem", fontWeight: "bold", color : "white" }}
             variant={choice === "취약" ? "contained" : "text"}
             onClick={changeSort}
           >
             취약
-          </button>
+          </Button>
         </div>
       </div>
     </div>
