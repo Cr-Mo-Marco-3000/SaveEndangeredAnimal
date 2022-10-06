@@ -58,13 +58,13 @@ function DetailInfo(props) {
       <div className={styles.Title}>
         <div>
           <div className={styles.animalClass}>
-            {animalInfo.animalType}/
+            {animalInfo.animalType} / 
             {animalInfo.animalEndangeredLevel === 1
-              ? "위급"
+              ? " 위급 "
               : animalInfo.animalEndangeredLevel === 2
-              ? "위기"
-              : "취약"}
-            ({animalInfo.animalMaxItem}NFT)
+              ? " 위기 "
+              : " 취약 "}
+            {/* ({animalInfo.animalMaxItem}NFT) */}
             <InfoIcon
               onClick={infoClick}
               style={{
@@ -76,7 +76,7 @@ function DetailInfo(props) {
         </div>
         <div className={styles.donationSide}>
           <div className={styles.NFTcount}>
-            {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
+          {animalInfo.animalMaxItem}중 {animalInfo.animalMaxItem - animalInfo.animalNowItem}개의 NFT가
             남아있습니다.
           </div>
           <button
@@ -86,13 +86,13 @@ function DetailInfo(props) {
             endIcon={<SendIcon />}
             onClick={openModal}
           >
-            Donation
+            기부하기
           </button>
           <Modal open={modalOpen} close={closeModal} header="기부하기"><Donation /></Modal>
         </div>
       </div>
       <div className={styles.Info}>
-        <p className={styles.InfoTitle}>Information</p>
+        <p className={styles.InfoTitle}>동물 정보</p>
         <div className={styles.InfoText}>{animalInfo.animalDesc}</div>
       </div>
     </>

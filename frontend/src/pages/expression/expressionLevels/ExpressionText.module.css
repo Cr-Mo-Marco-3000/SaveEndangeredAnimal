@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: space-evenly;
   color: white;
-  text-shadow: 0 0 5px white;
+  /* text-shadow: 0 0 5px white; */
 }
 
 .text {
