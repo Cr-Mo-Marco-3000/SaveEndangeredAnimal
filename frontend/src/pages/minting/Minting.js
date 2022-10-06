@@ -175,6 +175,10 @@ const Minting = () => {
     // 이 이후에 result값을 web3로 토큰 값으로 넘기면 됩니다.
   }
 
+  useEffect(() => {
+    document.body.style.overflow = "unset";
+  }, []);
+
   return (
     <div className={styles.outDiv}>
       {loading && (
