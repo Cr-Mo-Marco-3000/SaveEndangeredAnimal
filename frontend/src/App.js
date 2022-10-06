@@ -59,11 +59,11 @@ function App() {
               </div>
             </div>
           </article>
-          <button className="goToUpButton">
-            <a href="#">
+          <a href="#">
+            <button className="goToUpButton">
               <ForestIcon />
-            </a>
-          </button>
+            </button>
+          </a>
           <Footer />
         </BrowserRouter>
       </CookiesProvider>
