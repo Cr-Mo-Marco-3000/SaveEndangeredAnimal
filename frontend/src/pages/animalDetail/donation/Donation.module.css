@@ -15,17 +15,18 @@
     width: 150px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .button:hover {
-    background-color: rgb(194, 169, 242);
-    color : rgb(60, 42, 52);
+    background-color: aqua;
+    color: rgb(239, 94, 174);
     transition: 1s;
-    /* transform: scale(1.2); */
+    transform: scale(1.2);
   }
 
   .input {
     border-radius: 8px;
     font-size: 15px;
   }
+  

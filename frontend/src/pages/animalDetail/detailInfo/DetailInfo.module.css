@@ -16,6 +16,7 @@
   line-height: 40px;
   text-align: center;
   color: #e7e7e7;
+  margin-bottom: 0.5rem;
 }
 
 .animalName {
@@ -99,5 +100,12 @@
   width: 150px;
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 18px;
+}
+
+.button:hover {
+  background-color: aqua;
+  color: rgb(239, 94, 174);
+  transition: 1s;
+  transform: scale(1.2);
 }

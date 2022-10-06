@@ -41,7 +41,7 @@
   align-items: center;
   justify-content: space-evenly;
   color: white;
-  text-shadow: 0 0 5px white;
+  /* text-shadow: 0 0 5px white; */
 }
 
 .text {
@@ -73,20 +73,24 @@
 }
 
 .colorSpan:nth-child(1) {
-  color: rgb(255, 92, 92);
-  text-shadow: 0 0 5px rgb(255, 92, 92);
+  color: rgb(49, 255, 241);
+  font-weight: 900;
+  /* text-shadow: 0 0 5px rgb(255, 92, 92); */
 }
 .colorSpan:nth-child(2) {
-  color: rgb(48, 29, 255);
-  text-shadow: 0 0 5px rgb(48, 29, 255);
+  color: rgb(49, 241, 255);
+  font-weight: 900;
+  /* text-shadow: 0 0 5px rgb(48, 29, 255); */
 }
 .colorSpan:nth-child(3) {
-  color: rgb(61, 176, 68);
-  text-shadow: 0 0 5px rgb(61, 176, 68);
+  color: rgb(49, 241, 255);
+  font-weight: 900;
+  /* text-shadow: 0 0 5px rgb(61, 176, 68); */
 }
 .colorSpanLast {
-  color: rgb(191, 199, 50);
-  text-shadow: 0 0 5px rgb(191, 199, 50);
+  color: rgb(49, 241, 255);
+  font-weight: 900;
+  /* text-shadow: 0 0 5px rgb(191, 199, 50); */
 }
 
 .expressionHeader {

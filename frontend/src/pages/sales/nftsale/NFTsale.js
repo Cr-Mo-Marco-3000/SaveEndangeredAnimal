@@ -216,7 +216,7 @@ export default function NFTsale() {
           <input
             className={styles.input}
             type="number"
-            step="0.01"
+            step="0.001"
             placeholder="판매가격을 입력하세요"
             onChange={onChangeAccount}
             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"

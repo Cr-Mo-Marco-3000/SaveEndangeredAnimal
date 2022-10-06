@@ -81,6 +81,7 @@ export default function Menu(props) {
           sx={{
             fontSize: "17px",
             fontWeight: 900,
+            lineHeight:"0.5rem"
           }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
