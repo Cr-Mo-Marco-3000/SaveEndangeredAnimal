@@ -81,18 +81,18 @@
   > .scriptAreaHorizon_info:nth-child(2) {
   font-size: 20px;
   left: 2rem;
-  color: #282466;
+  color: rgb(184, 187, 193);
   font-weight: 900;
   margin: 0.1rem 0;
 }
 .scriptArea
   > .scriptAreaHorizon:nth-child(1)
   > .scriptAreaHorizon_info:nth-child(3) {
-  font-size: 17px;
+  font-size: 20px;
   left: 2rem;
   padding-top: 3px;
   font-weight: 900;
-  color: #282466;
+  color: rgb(149, 223, 254);
   bottom: 0.5rem;
 }
 .scriptArea > .scriptAreaHorizon:nth-child(2) {
