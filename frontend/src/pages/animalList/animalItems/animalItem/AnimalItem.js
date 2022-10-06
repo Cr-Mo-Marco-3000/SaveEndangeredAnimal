@@ -35,7 +35,7 @@ function AnimalItem(props) {
             <div className={style.scriptAreaHorizon_info}>{koreanName}</div>
             <div className={style.scriptAreaHorizon_info}>{scientificName}</div>
             <div className={style.scriptAreaHorizon_info}>
-              NFT {nowItem}/{maxItem}
+            {maxItem}개 중 {nowItem}개의 NFT 발급 완료
             </div>
           </div>
           <div className={style.scriptAreaHorizon}>
