@@ -29,9 +29,11 @@ export default function SaleCard(props) {
     if (saleData.saleSellerAddress === cookies.get("id")) setIsMine(true)
     else setIsMine(false)
     setModalOpen(true)
+    document.body.style.overflow = "hidden";
   }
   const closeModal = () => {
     setModalOpen(false)
+    document.body.style.overflow = "unset";
   }
 
   return (
