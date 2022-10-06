@@ -56,7 +56,6 @@ export default function Mainpage() {
   const goToExpression = async () => {
     const testResult = await api.user.getExpressionsResult()
     if (!testResult.length) {
-      console.log("업시유")
       Swal.fire({
         icon: "info",
         title: "나 표현하기로 이동!",
