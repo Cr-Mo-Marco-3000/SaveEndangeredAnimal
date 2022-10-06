@@ -33,6 +33,31 @@
   font-size: 25px;
 }
 
+.infoButton {
+  font-size: medium;
+  background-color: rgb(86, 62, 62);
+  color: #c1bbab;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 30px;
+  width: 300px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+}
+.infoButton:hover {
+  background-color: aqua;
+  color: rgb(239, 94, 174);
+  transition: 1s;
+  transform: scale(1.2);
+}
 .button:hover {
   background-color: aqua;
   color: rgb(239, 94, 174);
