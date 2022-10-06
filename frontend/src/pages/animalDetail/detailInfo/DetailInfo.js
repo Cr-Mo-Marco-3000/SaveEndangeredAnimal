@@ -23,9 +23,11 @@ function DetailInfo(props) {
   const [modalOpen, setModalOpen] = useState(false)
   const openModal = () => {
     setModalOpen(true)
+    document.body.style.overflow = "hidden";
   }
   const closeModal = () => {
     setModalOpen(false)
+    document.body.style.overflow = "unset";
   }
 
   const infoClick = () => {
