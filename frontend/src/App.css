@@ -80,3 +80,36 @@ article::after {
     center;
   z-index: 0;
 }
+
+.goToUpButton {
+  position: fixed;
+  background-color: #744e5c;
+  border: none;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 30px;
+  bottom: 3rem;
+  right: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 3000;
+  transition: background-color 0.5s;
+}
+
+.goToUpButton:hover {
+  background-color: #b8748f;
+}
+
+.goToUpButton a svg {
+  position: relative;
+  font-size: 2rem;
+  bottom: 0;
+  transition: bottom 0.5s;
+  color: #0c2032;
+}
+
+.goToUpButton:hover a svg {
+  bottom: 3px;
+}

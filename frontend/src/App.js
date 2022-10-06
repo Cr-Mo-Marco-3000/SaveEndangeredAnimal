@@ -15,6 +15,7 @@ import SalePage from "pages/sales/SalePage"
 import Minting from "pages/minting/Minting"
 import api from "../src/api/api"
 import ScrollToTop from "components/scrollToTop/ScrollToTop"
+import ForestIcon from "@mui/icons-material/Forest"
 
 function App() {
   let header = (
@@ -58,6 +59,11 @@ function App() {
               </div>
             </div>
           </article>
+          <button className="goToUpButton">
+            <a href="#">
+              <ForestIcon />
+            </a>
+          </button>
           <Footer />
         </BrowserRouter>
       </CookiesProvider>
