@@ -120,6 +120,19 @@
   },
   {
     "inputs": [],
+    "name": "erc20Contract",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "getSaleTokenList",
     "outputs": [
       {
