@@ -245,5 +245,6 @@ $RECYCLE.BIN/
 
 # buildfile for append
 !backend-0.0.1-SNAPSHOT.jar
+!build/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,react,solidity,soliditytruffle,visualstudiocode
