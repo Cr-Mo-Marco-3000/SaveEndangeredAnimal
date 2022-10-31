@@ -237,15 +237,15 @@
 <table>
     <tr>
         <td height="140px" align="center"> <a href="https://github.com/Cr-Mo-Marco-3000">
-            <img src="/uploads/3bb7f969061ac73f94242079b18d702c/김현영.png" width="140px" /> <br><br> 👑 김현영 <br>(Front-End) </a> <br></td>
+            <img src="/assets/김현영.png" width="140px" /> <br><br> 👑 김현영 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/깃허브 링크">
-            <img src="/uploads/cf3ca71671a314b0bfe46d119320374b/성성민.png" width="140px" /> <br><br> 🙂 성성민 <br>(Front-End) </a> <br></td>
+            <img src="/assets/성성민.png" width="140px" /> <br><br> 🙂 성성민 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/깃허브 링크">
-            <img src="/uploads/dc44d06923ec74abcf57716617ccde29/이종인.png" width="140px" /> <br><br> 😆 이종인 <br>(Front-End) </a> <br></td>
+            <img src="/assets/이종인.png" width="140px" /> <br><br> 😆 이종인 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/SilverLight96">
-            <img src="/uploads/6bfddce2423347150f7c14a1a5cb88e4/강경은.png" width="140px" /> <br><br> 😁 강경은 <br>(Back-End) </a> <br></td>
+            <img src="/assets/강경은.png" width="140px" /> <br><br> 😁 강경은 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/kkh9700">
-            <img src="/uploads/a3e25090c23c40dc3d191ad47a5b4b51/김경환.png" width="140px" /> <br><br> 😶 김경환 <br>(Back-End) </a> <br></td>
+            <img src="/assets/김경환.png" width="140px" /> <br><br> 😶 김경환 <br>(Back-End) </a> <br></td>
     </tr>
     <tr>
         <td align="center">UI/UX<br/>React<br/>Web3.js<br/>FastAPI</td>
