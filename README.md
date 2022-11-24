@@ -234,15 +234,15 @@
 <table>
     <tr>
         <td height="140px" align="center"> <a href="https://github.com/Cr-Mo-Marco-3000">
-            <img src="./assets/김현영.png" width="140px" /> <br><br> 👑 김현영 <br>(Front-End) </a> <br></td>
+            <img src="./assets/KHY.png" width="140px" /> <br><br> 👑 김현영 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/깃허브 링크">
-            <img src="./assets/성성민.png" width="140px" /> <br><br> 🙂 성성민 <br>(Front-End) </a> <br></td>
+            <img src="./assets/SSM.png" width="140px" /> <br><br> 🙂 성성민 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/깃허브 링크">
-            <img src="./assets/이종인.png" width="140px" /> <br><br> 😆 이종인 <br>(Front-End) </a> <br></td>
+            <img src="./assets/LJI.png" width="140px" /> <br><br> 😆 이종인 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/SilverLight96">
-            <img src="./assets/강경은.png" width="140px" /> <br><br> 😁 강경은 <br>(Back-End) </a> <br></td>
+            <img src="./assets/KKE.png" width="140px" /> <br><br> 😁 강경은 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/kkh9700">
-            <img src="./assets/김경환.png" width="140px" /> <br><br> 😶 김경환 <br>(Back-End) </a> <br></td>
+            <img src="./assets/KKH.png" width="140px" /> <br><br> 😶 김경환 <br>(Back-End) </a> <br></td>
     </tr>
     <tr>
         <td align="center">UI/UX<br/>React<br/>Web3.js<br/>FastAPI</td>
